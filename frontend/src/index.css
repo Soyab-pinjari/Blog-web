@@ -1,0 +1,97 @@
+@import "tailwindcss";
+.ProseMirror ul {
+  list-style: disc;
+  padding-left: 24px;
+}
+
+.ProseMirror ol {
+  list-style: decimal;
+  padding-left: 24px;
+}
+
+.ProseMirror h1 {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.ProseMirror h2 {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.ProseMirror ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+
+.ProseMirror ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+  padding-left: 1rem;
+}
+
+.ProseMirror li {
+  margin: 0.25rem 0;
+}
+
+.ProseMirror blockquote {
+  border-left: 4px solid #3b82f6;
+  padding-left: 1rem;
+  color: #6b7280;
+  font-style: italic;
+}
+input[type="color"] {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 9999px;
+  overflow: hidden;
+  cursor: pointer;
+  background: transparent;
+}
+
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 9999px;
+}
+
+input[type="color"]::-moz-color-swatch {
+  border: none;
+  border-radius: 9999px;
+}
+.ProseMirror {
+  min-height: 300px;
+  padding: 16px;
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ProseMirror:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+.ProseMirror:focus-visible {
+  outline: none !important;
+}
+
+/* Chrome, Edge, Safari */
+.editor-content .ProseMirror::-webkit-scrollbar {
+  display: none;
+}
+
+/* Firefox */
+.editor-content .ProseMirror {
+  scrollbar-width: none;
+}
+
+/* IE/Old Edge */
+.editor-content .ProseMirror {
+  -ms-overflow-style: none;
+}
