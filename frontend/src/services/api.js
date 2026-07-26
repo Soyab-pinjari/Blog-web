@@ -23,9 +23,14 @@ export const BlogCreate = async(BlogData)=>{
     return response.data;
 }
 
-export const GetAllBlogs = async()=>{
-    const response = await axios.get(`${BASE_URL}/blog/`);
-     return response.data;
+export const GetAllBlogs = async(category)=>{
+   const url = category
+    ? `${BASE_URL}/blog?category=${category}`
+    : `${BASE_URL}/blog/`;
+    const {data} = await axios.get(url);
+    console.log(data);
+     return data;
+
 }
 
 //profile---------------------------------------

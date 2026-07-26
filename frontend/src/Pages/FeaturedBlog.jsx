@@ -6,25 +6,21 @@ import { data, Link } from 'react-router';
 
 function FeaturedBlog() {
     const [blogs,setBlogs]=useState([]);
-   
-  const fetchBlogs = async()=>{
-    const data = await GetAllBlogs();
-    console.log("GetAllBlogs data",data);
-  const formattedBlogs = data.map((blog) => ({
-    ...blog,
-    createdAt: new Date(blog.createdAt).toLocaleString("en-IN", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    }),
-  }));
+    const [category,setCategory]=useState("");
 
-  setBlogs(formattedBlogs);
-}
-  useEffect(()=>{
+ const fetchBlogs = async () => {
+    try {
+      const data = await GetAllBlogs(category);
+      setBlogs(data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+   useEffect(() => {
     fetchBlogs();
-  },[])
-console.log("FeaturedBlog State:", blogs);
+  }, [category]);
+
+
   return (
     <>
 
@@ -35,15 +31,50 @@ console.log("FeaturedBlog State:", blogs);
           Featured Blogs
         </h2>
 
-        <button className="text-indigo-600 font-medium hover:text-indigo-800 transition">
+        <button className="text-indigo-600 text-xl font-medium  hover:text-indigo-800 transition">
           <Link to={'blogs'}>
           View All →
           </Link>
         </button>
       </div>
+<div className="relative w-full md:w-64">
+  <select
+    value={category}
+    onChange={(e) => setCategory(e.target.value)}
+    className="
+      appearance-none
+      w-full
+      bg-gray-50
+      border
+      border-gray-300
+      rounded-xl
+      px-4
+      py-3
+      pr-5
+      text-gray-700
+      font-semibold
+      shadow-sm
+      cursor-pointer
+      focus:outline-none
+    "
+  >
+    <option value="">All Categories</option>
+    <option value="Technology">Technology</option>
+    <option value="Travel">Travel</option>
+    <option value="Education">Education</option>
+    <option value="Health">Health</option>
+    <option value="Bussiness">Bussiness</option>
+    <option value="Programming">Programming</option>
+    <option value="Lifestyle">Lifestyle</option>
+    <option value="Entertainment">Entertainment</option>
+  </select>
 
+  <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+    ▼
+  </span>
+</div>
         {/* Cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid mt-5 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {blogs?.slice(0,8).map((blog) => (
             <Link to={`/blog/${blog.slug}`}
             key={blog._id}
@@ -78,7 +109,13 @@ console.log("FeaturedBlog State:", blogs);
 
                   <div className="text-sm text-gray-600">
                     <p className="font-medium mb-2">{blog.author.username}</p>
-                    <p>{blog.createdAt}</p>
+                    <p>
+                        {new Date(blog.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                    </p>
                   </div>
                 </div>
 

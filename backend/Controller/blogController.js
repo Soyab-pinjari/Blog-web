@@ -54,7 +54,14 @@ const createBlog = async(req,res)=>{
 }
 const getAllBlog = async(req,res)=>{
     try {
-        const blogs = await Blog.find().populate("author","username profileImage ").sort({createdAt:-1})
+        const {category}=req.query;
+        const filter = {};
+        if(category){
+            filter.category=category;
+
+        }
+    
+        const blogs = await Blog.find(filter).populate("author","username profileImage ").sort({createdAt:-1})
         res.status(200).json(blogs);
     } catch (error) {
          return res.status(500).json({success:false,message:error.message});
@@ -97,6 +104,8 @@ const deleteBlog = async (req,res)=>{
     }
 }
 
+
+
 // const updateBlog = async (req,res)=>{
 //     try {
         
@@ -104,4 +113,4 @@ const deleteBlog = async (req,res)=>{
         
 //     }
 // }
-module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog};
+module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog,};

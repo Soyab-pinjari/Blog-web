@@ -5,29 +5,20 @@ import { Link } from "react-router";
 
 function AllBlogs() {
   const [blogs, setBlogs] = useState([]);
+  const [category,setCategory]=useState("");
+ 
 
-  const fetchBlogs = async () => {
+ const fetchBlogs = async () => {
     try {
-      const data = await GetAllBlogs();
-
-      const formattedBlogs = data.map((blog) => ({
-        ...blog,
-        createdAt: new Date(blog.createdAt).toLocaleDateString("en-IN", {
-          day: "numeric",
-          month: "short",
-          year: "numeric",
-        }),
-      }));
-
-      setBlogs(formattedBlogs);
+      const data = await GetAllBlogs(category);
+      setBlogs(data);
     } catch (error) {
-      console.error("Error fetching blogs:", error);
+      console.log(error);
     }
   };
-
-  useEffect(() => {
+   useEffect(() => {
     fetchBlogs();
-  }, []);
+  }, [category]);
 
   return (
     <>
@@ -35,11 +26,48 @@ function AllBlogs() {
 
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="pt-24 pb-12">
-          <h2 className="text-3xl font-bold text-gray-900 mb-8">
+          <h2 className="text-3xl font-bold text-gray-900 mb-5">
             Explore Blogs
           </h2>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="relative w-full md:w-64">
+  <select
+    value={category}
+    onChange={(e) => setCategory(e.target.value)}
+    className="
+      appearance-none
+      w-full
+      bg-gray-50
+      border
+      border-gray-300
+      rounded-xl
+      px-4
+      py-3
+      pr-5
+      text-gray-700
+      font-semibold
+      shadow-sm
+      cursor-pointer
+      focus:outline-none
+    "
+  >
+    <option value="">All Categories</option>
+    <option value="Technology">Technology</option>
+    <option value="Travel">Travel</option>
+    <option value="Education">Education</option>
+    <option value="Health">Health</option>
+    <option value="Bussiness">Bussiness</option>
+    <option value="Programming">Programming</option>
+    <option value="Lifestyle">Lifestyle</option>
+    <option value="Entertainment">Entertainment</option>
+  </select>
+
+  <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
+    ▼
+  </span>
+</div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-5 gap-6">
             {blogs.map((blog) => (
               <Link to={`/blog/${blog.slug}`}
                 key={blog._id}
@@ -69,13 +97,17 @@ function AllBlogs() {
                       <p className="font-medium">
                         {blog.author?.username || "Unknown"}
                       </p>
-                      <p>{blog.createdAt}</p>
+                      <p className="mt-1">
+                         {new Date(blog.createdAt).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                      </p>
                     </div>
                   </div>
 
-                  <p className="text-sm text-gray-500 mt-3">
-                    {blog.readTime || "5 min read"}
-                  </p>
+                 
                 </div>
               </Link>
             ))}

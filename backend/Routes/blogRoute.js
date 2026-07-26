@@ -19,5 +19,6 @@ router.post('/create',auth,blogUpload.single("coverImage"),createBlog);
 router.get('/',getAllBlog);
 router.get('/user',auth,getUserBlog);
 router.get('/:slug',getBlogInfo);
+
 router.delete('/delete/:slug',auth,deleteBlog);
 module.exports = router;

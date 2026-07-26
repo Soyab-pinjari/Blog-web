@@ -18,6 +18,7 @@ import ScrollToTop from './Component/ScrollToTop'
 import ProfilePage from './Pages/ProfilePage'
 
 
+
 function App() {
   const [user,setUser]=useState(JSON.parse(localStorage.getItem('user'))||null);
 
@@ -35,6 +36,7 @@ function App() {
       <Route path='/create' element={<CreateBlog/>}></Route>
       <Route path='/blogs' element={<AllBlogs/>}></Route>
    <Route path="/blog/:slug"  element={<BlogPage/>}></Route>
+  
      
      </Routes>
     </userContext.Provider>
