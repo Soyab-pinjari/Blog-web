@@ -139,7 +139,7 @@ useEffect(() => {
 
 return (
     <>
-      <Navbar/>
+      {/* <Navbar/> */}
     <div className="min-h-screen bg-gray-100 flex pt-30 justify-center items-center p-5">
       <div className="w-full max-w-3xl bg-white rounded-xl shadow-md overflow-hidden">
 

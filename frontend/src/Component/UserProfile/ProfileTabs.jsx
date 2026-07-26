@@ -3,6 +3,7 @@ import { deleteBlog, getUserBlogs } from '../../services/api';
 import { useState } from 'react';
 import { useEffect } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
+import { Link } from 'react-router';
 
 function ProfileTabs() {
     const [blogs,setBlogs]= useState([]);
@@ -51,7 +52,7 @@ const handleDelete = async (selectedSlug) => {
 </h1>
       {
         (blogs.map((blog)=>(
-             <div className="flex gap-4 items-center justify-between bg-white rounded-xl p-4 shadow-sm border">
+             <Link to={`/blog/${blog.slug}`} className="flex gap-4 items-center justify-between bg-white rounded-xl p-4 shadow-sm border">
 
         <div className="flex gap-7">
 
@@ -123,7 +124,7 @@ const handleDelete = async (selectedSlug) => {
 
   </div>
 )}
-      </div>
+      </Link>
     
         )))
       }

@@ -52,6 +52,10 @@ export const getUserBlogs = async()=>{
     });
     return response.data;
 }
+export const getblogDetails = async (slug)=>{
+  const response = await axios.get(`${BASE_URL}/blog/${slug}`)
+  return response.data;
+}
 
 export const deleteBlog = async(slug)=>{
       console.log("API slug:", slug); // add this

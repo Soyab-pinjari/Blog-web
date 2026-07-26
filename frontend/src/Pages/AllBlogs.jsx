@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Component/Navbar";
 import { GetAllBlogs } from "../services/api";
+import { Link } from "react-router";
 
 function AllBlogs() {
   const [blogs, setBlogs] = useState([]);
@@ -40,7 +41,7 @@ function AllBlogs() {
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {blogs.map((blog) => (
-              <div
+              <Link to={`/blog/${blog.slug}`}
                 key={blog._id}
                 className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition duration-300"
               >
@@ -76,7 +77,7 @@ function AllBlogs() {
                     {blog.readTime || "5 min read"}
                   </p>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 

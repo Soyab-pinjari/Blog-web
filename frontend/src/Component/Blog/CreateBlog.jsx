@@ -83,19 +83,7 @@ function CreateBlog() {
               className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-indigo-500"
               />
           </div>
-          {/* <div> */}
-            {/* <label className="block text-sm font-medium mb-2">
-             content
-            </label> */}
-
-            {/* <input
-              type="text"
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Enter Blog Content"
-              className="w-full border border-gray-300 rounded-lg px-4 py-3 outline-none focus:border-indigo-500"
-              /> */}
-          {/* </div> */}
+      
 
           <div>
             <label className="block text-sm font-medium mb-2">
@@ -112,6 +100,10 @@ function CreateBlog() {
             <option value="Travel">Travel</option>
             <option value="Education">Education</option>
             <option value="Health">Health</option>
+            <option value="Bussiness">Bussiness</option>
+            <option value="Programming">Programming</option>
+            <option value="Lifestyle">Lifestyle</option>
+            <option value="Entertainment">Entertainment</option>
         </select>
           </div>
 
@@ -159,13 +151,8 @@ function CreateBlog() {
         setContent={setContent}
         />
 
-
-
         <div className="flex justify-end gap-4 mt-10">
 
-          {/* <button className="border border-gray-300 px-6 py-3 rounded-lg">
-            Save Draft
-            </button> */}
 
           <button  type="submit" className="bg-indigo-600 text-white px-7 py-3 rounded-lg hover:bg-indigo-700">
             Publish

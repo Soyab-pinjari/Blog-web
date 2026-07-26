@@ -48,9 +48,9 @@ const handleLogout = () => {
             </Link>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-600 transition">
+            <Link to={'/blogs'} className="hover:text-blue-600 transition">
               Blogs
-            </a>
+            </Link>
           </li>
           <li>
             <a href="#" className="hover:text-blue-600 transition">
@@ -89,8 +89,6 @@ const handleLogout = () => {
 
   {isLoggedIn ? (
     <>
-    
-
       {/* Profile */}
       <Link
   to="/profile"

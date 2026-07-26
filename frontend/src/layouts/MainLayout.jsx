@@ -3,6 +3,7 @@ import { Route } from 'react-router'
 import Navbar from '../Component/Navbar'
 import Hero from '../Pages/Hero'
 import FeaturedBlog from '../Pages/FeaturedBlog'
+import Footer from '../Component/Footer'
 
 
 
@@ -12,6 +13,7 @@ function MainLayout() {
     <Navbar/>
     <Hero/>
     <FeaturedBlog/>
+    <Footer/>
     </div>
   )
 }

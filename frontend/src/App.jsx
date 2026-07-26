@@ -13,6 +13,9 @@ import EditProfile from './Component/UserProfile/EditProfile'
 // import { GetAllBlogs } from './services/api'
 
 import userContext from './Context/userContext'
+import BlogPage from './Pages/BlogPage'
+import ScrollToTop from './Component/ScrollToTop'
+import ProfilePage from './Pages/ProfilePage'
 
 
 function App() {
@@ -20,7 +23,7 @@ function App() {
 
   return (
     <>
-
+    <ScrollToTop/>
     <userContext.Provider value={{ user, setUser }}>
 
      <Routes>
@@ -28,9 +31,10 @@ function App() {
       <Route path='/navbar' element={<Navbar/>}></Route>
       <Route path='/register' element={<Signup/>}></Route>
       <Route path='/login' element={<Signin/>}></Route>
-      <Route path='/profile' element={<EditProfile/>}></Route>
+      <Route path='/profile' element={<ProfilePage/>}></Route>
       <Route path='/create' element={<CreateBlog/>}></Route>
       <Route path='/blogs' element={<AllBlogs/>}></Route>
+   <Route path="/blog/:slug"  element={<BlogPage/>}></Route>
      
      </Routes>
     </userContext.Provider>

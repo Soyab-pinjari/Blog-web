@@ -1,0 +1,114 @@
+import axios from 'axios';
+import React, { useEffect, useState } from 'react'
+import { getblogDetails } from '../services/api';
+import { Link, useParams } from 'react-router';
+import Navbar from '../Component/Navbar';
+import Footer from '../Component/Footer';
+
+function BlogPage() {
+     const { slug } = useParams();
+
+    const [blog,setBlog]=useState(null);
+   
+    useEffect(()=>{
+            const fetchData = async()=>{
+                try {
+                    const res = await getblogDetails(slug);
+                    setBlog(res);
+                    console.log(res);
+                } catch (error) {
+                    console.log(error);
+                }
+
+            }
+            if(slug) {
+                fetchData();
+            }
+    },[slug])
+  return (
+    <div>
+<Navbar/>
+             <section className="max-w-4xl mx-auto px-6 py-10 mt-20">
+      {/* Category */}
+      <span className="inline-block bg-indigo-600 text-white text-xs font-medium px-4 py-1 rounded-full mb-5">
+        {blog?.category || "Technology"}
+      </span>
+
+
+      {/* Title */}
+      <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5">
+        {blog?.title || "The Future of AI: Trends to Watch in 2024"}
+      </h1>
+
+
+      {/* Author Info */}
+      <div className="flex items-center gap-3 mb-8">
+    <Link to={``}>
+        <img
+          src={
+            blog?.author?.profileImage
+            ? `http://localhost:3000/uploads/${blog.author.profileImage}`
+            : "http://localhost:3000/default-avatar.jpg"
+          }
+          alt="author"
+          className="w-10 h-10 rounded-full object-cover"
+          />
+
+          </Link>
+        <div className="text-sm text-gray-600">
+          <p className="font-medium text-gray-900">
+            {blog?.author?.username || "John Doe"}
+          </p>
+
+          <div className="flex gap-2 text-gray-500">
+            <span>Published At :
+             {new Date(blog?.createdAt).toLocaleDateString("en-GB", {
+  day: "2-digit",
+  month: "short",
+  year: "numeric",
+})}
+            </span>
+          
+          </div>
+        </div>
+
+      </div>
+
+
+      {/* Cover Image */}
+      <img
+        src={
+          blog?.coverImage
+            ? `http://localhost:3000/uploads/blogs/${blog.coverImage}`
+            : "/default-blog.jpg"
+        }
+        alt={blog?.title}
+        className="w-full h-[400px] object-cover rounded-xl shadow-md mb-8"
+      />
+
+
+      {/* Content */}
+  <div
+  className={`
+    prose
+    max-w-none
+    prose-headings:font-bold
+    prose-headings:text-gray-900
+    prose-h1:text-4xl
+    prose-h2:text-3xl
+    prose-h3:text-2xl
+    prose-p:text-lg
+    prose-p:leading-8
+    prose-strong:font-bold
+    prose-a:text-blue-600
+    prose-img:rounded-xl
+  `}
+  dangerouslySetInnerHTML={{ __html: blog?.content }}
+/>
+    </section>
+    <Footer/>
+    </div>
+  )
+}
+
+export default BlogPage

@@ -72,7 +72,7 @@ const getUserBlog = async(req,res)=>{
 const getBlogInfo = async (req,res)=>{
     try {
            
-        const blog = await Blog.findById ({slug: req.params.slug}).populate("author", "username profileImage");
+        const blog = await Blog.findOne ({slug: req.params.slug}).populate("author", "username profileImage ");
         if(!blog){
                 return res.status(404).json({
                 message: "Blog not found",

@@ -45,7 +45,7 @@ console.log("FeaturedBlog State:", blogs);
         {/* Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {blogs?.slice(0,8).map((blog) => (
-            <div
+            <Link to={`/blog/${blog.slug}`}
             key={blog._id}
               className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition duration-300"
               >
@@ -77,16 +77,13 @@ console.log("FeaturedBlog State:", blogs);
                     /> */}
 
                   <div className="text-sm text-gray-600">
-                    <p className="font-medium">{blog.author.username}</p>
+                    <p className="font-medium mb-2">{blog.author.username}</p>
                     <p>{blog.createdAt}</p>
                   </div>
                 </div>
 
-                <p className="text-sm text-gray-500 mt-3">
-                  {blog.readTime} 
-                </p>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
     </section>
