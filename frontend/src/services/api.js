@@ -58,12 +58,18 @@ export const getUserBlogs = async()=>{
     return response.data;
 }
 export const getblogDetails = async (slug)=>{
-  const response = await axios.get(`${BASE_URL}/blog/${slug}`)
+
+  const response = await axios.get(`${BASE_URL}/blog/${slug}`,{
+    headers:{
+      Authorization:`Bearer ${localStorage.getItem("token")}`
+    },
+  })
+
   return response.data;
 }
 
 export const deleteBlog = async(slug)=>{
-      console.log("API slug:", slug); // add this
+      console.log("API slug:", slug); 
     const response = await axios.delete(`${BASE_URL}/blog/delete/${slug}`,
          {
       headers: {

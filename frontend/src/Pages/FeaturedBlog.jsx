@@ -1,13 +1,13 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { GetAllBlogs } from '../services/api'
-import { data, Link } from 'react-router';
-
+import { data, Link, useNavigate } from 'react-router';
+import { categoryColors } from '../utils/categoryColors';
 
 function FeaturedBlog() {
     const [blogs,setBlogs]=useState([]);
     const [category,setCategory]=useState("");
-
+const navigate = useNavigate();
  const fetchBlogs = async () => {
     try {
       const data = await GetAllBlogs(category);
@@ -17,6 +17,7 @@ function FeaturedBlog() {
     }
   };
    useEffect(() => {
+    
     fetchBlogs();
   }, [category]);
 
@@ -78,7 +79,7 @@ function FeaturedBlog() {
           {blogs?.slice(0,8).map((blog) => (
             <Link to={`/blog/${blog.slug}`}
             key={blog._id}
-              className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition duration-300"
+              className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition duration-300 flex flex-col h-full"
               >
               {/* Image */}
               <div className="relative h-48">
@@ -87,39 +88,43 @@ function FeaturedBlog() {
                   alt={blog.title}
                   className="w-full h-full object-cover"
                   />
-
                 {/* Category */}
-                <span className="absolute bottom-3 left-3 bg-indigo-600 text-white text-xs px-3 py-1 rounded-full">
-                  {blog.category}
-                </span>
+                <span
+                className={`absolute bottom-3 left-3 text-white text-xs px-3 py-1 rounded-full ${
+                  categoryColors[blog.category] || "bg-gray-600"
+                }`}
+              >
+                {blog.category}
+            </span>
               </div>
 
-              {/* Content */}
-              <div className="p-4">
-                <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
-                  {blog.title}
-                </h3>
+             <div className="p-4 flex flex-col flex-1">
+  <h3 className="text-lg font-semibold text-gray-900 line-clamp-2 min-h-[56px]">
+    {blog.title}
+  </h3>
 
-                <div className="flex items-center gap-2 mt-4">
-                  {/* <img
-                    src={blog.author.profileImage}
-                    alt={blog.author.username}
-                    className="w-8 h-8 rounded-full object-cover"
-                    /> */}
+  <div className="mt-auto flex items-center gap-3 pt-4">
+    <img
+      src={`http://localhost:3000/uploads/${blog.author.profileImage}`}
+      alt="profile"
+      className="w-10 h-10 rounded-full object-cover flex-shrink-0"
+    />
 
-                  <div className="text-sm text-gray-600">
-                    <p className="font-medium mb-2">{blog.author.username}</p>
-                    <p>
-                        {new Date(blog.createdAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                    </p>
-                  </div>
-                </div>
+    <div className="text-sm text-gray-600">
+      <p className="font-medium text-black">
+        {blog.author.username}
+      </p>
 
-              </div>
+      <p>
+        {new Date(blog.createdAt).toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+        })}
+      </p>
+    </div>
+  </div>
+</div>
             </Link>
           ))}
         </div>

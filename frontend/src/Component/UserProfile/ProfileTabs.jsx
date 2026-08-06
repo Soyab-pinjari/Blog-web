@@ -21,6 +21,7 @@ function ProfileTabs() {
     console.log("blog data",blogs);
 
 const handleDelete = async (selectedSlug) => {
+       
   try {
     console.log("Deleting:", selectedSlug);
 
@@ -52,7 +53,8 @@ const handleDelete = async (selectedSlug) => {
 </h1>
       {
         (blogs.map((blog)=>(
-             <Link to={`/blog/${blog.slug}`} className="flex gap-4 items-center justify-between bg-white rounded-xl p-4 shadow-sm border">
+          <div className='flex justify-between items-center bg-white rounded-xl p-4 shadow-sm border'>
+             <Link to={`/blog/${blog.slug}`} className="flex gap-7 flex-1">
 
         <div className="flex gap-7">
 
@@ -78,6 +80,7 @@ const handleDelete = async (selectedSlug) => {
 
         </div>
 
+        </Link>
         <button className="text-gray-500 hover:text-red-500"  onClick={() => {
              console.log(blog.slug);
     setSelectedSlug(blog.slug);
@@ -86,7 +89,7 @@ const handleDelete = async (selectedSlug) => {
 
           <FiTrash2 size={22} />
                 
-        </button>
+        </button> 
 {showDeleteModal && (
   <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
 
@@ -112,20 +115,20 @@ const handleDelete = async (selectedSlug) => {
 
 
         <button
-         onClick={() => handleDelete(selectedSlug)}
+         onClick={(e) =>{ e.preventDefault();     
+    e.stopPropagation(); handleDelete(selectedSlug)}}
           className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600"
         >
           Delete
         </button>
 
       </div>
-
     </div>
 
   </div>
 )}
-      </Link>
     
+</div>
         )))
       }
       

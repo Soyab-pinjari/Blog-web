@@ -16,6 +16,7 @@ import userContext from './Context/userContext'
 import BlogPage from './Pages/BlogPage'
 import ScrollToTop from './Component/ScrollToTop'
 import ProfilePage from './Pages/ProfilePage'
+import Contact from './Pages/Contact'
 
 
 
@@ -29,6 +30,7 @@ function App() {
 
      <Routes>
       <Route path='/' element={<MainLayout/>}></Route>
+      <Route path='/contact' element={<Contact/>}></Route>
       <Route path='/navbar' element={<Navbar/>}></Route>
       <Route path='/register' element={<Signup/>}></Route>
       <Route path='/login' element={<Signin/>}></Route>

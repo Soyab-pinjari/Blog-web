@@ -63,9 +63,9 @@ const handleLogout = () => {
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-600 transition">
+            <Link to={'/contact'} className="hover:text-blue-600 transition">
               Contact
-            </a>
+            </Link>
           </li>
         </ul>
 

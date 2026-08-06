@@ -56,9 +56,7 @@ const bannerImage = user.banner
 
     const data = await res.json();
 
-
 setUser(data.user);
-
 
   } catch (err) {
     console.log(err);
@@ -118,6 +116,7 @@ const saveProfile = async () => {
   }
 };
 useEffect(() => {
+  
   const fetchProfile = async () => {
     try {
       const res = await getProfile();

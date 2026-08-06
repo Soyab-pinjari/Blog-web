@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function Hero() {
   return (
@@ -23,13 +24,16 @@ function Hero() {
           </p>
 
           <div className="flex gap-5 mt-10">
+            <Link to={'/blogs'}>
             <button className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-semibold transition">
               Explore Blogs
             </button>
-
+            </Link>
+            <Link to={'/profile'}>
             <button className="border-2 border-blue-500 text-gray-800 hover:bg-blue-50 px-8 py-4 rounded-xl font-semibold transition">
               Start Writing
             </button>
+            </Link>
           </div>
         </div>
 

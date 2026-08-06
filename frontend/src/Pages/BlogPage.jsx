@@ -1,16 +1,22 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { getblogDetails } from '../services/api';
-import { Link, useParams } from 'react-router';
+import { Link, useNavigate, useParams } from 'react-router';
 import Navbar from '../Component/Navbar';
 import Footer from '../Component/Footer';
-
+import { categoryColors } from '../utils/categoryColors';
 function BlogPage() {
      const { slug } = useParams();
-
+const navigate=useNavigate();
     const [blog,setBlog]=useState(null);
    
     useEffect(()=>{
+        const token = localStorage.getItem("token");
+
+    if (!token) {
+        navigate("/login");
+        return;
+    }
             const fetchData = async()=>{
                 try {
                     const res = await getblogDetails(slug);
@@ -30,9 +36,13 @@ function BlogPage() {
 <Navbar/>
              <section className="max-w-4xl mx-auto px-6 py-10 mt-20">
       {/* Category */}
-      <span className="inline-block bg-indigo-600 text-white text-xs font-medium px-4 py-1 rounded-full mb-5">
-        {blog?.category || "Technology"}
-      </span>
+    <span
+  className={`inline-block ${
+    categoryColors[blog?.category] || "bg-gray-600"
+  } text-white text-xs font-medium px-4 py-1 rounded-full mb-5`}
+>
+  {blog?.category || "Technology"}
+</span>
 
 
       {/* Title */}

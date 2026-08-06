@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Navbar from "../Component/Navbar";
 import { GetAllBlogs } from "../services/api";
-import { Link } from "react-router";
-
+import { Link, useNavigate } from "react-router";
+import { categoryColors } from "../utils/categoryColors";
 function AllBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [category,setCategory]=useState("");
- 
+  const navigate = useNavigate();
 
  const fetchBlogs = async () => {
     try {
@@ -16,7 +16,12 @@ function AllBlogs() {
       console.log(error);
     }
   };
+   
    useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(!token){
+      navigate("/login")
+    }
     fetchBlogs();
   }, [category]);
 
@@ -81,9 +86,13 @@ function AllBlogs() {
                     className="w-full h-full object-cover"
                   />
 
-                  <span className="absolute bottom-3 left-3 bg-indigo-600 text-white text-xs px-3 py-1 rounded-full">
-                    {blog.category}
-                  </span>
+                    <span
+                className={`absolute bottom-3 left-3 text-white text-xs px-3 py-1 rounded-full ${
+                  categoryColors[blog.category] || "bg-gray-600"
+                }`}
+              >
+                {blog.category}
+            </span>
                 </div>
 
                 {/* Content */}

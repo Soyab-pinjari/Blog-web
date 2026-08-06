@@ -58,7 +58,6 @@ const getAllBlog = async(req,res)=>{
         const filter = {};
         if(category){
             filter.category=category;
-
         }
     
         const blogs = await Blog.find(filter).populate("author","username profileImage ").sort({createdAt:-1})
