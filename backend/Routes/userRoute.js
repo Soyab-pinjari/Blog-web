@@ -9,13 +9,14 @@ const express = require('express');
 const { registration, login } = require('../Controller/authController');
 const router = express.Router();
 const auth = require('../middleware/auth');
-const { updateBanner, updateProfileImage, getProfile, updateProfile } = require('../Controller/userController');
+const { updateBanner, updateProfileImage, getProfile, updateProfile, authorInfo } = require('../Controller/userController');
 const { profileUpload, bannerUpload } = require('../Config/multer');
 
 
 router.post('/register',registration);
 router.post('/login',login);
 router.get('/profile',auth,getProfile);
+router.get('/profile/:id',authorInfo);
 router.patch('/profile',auth,updateProfile);
 router.patch('/profile-image',auth,profileUpload.single("profileImage"),updateProfileImage);
 router.patch(

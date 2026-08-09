@@ -185,10 +185,6 @@ return (
  ➕   
 </button>
           </div>
-
-       
-
-
           {/* User Info */}
           <div className="pt-20">
             <h1 className="text-2xl font-bold text-gray-800">
@@ -198,8 +194,6 @@ return (
             {/* <p className="text-gray-400 text-sm">
               @sarah_wilson
             </p> */}
-
-
                         {isEditing ? (
                 <textarea
                   name="bio"
@@ -237,10 +231,13 @@ return (
     📍 {user.location || "Add location"}
   </span>
 )}
-
               <span>
-                 joined {user.createdAt &&
-  new Date(user.createdAt).toISOString().split("T")[0]}
+                 joined : {user.createdAt &&
+  new Date(user.createdAt).toLocaleDateString("en-IN",{
+    day:"2-digit",
+    month:"short",
+    year:"numeric"
+  })}
 
               </span>
 
@@ -249,19 +246,22 @@ return (
 {isEditing && (
   <button
     onClick={saveProfile}
-    className="mt-4 px-4 py-2 bg-purple-600 text-white rounded-lg"
+    className="mt-4 px-4 py-2 mr-5 bg-purple-600 text-white rounded-lg"
   >
     Save
   </button>
 )}
 
 {/* --------------------------------------myBlogs------------- */}
- <Link
+{!isEditing &&(
+
+  <Link
   to="/create"
-  className="inline-block mt-8 px-5 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
+  className="inline-block  mt-8 px-5 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
 >
   Create Blog
 </Link>
+)}
 
 <ProfileTabs/>
 

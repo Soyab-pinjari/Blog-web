@@ -75,6 +75,16 @@ const getUserBlog = async(req,res)=>{
          return res.status(500).json({success:false,message:error.message});
     }
 }
+
+const authorBlogs=async(req,res)=>{
+    try {
+        const blogs = await Blog.find({author:req.params.id}).sort({ createdAt: -1 })
+         res.json(blogs);
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({message:"server error"});
+    }
+}
 const getBlogInfo = async (req,res)=>{
     try {
            
@@ -112,4 +122,4 @@ const deleteBlog = async (req,res)=>{
         
 //     }
 // }
-module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog,};
+module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog,authorBlogs,};

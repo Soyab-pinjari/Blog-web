@@ -10,7 +10,7 @@ function Navbar() {
   const isLoggedIn = localStorage.getItem("token");
   const {user,setUser}=useContext(userContext);
   const navigate = useNavigate();
-
+   
    const profileImage =user?.profileImage
   ?  `http://localhost:3000/uploads/${user.profileImage}?v=${user.updatedAt}`
   : "http://localhost:3000/default-avatar.jpg";
@@ -43,7 +43,7 @@ const handleLogout = () => {
         {/* Nav Links */}
         <ul className="hidden md:flex items-center gap-10 font-medium">
           <li>
-            <Link to={'/'} className="text-blue-600">
+            <Link to={'/'} className="hover:text-blue-600">
               Home
             </Link>
           </li>
@@ -58,7 +58,7 @@ const handleLogout = () => {
             </a>
           </li>
           <li>
-            <a href="#" className="hover:text-blue-600 transition">
+            <a href='#aboutPage' className="hover:text-blue-600 transition">
               About
             </a>
           </li>

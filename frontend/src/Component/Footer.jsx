@@ -9,7 +9,7 @@ import { Link } from "react-router";
 
 function Footer() {
   return (
-    <footer className="bg-blue-50 mt-16">
+    <footer className="bg-blue-50 mt-16 relative w-full mt-0">
       <div className="max-w-7xl mx-auto px-6 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         {/* Logo */}
         <div>

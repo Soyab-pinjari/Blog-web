@@ -3,6 +3,7 @@ import Navbar from "../Component/Navbar";
 import { GetAllBlogs } from "../services/api";
 import { Link, useNavigate } from "react-router";
 import { categoryColors } from "../utils/categoryColors";
+import BlogList from "../Component/Blog/BlogList";
 function AllBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [category,setCategory]=useState("");
@@ -68,60 +69,15 @@ function AllBlogs() {
   </select>
 
   <span className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-gray-500">
-    ▼
+    
   </span>
 </div>
+        <BlogList
+        blogs={blogs}
+           title="All Blogs"
+        >
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 mt-5 gap-6">
-            {blogs.map((blog) => (
-              <Link to={`/blog/${blog.slug}`}
-                key={blog._id}
-                className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition duration-300"
-              >
-                {/* Image */}
-                <div className="relative h-48">
-                  <img
-                    src={`http://localhost:3000/uploads/blogs/${blog.coverImage}`}
-                    alt={blog.title}
-                    className="w-full h-full object-cover"
-                  />
-
-                    <span
-                className={`absolute bottom-3 left-3 text-white text-xs px-3 py-1 rounded-full ${
-                  categoryColors[blog.category] || "bg-gray-600"
-                }`}
-              >
-                {blog.category}
-            </span>
-                </div>
-
-                {/* Content */}
-                <div className="p-4">
-                  <h3 className="text-lg font-semibold text-gray-900 line-clamp-2">
-                    {blog.title}
-                  </h3>
-
-                  <div className="flex items-center gap-2 mt-4">
-                    <div className="text-sm text-gray-600">
-                      <p className="font-medium">
-                        {blog.author?.username || "Unknown"}
-                      </p>
-                      <p className="mt-1">
-                         {new Date(blog.createdAt).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}
-                      </p>
-                    </div>
-                  </div>
-
-                 
-                </div>
-              </Link>
-            ))}
-          </div>
-
+        </BlogList>
           {blogs.length === 0 && (
             <p className="text-center text-gray-500 mt-10">
               No blogs found.

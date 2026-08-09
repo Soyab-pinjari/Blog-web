@@ -17,6 +17,8 @@ import BlogPage from './Pages/BlogPage'
 import ScrollToTop from './Component/ScrollToTop'
 import ProfilePage from './Pages/ProfilePage'
 import Contact from './Pages/Contact'
+import AuthorInfo from './Component/UserProfile/AuthorInfo'
+import About from './Pages/About'
 
 
 
@@ -30,7 +32,9 @@ function App() {
 
      <Routes>
       <Route path='/' element={<MainLayout/>}></Route>
+      <Route path='/author/:id' element={<AuthorInfo/>}></Route>
       <Route path='/contact' element={<Contact/>}></Route>
+      {/* <Route path='/about' element={<About/>}></Route> */}
       <Route path='/navbar' element={<Navbar/>}></Route>
       <Route path='/register' element={<Signup/>}></Route>
       <Route path='/login' element={<Signin/>}></Route>

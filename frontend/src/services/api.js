@@ -44,11 +44,29 @@ export const getProfile = () => {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },
+    
+  })
+    .then((res) => {
+    console.log(res.data);
+  })
+  .catch((err) => {
+    if (err.response?.status === 401) {
+      localStorage.removeItem("token");
+      window.location.href = "/login";
+    }
   });
+  
 };
 
+export const authorProfile = async(id)=>{
+  try {
+    const response = await axios.get(`${BASE_URL}/user/profile/${id}`)
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
 export const getUserBlogs = async()=>{
- 
     const response = await axios.get(`${BASE_URL}/blog/user`,
      {
     headers: {
@@ -67,6 +85,16 @@ export const getblogDetails = async (slug)=>{
 
   return response.data;
 }
+
+export const getauthorBlogs=async(id)=>{
+  try {
+    const response = await axios.get(`${BASE_URL}/blog/author/${id}`)
+      console.log("API response:", response.data);
+    return response.data
+  } catch (error) {
+    console.log(error)
+  }
+} 
 
 export const deleteBlog = async(slug)=>{
       console.log("API slug:", slug); 

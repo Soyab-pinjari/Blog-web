@@ -8,11 +8,13 @@ import {
   FaLinkedin,
   FaGithub,
 } from "react-icons/fa";
+import Navbar from "../Component/Navbar";
 
 const Contact = () => {
   return (
-    <div className="bg-gray-50 min-h-screen">
 
+    <div className="bg-gray-50 min-h-screen">
+      <Navbar/>
       {/* Hero Section */}
       <section className=" text-white py-8">
         <div className="max-w-7xl mx-auto px-6 text-blue-600 text-center">
