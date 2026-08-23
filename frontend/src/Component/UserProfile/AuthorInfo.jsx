@@ -54,6 +54,7 @@ function AuthorInfo() {
           <img
             src={BannerImage}
             alt="cover"
+              loading="lazy"
             className="w-full h-full object-cover"
           />
 

@@ -42,6 +42,7 @@ function Hero() {
           <img
             src="/hero.jpeg"
             alt="Travel"
+              loading="lazy"
             className="rounded-3xl shadow-xl w-full h-[500px] object-cover"
           />
 

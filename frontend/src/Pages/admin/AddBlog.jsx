@@ -215,6 +215,7 @@ const AddBlog = () => {
                                     <img
                                         src={coverImage.preview}
                                         alt="Cover Preview"
+                                          loading="lazy"
                                         className="h-64 w-full object-cover"
                                     />
 

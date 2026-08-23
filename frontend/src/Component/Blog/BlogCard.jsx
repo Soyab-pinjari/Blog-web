@@ -15,6 +15,7 @@ function BlogCard({ blog }) {
           <img
             src={`${BASE_URL}/uploads/blogs/${blog.coverImage}`}
             alt={blog.title}
+              loading="lazy"
             className="w-full h-full object-cover"
           />
 
@@ -42,6 +43,7 @@ function BlogCard({ blog }) {
         <img
           src={blog.author?.profileImage?`${BASE_URL}/uploads/${blog.author.profileImage}`:`${BASE_URL}/default-avatar.jpg`}
           className="w-10 h-10 rounded-full object-cover"
+            loading="lazy"
         />
 
         <div>

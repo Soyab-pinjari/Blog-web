@@ -79,6 +79,7 @@ const createBlog = async (req, res) => {
     }
 };
 const getAllBlog = async(req,res)=>{
+      console.time("BLOG API");
     try {
         const {category}=req.query;
         const filter = {};
@@ -87,6 +88,7 @@ const getAllBlog = async(req,res)=>{
         }
     
         const blogs = await Blog.find(filter).populate("author","username profileImage ").sort({createdAt:-1})
+        console.timeEnd("BLOG API");
         res.status(200).json(blogs);
     } catch (error) {
          return res.status(500).json({success:false,message:error.message});

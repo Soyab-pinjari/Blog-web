@@ -61,6 +61,7 @@ const navigate=useNavigate();
             : `${BASE_URL}/default-avatar.jpg`
           }
           alt="author"
+            loading="lazy"
           className="w-10 h-10 rounded-full object-cover"
           />
 
@@ -90,6 +91,7 @@ const navigate=useNavigate();
         : "/default-blog.jpg"
     }
     alt={blog?.title || "Blog cover"}
+    loading="lazy"
     className="w-full h-full object-cover object-center"
   />
 </div>
