@@ -58,6 +58,7 @@ function FeaturedBlog() {
             <option value="Entertainment">Entertainment</option>
           </select>
         </div>
+      
 
         {loading ? (
           <div className="flex justify-center items-center py-20">
