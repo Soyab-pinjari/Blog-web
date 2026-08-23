@@ -27,11 +27,23 @@ import AddUser from './Pages/admin/AddUser'
 import AdminCategories from './Pages/admin/AdminCategories'
 import AddCategory from './Pages/admin/AddCategory'
 import EditCategory from './Pages/admin/EditCategory'
+import Signin from './Forms/SignIn'
+import Signup from './Forms/Signup'
 
 
 
 function App() {
-  const [user,setUser]=useState(JSON.parse(localStorage.getItem('user'))||null);
+  const getUserFromStorage = () => {
+  try {
+    const user = localStorage.getItem("user");
+    return user ? JSON.parse(user) : null;
+  } catch (error) {
+    console.error("Invalid user data in localStorage:", error);
+    localStorage.removeItem("user");
+    return null;
+  }
+};
+    const [user, setUser] = useState(getUserFromStorage());
 
   return (
     <>
@@ -44,8 +56,8 @@ function App() {
       <Route path='/contact' element={<Contact/>}></Route>
       {/* <Route path='/about' element={<About/>}></Route> */}
       <Route path='/navbar' element={<Navbar/>}></Route>
-      <Route path='/register' element={<Signup/>}></Route>
-      <Route path='/login' element={<Signin/>}></Route>
+      <Route path='/register' element={<Signin/>}></Route>
+      <Route path='/login' element={<Signup/>}></Route>
       <Route path='/profile' element={<ProfilePage/>}></Route>
       <Route path='/create' element={<CreateBlog/>}></Route>
       <Route path='/blogs' element={<AllBlogs/>}></Route>
