@@ -152,54 +152,38 @@ const deleteBlog = async (req,res)=>{
     }
 }
 
-
 const searchBlogs = async (req, res) => {
   try {
     const { q } = req.query;
 
-    if (!q || q.trim() === "") {
+    if (!q || !q.trim()) {
       return res.status(400).json({
-        success: false,
-        message: "Search query is required",
+        message: "Search query is required"
       });
     }
 
-    const search = q.trim();
+    const searchTerm = q.trim();
 
     const blogs = await Blog.find({
-      $or: [
-        {
-          title: {
-            $regex: search,
-            $options: "i",
-          },
-        },
-        {
-          content: {
-            $regex: search,
-            $options: "i",
-          },
-        },
-        {
-          category: {
-            $regex: search,
-            $options: "i",
-          },
-        },
-      ],
-    }).sort({ createdAt: -1 });
+      title: {
+        $regex: searchTerm,
+        $options: "i"
+      }
+    })
+      .sort({ createdAt: -1 })
+      .limit(10);
 
     res.status(200).json({
       success: true,
-      count: blogs.length,
-      blogs,
+      blogs
     });
+
   } catch (error) {
     console.error("Search error:", error);
 
     res.status(500).json({
       success: false,
-      message: "Server error",
+      message: "Server error"
     });
   }
 };
