@@ -19,6 +19,15 @@ import ProfilePage from './Pages/ProfilePage'
 import Contact from './Pages/Contact'
 import AuthorInfo from './Component/UserProfile/AuthorInfo'
 import About from './Pages/About'
+import AdminLayout from './layouts/adminLayout'
+import AdminDashboard from './Component/Dashboard/adminDashboard'
+import AdminBlogs from './Pages/admin/AdminBlogs'
+import AddBlog from './Pages/admin/AddBlog'
+import AdminUsers from './Pages/admin/AdminUsers'
+import AddUser from './Pages/admin/AddUser'
+import AdminCategories from './Pages/admin/AdminCategories'
+import AddCategory from './Pages/admin/AddCategory'
+import EditCategory from './Pages/admin/EditCategory'
 
 
 
@@ -42,7 +51,25 @@ function App() {
       <Route path='/create' element={<CreateBlog/>}></Route>
       <Route path='/blogs' element={<AllBlogs/>}></Route>
    <Route path="/blog/:slug"  element={<BlogPage/>}></Route>
-  
+
+   {/* Admin routes */}
+    <Route path="/admin" element={<AdminLayout />}>
+
+    <Route index element={<AdminDashboard />} />
+
+    <Route path="blogs" element={<AdminBlogs />} />
+    <Route path='blogs/add' element={<AddBlog/>}></Route>
+    <Route path='users' element={<AdminUsers/>}></Route>
+       <Route path="users/add" element={<AddUser />} />
+       
+         <Route path="categories" element={<AdminCategories />} />
+    <Route path="categories/add" element={<AddCategory />} />
+      <Route
+        path="categories/edit/:id"
+        element={<EditCategory />}
+    />
+
+</Route>
      
      </Routes>
     </userContext.Provider>

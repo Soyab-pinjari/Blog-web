@@ -65,7 +65,7 @@ const updateProfileImage = async (req, res) => {
       {
         profileImage: imagePath,
       },
-      { new: true }
+        { returnDocument: "after" }
     );
 
     res.status(200).json({

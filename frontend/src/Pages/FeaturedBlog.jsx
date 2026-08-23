@@ -38,11 +38,11 @@ const navigate = useNavigate();
       View All →
     </Link>
   </div>
-     <div className="relative w-full md:w-64">
+     <div className="relative w-52 md:w-64">
     <select
       value={category}
       onChange={(e) => setCategory(e.target.value)}
-      className="appearance-none w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-700 font-semibold shadow-sm cursor-pointer focus:outline-none"
+      className="appearance-none w-50 bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-700 font-semibold shadow-sm cursor-pointer focus:outline-none"
     >
       <option value="">All Categories</option>
       <option value="Technology">Technology</option>

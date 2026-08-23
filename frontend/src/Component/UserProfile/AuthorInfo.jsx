@@ -2,14 +2,17 @@ import React, { useContext, useEffect, useState } from 'react'
 import userContext from '../../Context/userContext'
 
 import { authorProfile, getauthorBlogs } from '../../services/api';
-import { useParams } from 'react-router'
+import { Link, useNavigate, useParams } from 'react-router'
 import Navbar from '../Navbar';
 
 function AuthorInfo() {
     const {id}=useParams();
     const [author,setAuthor] = useState({})
     const [blogs,setBlogs]=useState([])
+    const navigate = useNavigate();
+
     const BannerImage = author?.banner 
+
     ?`http://localhost:3000/uploads/${author?.banner}`:"http://localhost:3000/default-banner.jpeg";
 
     const profileImage = author?.profileImage
@@ -28,7 +31,8 @@ function AuthorInfo() {
         try {
             const res = await getauthorBlogs(id);
             setBlogs(res);
-            console.log(res);
+            console.log("response",res);
+
         } catch (error) {
             console.log(error);
         }
@@ -105,66 +109,58 @@ function AuthorInfo() {
 
 
         {/* Blogs Section */}
-        <div className="px-10 pb-10">
+      <div className="px-10 pb-10">
+  <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block pb-2">
+    Blogs
+  </h2>
 
-          <h2 className="text-2xl font-bold text-blue-600 border-b-4 border-blue-600 inline-block pb-2">
-             Blogs
-          </h2>
+  <div className="mt-8 space-y-5">
+    {blogs?.length > 0 ? (
+      blogs.map((blog) => (
+        <Link
+          key={blog._id}
+          to={`/blog/${blog.slug}`}
+          className="block"
+        >
+          <div className="flex items-center gap-5 border rounded-xl p-4 hover:shadow-md transition cursor-pointer">
+            
+            <img
+              src={`http://localhost:3000/uploads/blogs/${blog.coverImage}`}
+              alt={blog.title}
+              className="w-48 h-28 rounded-lg object-cover"
+            />
 
+            <div className="flex-1">
+              <h3 className="text-xl font-semibold text-gray-900">
+                {blog.title}
+              </h3>
 
-          <div className="mt-8 space-y-5">
-
-            {blogs?.length > 0 ? (
-              blogs.map((blog)=>(
-                <div
-                  key={blog._id}
-                  className="flex items-center gap-5 border rounded-xl p-4 hover:shadow-md transition"
-                >
-
-                 
-                  <img
-                    src={`http://localhost:3000/uploads/blogs/${blog.coverImage}`}
-                    alt={blog.title}
-                    className="w-48 h-28 rounded-lg object-cover"
-                  />
-
-
-                  <div className="flex-1">
-
-                    <h3 className="text-xl font-semibold text-gray-900">
-                      {blog.title}
-                    </h3>
-
-
-                    <p className="text-gray-500 mt-2">
-                      Published At :{" "}
-                      {new Date(blog.createdAt).toLocaleDateString(
-                        "en-IN",
-                        {
-                          day:"2-digit",
-                          month:"short",
-                          year:"numeric"
-                        }
-                      )}
-                    </p>
-
-                    <p className="text-sm text-gray-400 mt-2">
-                      {blog.category}
-                    </p>
-                  </div>
-
-
-                </div>
-              ))
-            ) : (
-              <p className="text-gray-500">
-                No blogs published yet.
+              <p className="text-gray-500 mt-2">
+                Published At:{" "}
+                {new Date(blog.createdAt).toLocaleDateString("en-IN", {
+                  day: "2-digit",
+                  month: "short",
+                  year: "numeric",
+                })}
               </p>
-            )}
+
+              <p className="text-sm text-gray-400 mt-2">
+                {blog.category}
+              </p>
+            </div>
 
           </div>
+        </Link>
+      ))
+    ) : (
+      <p className="text-gray-500">
+        No blogs published yet.
+      </p>
+    )}
+  </div>
+</div>
 
-        </div>
+
 
       </div>
 

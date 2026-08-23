@@ -44,7 +44,6 @@ const navigate=useNavigate();
   {blog?.category || "Technology"}
 </span>
 
-
       {/* Title */}
       <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5">
         {blog?.title || "The Future of AI: Trends to Watch in 2024"}
@@ -53,7 +52,7 @@ const navigate=useNavigate();
 
       {/* Author Info */}
       <div className="flex items-center gap-3 mb-8">
-    <Link to={``}>
+    <Link to={`/author/${blog?.author?._id}`}>
         <img
           src={
             blog?.author?.profileImage
@@ -78,24 +77,21 @@ const navigate=useNavigate();
   year: "numeric",
 })}
             </span>
-          
           </div>
         </div>
-
       </div>
-
-
       {/* Cover Image */}
-      <img
-        src={
-          blog?.coverImage
-            ? `http://localhost:3000/uploads/blogs/${blog.coverImage}`
-            : "/default-blog.jpg"
-        }
-        alt={blog?.title}
-        className="w-full h-[400px] object-cover rounded-xl shadow-md mb-8"
-      />
-
+ <div className="w-full aspect-video overflow-hidden rounded-xl shadow-md mb-8">
+  <img
+    src={
+      blog?.coverImage
+        ? `http://localhost:3000/uploads/blogs/${blog.coverImage}`
+        : "/default-blog.jpg"
+    }
+    alt={blog?.title || "Blog cover"}
+    className="w-full h-full object-cover object-center"
+  />
+</div>
 
       {/* Content */}
   <div

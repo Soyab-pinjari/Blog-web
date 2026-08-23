@@ -107,3 +107,4 @@ export const deleteBlog = async(slug)=>{
     )
      return response.data;
 }
+

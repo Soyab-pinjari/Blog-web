@@ -6,6 +6,7 @@ const app = express();
 const path = require('path')
 const blogRoute = require('./Routes/blogRoute');
 const userRoutes = require('./Routes/userRoute');
+const categoryRoutes = require('./Routes/categoryRoutes')
 app.use(cors());
 connection();  // Database connection
 app.use(express.json());
@@ -15,6 +16,7 @@ app.use(express.static("public"));
 
 app.use("/uploads", express.static(path.join(process.cwd(), "uploads")));
 app.use('/user',userRoutes);
+app.use("/api/category", categoryRoutes);
 app.use('/blog',blogRoute);
 
 app.listen(3000,(req,res)=>{

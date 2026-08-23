@@ -11,47 +11,73 @@
 const auth = require('../middleware/auth');
 const slugify = require('slugify');
 const Blog = require('../Modal/Blog');
-
+const Category = require('../Modal/Category')
 // const slug = slugify(title, {
 //   lower: true,
 //   strict: true,
 // });
 
-const createBlog = async(req,res)=>{
-  console.log("body---",req.body);
-     try {
-        const {title,content,category}=req.body;
-    
+const createBlog = async (req, res) => {
+    try {
+
+        const { title, content, category } = req.body;
+
         if (!req.file) {
-      return res.status(400).json({
-        success: false,
-        message: "No file uploaded",
-      });
-    }
-        let blog =new Blog({
-             title,
+            return res.status(400).json({
+                success: false,
+                message: "No file uploaded",
+            });
+        }
+
+        // Check category
+        const categoryExists = await Category.findOne({
+            slug: category
+        });
+
+        if (!categoryExists) {
+            return res.status(400).json({
+                success: false,
+                message: "Invalid category",
+            });
+        }
+
+        let blog = new Blog({
+            title,
             content,
             coverImage: req.file.filename,
-            category,
-            author : req.user.userId
-        })
-           blog.slug = title.toLowerCase().trim().replace(/[^\w\s-]/g, "")
-    .replace(/\s+/g, "-") +
-  "-" +
-   blog._id;
-    console.log("blog ===", blog);
-    const savedBlog = await blog.save();
-   console.log(savedBlog);
-    return res.status(201).json({
-      success: true,
-      message: "Blog Created",
-      blog: savedBlog,
-    });
 
-     } catch (error) {
-        return res.status(500).json({success:false,message:error.message});
-     }   
-}
+            // Save category slug
+            category: categoryExists.slug,
+
+            author: req.user.userId
+        });
+
+        blog.slug =
+            title
+                .toLowerCase()
+                .trim()
+                .replace(/[^\w\s-]/g, "")
+                .replace(/\s+/g, "-") +
+            "-" +
+            blog._id;
+
+        const savedBlog = await blog.save();
+
+        return res.status(201).json({
+            success: true,
+            message: "Blog Created",
+            blog: savedBlog,
+        });
+
+    } catch (error) {
+
+        return res.status(500).json({
+            success: false,
+            message: error.message
+        });
+
+    }
+};
 const getAllBlog = async(req,res)=>{
     try {
         const {category}=req.query;
@@ -80,11 +106,24 @@ const authorBlogs=async(req,res)=>{
     try {
         const blogs = await Blog.find({author:req.params.id}).sort({ createdAt: -1 })
          res.json(blogs);
+        
     } catch (error) {
         console.log(error);
         res.status(500).json({message:"server error"});
     }
 }
+
+// const authorBlogDetails = async(req,res)=>{
+//     try {
+//         const blog = await Blog.findOne({id:req.params.id}.populate("author","username profileImage"));
+//         res.status(200).json(blog);
+//         console.log(blog);
+//     } catch (error) {
+//         console.log(error);
+//         res.status(500).json({message:"server error"});
+//     }
+// }
+
 const getBlogInfo = async (req,res)=>{
     try {
            
