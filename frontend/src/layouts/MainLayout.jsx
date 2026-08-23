@@ -4,7 +4,6 @@ import Navbar from '../Component/Navbar'
 import Hero from '../Pages/Hero'
 import FeaturedBlog from '../Pages/FeaturedBlog'
 import Footer from '../Component/Footer'
-import Steps from '../Pages/steps'
 import About from '../Pages/About'
 
 
@@ -14,7 +13,7 @@ function MainLayout() {
     <div>
     <Navbar/>
     <Hero/>
-    <Steps/>
+    {/* <Steps/> */}
     <FeaturedBlog/>
     <section id='aboutPage'>
 
