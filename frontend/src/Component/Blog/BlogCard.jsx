@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { categoryColors } from "../../utils/categoryColors";
+import { useEffect } from "react";
 const BASE_URL = import.meta.env.VITE_API_URL
 function BlogCard({ blog }) {
 
+  const navigate = useNavigate();
+  useEffect(()=>{
+
+    const token = localStorage.getItem('token');
+    if(!token){
+      navigate('/')
+    }
+  },[])
   return (
 
     <div className="bg-white rounded-2xl overflow-hidden border border-gray-200 shadow-sm hover:shadow-lg transition duration-300 flex flex-col h-full">
