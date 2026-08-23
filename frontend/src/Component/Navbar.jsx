@@ -3,6 +3,7 @@ import { FiSearch, FiBell ,FiUser, FiMessageSquare} from "react-icons/fi";
 import { Link, useNavigate } from 'react-router';
 import { getProfile } from "../services/api";
 import userContext from '../Context/userContext';
+import Search from './Search';
 const BASE_URL = import.meta.env.VITE_API_URL
 
 function Navbar() {
@@ -71,15 +72,10 @@ const handleLogout = () => {
 
         {/* Right Side */}
        <div className="flex items-center gap-4">
-  {/* Search */}
-  <div className="hidden lg:flex items-center border rounded-lg px-3 py-2 w-72">
-    <FiSearch className="text-gray-500 text-lg" />
-    <input
-      type="text"
-      placeholder="Search blogs..."
-      className="ml-2 w-full outline-none text-sm"
-    />
-  </div>
+  Search
+ <Search/>
+
+
 
   {/* Notification */}
   <button className="relative p-2 rounded-full hover:bg-gray-100">
