@@ -39,7 +39,6 @@ const About = () => {
     },
   ];
 
-  
 
   const categories = [
     "Technology",
@@ -54,8 +53,7 @@ const About = () => {
   return (
     <div className="bg-white  pt-20  text-slate-900">
 
-      
-
+    
       {/* What is Blogy */}
       <section className="bg-slate-50 py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">

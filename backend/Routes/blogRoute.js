@@ -9,7 +9,7 @@
 // GET    /blog/category/:slug
 
 const express = require('express');
-const {createBlog, getAllBlog, getUserBlog, getBlogInfo, deleteBlog, authorBlogs, }= require('../Controller/blogController');
+const {createBlog, getAllBlog, getUserBlog, getBlogInfo, deleteBlog, authorBlogs, searchBlogs, }= require('../Controller/blogController');
 const auth = require('../middleware/auth');
 const { blogUpload } = require('../Config/multer');
 
@@ -22,4 +22,6 @@ router.get('/author/:id',authorBlogs);
 // router.get('/author/:id',authorBlogDetails);
 router.get('/:slug',auth,getBlogInfo);
 router.delete('/delete/:slug',auth,deleteBlog);
+
+router.get('/search',searchBlogs)
 module.exports = router;

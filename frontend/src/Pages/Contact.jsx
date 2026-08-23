@@ -16,7 +16,7 @@ const Contact = () => {
     <div className="bg-gray-50 min-h-screen">
       <Navbar/>
       {/* Hero Section */}
-      <section className=" text-white py-8">
+      <section className=" text-white mt-20 py-8">
         <div className="max-w-7xl mx-auto px-6 text-blue-600 text-center">
           <h1 className="text-1xl md:text-5xl font-bold">
             Contact Us
