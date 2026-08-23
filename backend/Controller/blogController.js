@@ -96,9 +96,11 @@ const getAllBlog = async(req,res)=>{
 }
 
 const getUserBlog = async(req,res)=>{
+     console.time("BLOG API");
     try {
         const blogs = await Blog.find({author:req.user.userId}).populate("author","username profileImage").sort({createdAt:-1});
         res.json(blogs);
+        console.timeEnd("BLOG API");
     } catch (error) {
          return res.status(500).json({success:false,message:error.message});
     }
