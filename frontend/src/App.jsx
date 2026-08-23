@@ -56,8 +56,8 @@ function App() {
       <Route path='/contact' element={<Contact/>}></Route>
       {/* <Route path='/about' element={<About/>}></Route> */}
       <Route path='/navbar' element={<Navbar/>}></Route>
-      <Route path='/register' element={<Signin/>}></Route>
-      <Route path='/login' element={<Signup/>}></Route>
+      <Route path='/register' element={<Signup/>}></Route>
+      <Route path='/login' element={<Signin/>}></Route>
       <Route path='/profile' element={<ProfilePage/>}></Route>
       <Route path='/create' element={<CreateBlog/>}></Route>
       <Route path='/blogs' element={<AllBlogs/>}></Route>
