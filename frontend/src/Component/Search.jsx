@@ -16,9 +16,13 @@ const handleSearch = async () => {
 
   try {
     const res = await axios.get(
-      `${import.meta.env.VITE_API_URL}/blog/search`,
+      `${import.meta.env.VITE_API_URL}/blog/search`
+      ,
       {
         params: { q: search },
+           headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
       }
     );
 
