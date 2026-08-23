@@ -165,14 +165,20 @@ const searchBlogs = async (req, res) => {
     const searchTerm = q.trim();
 
     const blogs = await Blog.find({
+      $or: [
+    {
       title: {
         $regex: searchTerm,
-        $options: "i"
+        $options: "i",
       },
-      category:{
-        $regex:searchTerm,
-        $options:"i"
-      }
+    },
+    {
+      category: {
+        $regex: searchTerm,
+        $options: "i",
+      },
+    },
+  ],
     })
       .sort({ createdAt: -1 })
       .limit(5);
