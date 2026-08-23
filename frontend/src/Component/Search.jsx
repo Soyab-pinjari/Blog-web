@@ -20,9 +20,7 @@ const handleSearch = async () => {
       ,
       {
         params: { q: search },
-           headers: {
-        Authorization: `Bearer ${localStorage.getItem('token')}`,
-      },
+        
       }
     );
 
