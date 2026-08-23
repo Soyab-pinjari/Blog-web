@@ -8,21 +8,25 @@ function AllBlogs() {
   const [blogs, setBlogs] = useState([]);
   const [category,setCategory]=useState("");
   const navigate = useNavigate();
-
- const fetchBlogs = async () => {
-    try {
-      const data = await GetAllBlogs(category);
-      setBlogs(data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+const [loading, setLoading] = useState(true);
    
    useEffect(() => {
     const token = localStorage.getItem("token");
     if(!token){
       navigate("/login")
     }
+  const fetchBlogs = async()=>{
+   try {
+    setLoading(true);
+
+      const data = await GetAllBlogs(category);
+      setBlogs(data);
+    } catch (error) {
+      console.log(error);
+    }finally{
+      setLoading(false)
+    }
+  }
     fetchBlogs();
   }, [category]);
 

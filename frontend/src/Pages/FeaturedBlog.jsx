@@ -8,17 +8,23 @@ import BlogList from '../Component/Blog/BlogList';
 function FeaturedBlog() {
     const [blogs,setBlogs]=useState([]);
     const [category,setCategory]=useState("");
+    const [loading, setLoading] = useState(true);
 const navigate = useNavigate();
- const fetchBlogs = async () => {
+
+   useEffect(() => {
+    const fetchBlogs =async()=>{
     try {
-      const data = await GetAllBlogs(category);
+       setLoading(true);
+       const data = await GetAllBlogs(category);
       setBlogs(data);
     } catch (error) {
-      console.log(error);
+       console.log(error);
+
+    }  
+     finally {
+      setLoading(false);
     }
-  };
-   useEffect(() => {
-    
+    }
     fetchBlogs();
   }, [category]);
 
