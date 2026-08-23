@@ -39,12 +39,10 @@ useEffect(() => {
     <Navbar />
 
     {loading ? (
-      // Loading UI
       <div className="flex justify-center items-center min-h-[60vh]">
         <div className="w-10 h-10 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
       </div>
     ) : (
-      // Actual content
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="pt-24 pb-12">
           <h2 className="text-3xl font-bold text-gray-900 mb-5">
