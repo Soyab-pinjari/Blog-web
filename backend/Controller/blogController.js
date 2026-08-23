@@ -168,10 +168,14 @@ const searchBlogs = async (req, res) => {
       title: {
         $regex: searchTerm,
         $options: "i"
+      },
+      category:{
+        $regex:searchTerm,
+        $options:"i"
       }
     })
       .sort({ createdAt: -1 })
-      .limit(10);
+      .limit(5);
 
     res.status(200).json({
       success: true,
