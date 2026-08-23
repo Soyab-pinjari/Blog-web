@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { categoryColors } from "../../utils/categoryColors";
-
+const BASE_URL = import.meta.env.VITE_API_URL
 function BlogCard({ blog }) {
 
   return (
@@ -10,7 +10,7 @@ function BlogCard({ blog }) {
       <Link to={`/blog/${blog.slug}`}>
         <div className="relative h-48">
           <img
-            src={`http://localhost:3000/uploads/blogs/${blog.coverImage}`}
+            src={`${BASE_URL}/uploads/blogs/${blog.coverImage}`}
             alt={blog.title}
             className="w-full h-full object-cover"
           />
@@ -37,7 +37,7 @@ function BlogCard({ blog }) {
         className="flex items-center gap-3 px-4 pb-4"
       >
         <img
-          src={blog.author?.profileImage?`http://localhost:3000/uploads/${blog.author.profileImage}`:"http://localhost:3000/default-avatar.jpg"}
+          src={blog.author?.profileImage?`${BASE_URL}/uploads/${blog.author.profileImage}`:`${BASE_URL}/default-avatar.jpg`}
           className="w-10 h-10 rounded-full object-cover"
         />
 

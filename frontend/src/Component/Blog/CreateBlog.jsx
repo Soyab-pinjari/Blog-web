@@ -4,7 +4,7 @@ import { BlogCreate } from "../../services/api";
 import BlogEditor from "../BlogEditor";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../Navbar";
-
+const BASE_URL = import.meta.env.VITE_API_URL
 function CreateBlog() {
   const [title, setTitle] = useState("");
   const [file, setFile] = useState(null);
@@ -22,7 +22,7 @@ function CreateBlog() {
   const fetchCategories = async () => {
     try {
       const response = await axios.get(
-        "http://localhost:3000/api/category"
+        `${BASE_URL}/api/category`
       );
 
       setCategories(response.data.categories || []);

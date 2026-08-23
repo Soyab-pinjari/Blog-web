@@ -6,7 +6,7 @@ import {
     Save,
 } from "lucide-react";
 import axios from "axios";
-
+const BASE_URL=import.meta.env.VITE_API_URL
 const AddCategory = () => {
     const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ const AddCategory = () => {
             setLoading(true);
 
             const response = await axios.post(
-                "http://localhost:3000/api/category/create",
+                `${BASE_URL}/api/category/create`,
                 {
                     name: formData.name.trim(),
                     icon: formData.icon.trim(),

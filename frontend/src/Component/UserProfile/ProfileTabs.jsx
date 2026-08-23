@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 import { FiTrash2 } from 'react-icons/fi';
 import { Link } from 'react-router';
-
+const BASE_URL = import.meta.env.VITE_API_URL
 function ProfileTabs() {
     const [blogs,setBlogs]= useState([]);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
@@ -59,7 +59,7 @@ const handleDelete = async (selectedSlug) => {
         <div className="flex gap-7">
 
           <img
-            src={`http://localhost:3000/uploads/blogs/${blog.coverImage}`}
+            src={`${BASE_URL}/uploads/blogs/${blog.coverImage}`}
             alt=""
             className="w-40 h-24 rounded-lg object-cover"
           />

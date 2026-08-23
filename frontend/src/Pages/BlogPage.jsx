@@ -5,6 +5,7 @@ import { Link, useNavigate, useParams } from 'react-router';
 import Navbar from '../Component/Navbar';
 import Footer from '../Component/Footer';
 import { categoryColors } from '../utils/categoryColors';
+const BASE_URL = import.meta.env.VITE_API_URL
 function BlogPage() {
      const { slug } = useParams();
 const navigate=useNavigate();
@@ -56,8 +57,8 @@ const navigate=useNavigate();
         <img
           src={
             blog?.author?.profileImage
-            ? `http://localhost:3000/uploads/${blog.author.profileImage}`
-            : "http://localhost:3000/default-avatar.jpg"
+            ? `${BASE_URL}/uploads/${blog.author.profileImage}`
+            : `${BASE_URL}/default-avatar.jpg`
           }
           alt="author"
           className="w-10 h-10 rounded-full object-cover"
@@ -85,7 +86,7 @@ const navigate=useNavigate();
   <img
     src={
       blog?.coverImage
-        ? `http://localhost:3000/uploads/blogs/${blog.coverImage}`
+        ? `${BASE_URL}/uploads/blogs/${blog.coverImage}`
         : "/default-blog.jpg"
     }
     alt={blog?.title || "Blog cover"}

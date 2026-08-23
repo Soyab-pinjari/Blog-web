@@ -4,7 +4,7 @@ import userContext from '../../Context/userContext'
 import { authorProfile, getauthorBlogs } from '../../services/api';
 import { Link, useNavigate, useParams } from 'react-router'
 import Navbar from '../Navbar';
-
+const BASE_URL = import.meta.env.VITE_API_URL
 function AuthorInfo() {
     const {id}=useParams();
     const [author,setAuthor] = useState({})
@@ -13,10 +13,10 @@ function AuthorInfo() {
 
     const BannerImage = author?.banner 
 
-    ?`http://localhost:3000/uploads/${author?.banner}`:"http://localhost:3000/default-banner.jpeg";
+    ?`${BASE_URL}/uploads/${author?.banner}`:`${BASE_URL}/default-banner.jpeg`;
 
     const profileImage = author?.profileImage
-    ?`http://localhost:3000/uploads/${author?.profileImage}`:"http://localhost:3000/default-avatar.jpg";
+    ?`${BASE_URL}/uploads/${author?.profileImage}`:`${BASE_URL}/default-avatar.jpg`;
  
         const fetchUser = async () => {
         try {
@@ -125,7 +125,7 @@ function AuthorInfo() {
           <div className="flex items-center gap-5 border rounded-xl p-4 hover:shadow-md transition cursor-pointer">
             
             <img
-              src={`http://localhost:3000/uploads/blogs/${blog.coverImage}`}
+              src={`${BASE_URL}/uploads/blogs/${blog.coverImage}`}
               alt={blog.title}
               className="w-48 h-28 rounded-lg object-cover"
             />

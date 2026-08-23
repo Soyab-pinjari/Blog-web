@@ -1,5 +1,5 @@
 import axios from "axios";
-const BASE_URL = "http://localhost:3000"
+const BASE_URL = import.meta.env.VITE_API_URL
 
 export const signUpUser = async (userData)=>{
     const info= await axios.post(`${BASE_URL}/user/register`,userData);
@@ -40,7 +40,7 @@ export const GetUserInfo = async()=>{
 }
 
 export const getProfile = () => {
-  return axios.get("http://localhost:3000/user/profile", {
+  return axios.get(`${BASE_URL}/user/profile`, {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
     },

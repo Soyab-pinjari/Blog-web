@@ -3,7 +3,7 @@ import { FiSearch, FiBell ,FiUser, FiMessageSquare} from "react-icons/fi";
 import { Link, useNavigate } from 'react-router';
 import { getProfile } from "../services/api";
 import userContext from '../Context/userContext';
-
+const BASE_URL = import.meta.env.VITE_API_URL
 
 function Navbar() {
 
@@ -12,8 +12,8 @@ function Navbar() {
   const navigate = useNavigate();
    
    const profileImage =user?.profileImage
-  ?  `http://localhost:3000/uploads/${user.profileImage}?v=${user.updatedAt}`
-  : "http://localhost:3000/default-avatar.jpg";
+  ?  `${BASE_URL}/uploads/${user.profileImage}?v=${user.updatedAt}`
+  : `${BASE_URL}/default-avatar.jpg`;
 
 const handleLogout = () => {
   try {

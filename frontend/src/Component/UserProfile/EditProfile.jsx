@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import userContext from "../../Context/userContext";
 import { getProfile } from "../../services/api";
 import ProfileTabs from "./ProfileTabs";
-
+const BASE_URL=import.meta.env.VITE_API_URL
 function EditProfile() {
   const profileInput = useRef(null);
   const bannerInput = useRef(null);
@@ -74,13 +74,13 @@ function EditProfile() {
 
   // Profile image URL
   const profileImage = user.profileImage
-    ? `http://localhost:3000/uploads/${user.profileImage}?v=${user.updatedAt}`
-    : "http://localhost:3000/default-avatar.jpg";
+    ? `${BASE_URL}/uploads/${user.profileImage}?v=${user.updatedAt}`
+    : `${BASE_URL}/default-avatar.jpg`;
 
   // Banner image URL
   const bannerImage = user.banner
-    ? `http://localhost:3000/uploads/${user.banner}?v=${user.updatedAt}`
-    : "http://localhost:3000/default-banner.jpeg";
+    ? `${BASE_URL}/uploads/${user.banner}?v=${user.updatedAt}`
+    : `${BASE_URL}/default-banner.jpeg`;
 
   // Upload profile image
   const handleProfileImage = async (e) => {
@@ -98,7 +98,7 @@ function EditProfile() {
 
     try {
       const res = await fetch(
-        "http://localhost:3000/user/profile-image",
+        `${BASE_URL}/user/profile-image`,
         {
           method: "PATCH",
 
@@ -148,7 +148,7 @@ function EditProfile() {
 
     try {
       const res = await fetch(
-        "http://localhost:3000/user/banner",
+        `${BASE_URL}/user/banner`,
         {
           method: "PATCH",
 
@@ -187,7 +187,7 @@ function EditProfile() {
       const token = localStorage.getItem("token");
 
       const res = await axios.patch(
-        "http://localhost:3000/user/profile",
+        `${BASE_URL}/user/profile`,
         formData,
         {
           headers: {

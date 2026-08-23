@@ -9,7 +9,7 @@ import {
     FileText,
 } from "lucide-react";
 import axios from "axios";
-
+const BASE_URL = import.meta.env.VITE_API_URL
 const AdminCategories = () => {
     const [search, setSearch] = useState("");
     const [categories, setCategories] = useState([]);
@@ -19,11 +19,9 @@ const AdminCategories = () => {
     const fetchCategories = async () => {
         try {
             setLoading(true);
-
             const response = await axios.get(
-                "http://localhost:3000/api/category"
+                `${BASE_URL}/api/category`
             );
-
             setCategories(response.data.categories);
 
         } catch (error) {
@@ -51,7 +49,7 @@ const AdminCategories = () => {
 
         try {
             await axios.delete(
-                `http://localhost:3000/api/category/${id}`
+                `${BASE_URL}/api/category/${id}`
             );
 
             // UI se remove
