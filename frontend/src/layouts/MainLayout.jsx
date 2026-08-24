@@ -1,61 +1,70 @@
-import React from 'react'
-import { Route } from 'react-router'
-import { motion } from 'framer-motion'
-import Navbar from '../Component/Navbar'
-import Hero from '../Pages/Hero'
-import FeaturedBlog from '../Pages/FeaturedBlog'
-import Footer from '../Component/Footer'
-import About from '../Pages/About'
+import React from "react";
+import { motion } from "framer-motion";
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 1) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.15, duration: 0.6, ease: 'easeOut' },
-  }),
-}
+import Navbar from "../Component/Navbar";
+import Hero from "../Pages/Hero";
+import FeaturedBlog from "../Pages/FeaturedBlog";
+import Footer from "../Component/Footer";
+import About from "../Pages/About";
 
 function MainLayout() {
   return (
-    <div>
-      <Navbar />
-
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      className="overflow-x-hidden"
+    >
+      {/* Navbar */}
       <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={fadeUp}
-        custom={0}
+        initial={{ y: -50, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ duration: 0.6 }}
+      >
+        <Navbar />
+      </motion.div>
+
+      {/* Hero */}
+      <motion.section
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
       >
         <Hero />
-      </motion.div>
+      </motion.section>
 
-      {/* <Steps/> */}
-
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
+      {/* Featured Blogs */}
+      <motion.section
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        variants={fadeUp}
-        custom={1}
+        transition={{ duration: 0.7 }}
       >
         <FeaturedBlog />
-      </motion.div>
+      </motion.section>
 
+      {/* About */}
       <motion.section
         id="aboutPage"
-        initial="hidden"
-        whileInView="visible"
+        initial={{ opacity: 0, y: 60 }}
+        whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.2 }}
-        variants={fadeUp}
-        custom={2}
+        transition={{ duration: 0.7 }}
       >
         <About />
       </motion.section>
 
-      <Footer />
-    </div>
-  )
+      {/* Footer */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8 }}
+      >
+        <Footer />
+      </motion.div>
+    </motion.div>
+  );
 }
 
-export default MainLayout
+export default MainLayout;
