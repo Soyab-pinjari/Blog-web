@@ -12,6 +12,7 @@ import userContext from "../../Context/userContext";
 import { getProfile } from "../../services/api";
 import ProfileTabs from "./ProfileTabs";
 const BASE_URL=import.meta.env.VITE_API_URL
+
 function EditProfile() {
   const profileInput = useRef(null);
   const bannerInput = useRef(null);
@@ -34,7 +35,7 @@ function EditProfile() {
       try {
         const res = await getProfile();
   console.log(res)
-        // const updatedUser = res.data.user;
+        const updatedUser = res.data.user;
 
         setUser(updatedUser);
 
