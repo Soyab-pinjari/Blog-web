@@ -5,6 +5,7 @@
 // unfollowUser
 // getUserBlogs
 const User = require('../Modal/Users')
+const uploadToCloudinary = require('../Utils/uploadToCloudinary')
 
 const getProfile = async (req, res) => {
   try {
@@ -55,18 +56,24 @@ const updateProfileImage = async (req, res) => {
       });
     }
 
-    const userId = req.user.userId; // auth middleware se
+    const userId = req.user.userId;
 
-    const imagePath = req.file.path .replace(process.cwd() + "\\uploads\\", "")
-  .replace(/\\/g, "/");
+    // Upload image to Cloudinary
+    const result = await uploadToCloudinary(
+      req.file.buffer,
+      "blog-app/profiles"
+    );
 
+    // Save Cloudinary URL in MongoDB
     const user = await User.findByIdAndUpdate(
       userId,
       {
-        profileImage: imagePath,
+        profileImage: result.secure_url,
       },
-        { returnDocument: "after" }
-    );
+      {
+        new: true,
+      }
+    ).select("-password");
 
     res.status(200).json({
       success: true,
@@ -74,7 +81,7 @@ const updateProfileImage = async (req, res) => {
       user,
     });
   } catch (error) {
-    console.log(error);
+    console.log("Profile image upload error:", error);
 
     res.status(500).json({
       success: false,
@@ -83,8 +90,7 @@ const updateProfileImage = async (req, res) => {
   }
 };
 
-
- const updateBanner = async (req, res) => {
+const updateBanner = async (req, res) => {
   try {
     if (!req.file) {
       return res.status(400).json({
@@ -95,23 +101,30 @@ const updateProfileImage = async (req, res) => {
 
     const userId = req.user.userId;
 
-    const imagePath = req.file.path .replace(process.cwd() + "\\uploads\\", "")
-  .replace(/\\/g, "/");
+    // Upload banner to Cloudinary
+    const result = await uploadToCloudinary(
+      req.file.buffer,
+      "blog-app/banners"
+    );
+
+    // Save Cloudinary URL in MongoDB
     const user = await User.findByIdAndUpdate(
       userId,
       {
-        banner: imagePath,
+        banner: result.secure_url,
       },
-      { new: true }
-    );
+      {
+        new: true,
+      }
+    ).select("-password");
 
-    res.status(200).json({  
+    res.status(200).json({
       success: true,
       message: "Banner updated successfully",
       user,
     });
   } catch (error) {
-    console.log(error);
+    console.log("Banner upload error:", error);
 
     res.status(500).json({
       success: false,

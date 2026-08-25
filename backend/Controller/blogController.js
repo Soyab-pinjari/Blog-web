@@ -12,6 +12,7 @@ const auth = require('../middleware/auth');
 const slugify = require('slugify');
 const Blog = require('../Modal/Blog');
 const Category = require('../Modal/Category')
+const uploadToCloudinary = require("../Utils/uploadToCloudinary");
 // const slug = slugify(title, {
 //   lower: true,
 //   strict: true,
@@ -19,7 +20,6 @@ const Category = require('../Modal/Category')
 
 const createBlog = async (req, res) => {
     try {
-
         const { title, content, category } = req.body;
 
         if (!req.file) {
@@ -41,10 +41,19 @@ const createBlog = async (req, res) => {
             });
         }
 
+        // Upload blog cover image to Cloudinary
+        const result = await uploadToCloudinary(
+            req.file.buffer,
+            "blog-app/blogs"
+        );
+
+        // Create blog
         let blog = new Blog({
             title,
             content,
-            coverImage: req.file.filename,
+
+            // Save Cloudinary URL
+            coverImage: result.secure_url,
 
             // Save category slug
             category: categoryExists.slug,
@@ -70,12 +79,12 @@ const createBlog = async (req, res) => {
         });
 
     } catch (error) {
+        console.log("Create blog error:", error);
 
         return res.status(500).json({
             success: false,
             message: error.message
         });
-
     }
 };
 const getAllBlog = async(req,res)=>{
