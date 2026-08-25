@@ -75,12 +75,12 @@ function EditProfile() {
 
   // Profile image URL
   const profileImage = user.profileImage
-    ? `user.profileImage`
+    ? user.profileImage
     : `${BASE_URL}/default-avatar.jpg`;
 
   // Banner image URL
   const bannerImage = user.banner
-    ? `user.banner`
+    ? user.banner
     : `${BASE_URL}/default-banner.jpeg`;
 
   // Upload profile image
