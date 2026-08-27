@@ -8,6 +8,7 @@ const User = require('../Modal/Users')
 const uploadToCloudinary = require('../Utils/uploadToCloudinary')
 
 const getProfile = async (req, res) => {
+  console.log("blogs")
   try {
     const user = await User.findById(req.user.userId).select("-password");
     if (!user) {
@@ -123,6 +124,7 @@ const updateBanner = async (req, res) => {
       message: "Banner updated successfully",
       user,
     });
+    console.log("Cloudinary result:", result);
   } catch (error) {
     console.log("Banner upload error:", error);
 
