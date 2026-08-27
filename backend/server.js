@@ -17,7 +17,11 @@ app.use(
 );
 
 connection();
-
+app.use((req, res, next) => {
+  console.log("🔥 REQUEST RECEIVED");
+  console.log(req.method, req.originalUrl);
+  next();
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -31,6 +35,7 @@ app.use(
 app.use("/user", userRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/blog", blogRoute);
+
 
 app.get("/", (req, res) => {
     res.send("Backend is running successfully");

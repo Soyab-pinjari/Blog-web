@@ -58,13 +58,15 @@ const updateProfileImage = async (req, res) => {
     }
 
     const userId = req.user.userId;
-
+  console.log("USER ID:", userId);
+    console.log("FILE:", req.file);
+    console.log("BUFFER SIZE:", req.file.buffer?.length);
     // Upload image to Cloudinary
     const result = await uploadToCloudinary(
       req.file.buffer,
       "blog-app/profiles"
     );
-
+console.log("☁️ CLOUDINARY RESULT:", result);
     // Save Cloudinary URL in MongoDB
     const user = await User.findByIdAndUpdate(
       userId,
@@ -83,7 +85,7 @@ const updateProfileImage = async (req, res) => {
     });
   } catch (error) {
     console.log("Profile image upload error:", error);
-
+ console.error("❌ PROFILE IMAGE ERROR:", error);
     res.status(500).json({
       success: false,
       message: "Server Error",
