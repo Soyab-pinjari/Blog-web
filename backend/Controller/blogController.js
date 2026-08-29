@@ -89,7 +89,8 @@ const createBlog = async (req, res) => {
 };
 const getAllBlog = async(req,res)=>{
     
-      console.time("BLOG API");
+    console.log("hello")
+    console.time("BLOG API");
     try {
         const {category}=req.query;
         const filter = {};
