@@ -13,7 +13,7 @@ function Navbar() {
   const navigate = useNavigate();
    
    const profileImage =user?.profileImage
-  ?  `${BASE_URL}/uploads/${user.profileImage}?v=${user.updatedAt}`
+  ?  user.profileImage
   : `${BASE_URL}/default-avatar.jpg`;
 
 const handleLogout = () => {

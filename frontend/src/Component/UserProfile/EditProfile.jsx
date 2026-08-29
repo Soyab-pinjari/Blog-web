@@ -75,7 +75,7 @@ function EditProfile() {
 
   // Profile image URL
  const profileImage =user?.profileImage
-  ?  `user.profileImage`
+  ?  user.profileImage
   : `${BASE_URL}/default-avatar.jpg`;
 
   // Banner image URL
@@ -89,7 +89,7 @@ function EditProfile() {
 
     if (!file) return;
 
-    // Show preview immediately
+    // Show preview immediatelyd
     const previewURL = URL.createObjectURL(file);
     setProfilePreview(previewURL);
 
