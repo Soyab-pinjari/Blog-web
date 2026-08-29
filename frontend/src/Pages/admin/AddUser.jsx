@@ -161,6 +161,7 @@ const AddUser = () => {
                                     />
 
                                     <button
+                                 
                                         type="button"
                                         onClick={() =>
                                             setShowPassword(!showPassword)
@@ -256,6 +257,7 @@ const AddUser = () => {
 
                             <button
                                 type="submit"
+                               
                                 className="flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-blue-700"
                             >
                                 <Save size={17} />

@@ -106,6 +106,6 @@ input[type="color"]::-moz-color-swatch {
   -ms-overflow-style: none;
 }
 
-button.hover {
+button:hover {
   cursor: pointer;
 }
