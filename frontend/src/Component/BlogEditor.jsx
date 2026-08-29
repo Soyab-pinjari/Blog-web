@@ -5,7 +5,7 @@ import {Color} from "@tiptap/extension-color";
 
 
 const BlogEditor = ({content,setContent})=>{
-    // const btn ="px-3 py-2 rounded-md border border-gray-300 hover:bg-blue-500 hover:text-white transition";
+    const btn ="px-3 py-2 rounded-md border border-gray-300 hover:bg-blue-500 hover:text-white transition";
     
   
   const editor = useEditor({
