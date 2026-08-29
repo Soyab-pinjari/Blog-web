@@ -1,6 +1,6 @@
-/* @import "tailwindcss";
+@import "tailwindcss";
 
-@plugin "@tailwindcss/typography";
+/* @plugin "@tailwindcss/typography"; */
 
 html {
   scroll-behavior: smooth;
@@ -104,4 +104,4 @@ input[type="color"]::-moz-color-swatch {
 .editor-content .ProseMirror {
   scrollbar-width: none;
   -ms-overflow-style: none;
-} */
+}
