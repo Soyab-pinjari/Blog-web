@@ -74,9 +74,9 @@ function EditProfile() {
   };
 
   // Profile image URL
-  const profileImage = user.profileImage
-    ? user.profileImage
-    : `${BASE_URL}/default-avatar.jpg`;
+ const profileImage =user?.profileImage
+  ?  `user.profileImage`
+  : `${BASE_URL}/default-avatar.jpg`;
 
   // Banner image URL
   const bannerImage = user.banner
