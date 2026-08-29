@@ -78,7 +78,7 @@ const handleLogout = () => {
 
 
   {/* Notification */}
-  <button class={btn} className="relative p-2 rounded-full hover:bg-gray-100">
+  <button className="relative p-2 rounded-full hover:bg-gray-100">
     <FiBell className="text-xl" />
     <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
   </button>
@@ -100,7 +100,7 @@ const handleLogout = () => {
       
      <button
   onClick={handleLogout}
-  class={btn}
+  
   className="px-5 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
 >
   Log out

@@ -78,7 +78,9 @@ const AdminLayout = () => {
                     </Link>
 
                     <button
+                    
                         onClick={() => setSidebarOpen(false)}
+                       
                         className="text-xl text-gray-400 hover:text-white lg:hidden"
                     >
                         ✕
@@ -153,6 +155,7 @@ const AdminLayout = () => {
                     </Link>
 
                     <button
+                  
                         className="
                             mt-2 flex w-full items-center gap-3
                             rounded-lg px-4 py-3
@@ -181,6 +184,7 @@ const AdminLayout = () => {
 
                         {/* Mobile Menu */}
                         <button
+                        
                             onClick={() => setSidebarOpen(true)}
                             className="text-2xl text-gray-700 lg:hidden"
                         >

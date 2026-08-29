@@ -269,7 +269,7 @@ function EditProfile() {
             />
 
             <button
-            class={btn}
+         
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
@@ -356,7 +356,7 @@ function EditProfile() {
             {isEditing && (
               <button
                 onClick={saveProfile}
-                class={btn}
+               
                 className="mt-4 px-4 py-2 mr-5 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
               >
                 Save

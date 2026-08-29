@@ -120,12 +120,14 @@ const AddBlog = () => {
 
                                         <button
                                             type="button"
+                                            
                                             className="rounded px-3 py-1.5 text-sm font-bold text-gray-700 hover:bg-gray-200"
                                         >
                                             B
                                         </button>
 
                                         <button
+                                      
                                             type="button"
                                             className="rounded px-3 py-1.5 text-sm italic text-gray-700 hover:bg-gray-200"
                                         >
@@ -134,6 +136,7 @@ const AddBlog = () => {
 
                                         <button
                                             type="button"
+                                          
                                             className="rounded px-3 py-1.5 text-sm underline text-gray-700 hover:bg-gray-200"
                                         >
                                             U
@@ -141,6 +144,7 @@ const AddBlog = () => {
 
                                         <button
                                             type="button"
+                                       
                                             className="rounded px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-200"
                                         >
                                             H1
@@ -148,6 +152,7 @@ const AddBlog = () => {
 
                                         <button
                                             type="button"
+                                            
                                             className="rounded px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-200"
                                         >
                                             H2
@@ -155,6 +160,7 @@ const AddBlog = () => {
 
                                         <button
                                             type="button"
+                                        
                                             className="rounded px-3 py-1.5 text-sm text-gray-700 hover:bg-gray-200"
                                         >
                                             • List
@@ -221,6 +227,7 @@ const AddBlog = () => {
 
                                     <button
                                         type="button"
+                                      
                                         onClick={removeImage}
                                         className="absolute right-3 top-3 flex h-9 w-9 items-center justify-center rounded-full bg-black/60 text-white transition hover:bg-red-600"
                                     >
@@ -250,6 +257,7 @@ const AddBlog = () => {
 
                                 <button
                                     type="submit"
+                                  
                                     className="flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-3 text-sm font-medium text-white transition hover:bg-blue-700"
                                 >
                                     <Send size={17} />
@@ -258,6 +266,7 @@ const AddBlog = () => {
 
                                 <button
                                     type="button"
+                                    
                                     className="flex w-full items-center justify-center gap-2 rounded-lg border border-gray-200 px-4 py-3 text-sm font-medium text-gray-700 transition hover:bg-gray-50"
                                 >
                                     <Save size={17} />
@@ -362,6 +371,7 @@ const AddBlog = () => {
                                 {/* Toggle */}
                                 <button
                                     type="button"
+                                  
                                     onClick={() => setFeatured(!featured)}
                                     className={`relative h-6 w-11 rounded-full transition ${
                                         featured
