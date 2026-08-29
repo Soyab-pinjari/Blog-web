@@ -234,7 +234,7 @@ function CreateBlog() {
             <div className="flex justify-end gap-4 mt-10">
               <button
                 type="submit"
-                class ={btn}
+              
                 className="bg-indigo-600 text-white px-7 py-3 rounded-lg hover:bg-indigo-700"
               >
                 Publish
