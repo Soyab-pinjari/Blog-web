@@ -72,7 +72,7 @@ const RecentBlogs = () => {
                     </p>
                 </div>
 
-                <button className="text-sm font-medium text-blue-600 hover:text-blue-700">
+                <button class={btn} className="text-sm font-medium text-blue-600 hover:text-blue-700">
                     View All
                 </button>
 
@@ -205,6 +205,7 @@ const RecentBlogs = () => {
 
                                         <button
                                             title="View"
+                                            class={btn}
                                             className="rounded-lg p-2 text-gray-500 hover:bg-blue-50 hover:text-blue-600"
                                         >
                                             <Eye size={16} />
@@ -212,6 +213,8 @@ const RecentBlogs = () => {
 
                                         <button
                                             title="Edit"
+                                            
+                                            class={btn}
                                             className="rounded-lg p-2 text-gray-500 hover:bg-green-50 hover:text-green-600"
                                         >
                                             <Pencil size={16} />
@@ -219,6 +222,7 @@ const RecentBlogs = () => {
 
                                         <button
                                             title="Delete"
+                                            class={btn}
                                             className="rounded-lg p-2 text-gray-500 hover:bg-red-50 hover:text-red-600"
                                         >
                                             <Trash2 size={16} />
@@ -226,6 +230,7 @@ const RecentBlogs = () => {
 
                                         <button
                                             title="More"
+                                            class={btn}
                                             className="rounded-lg p-2 text-gray-500 hover:bg-gray-100"
                                         >
                                             <MoreHorizontal size={16} />

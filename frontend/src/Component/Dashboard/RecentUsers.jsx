@@ -54,8 +54,9 @@ const RecentUsers = () => {
                     </p>
                 </div>
 
-                <button className="text-sm font-medium text-blue-600 hover:text-blue-700">
+                <button class={btn} className="text-sm font-medium text-blue-600 hover:text-blue-700">
                     View All
+
                 </button>
 
             </div>
@@ -116,6 +117,7 @@ const RecentUsers = () => {
 
                             <button
                                 title="More options"
+                                class={btn}
                                 className="rounded-lg p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-700"
                             >
                                 <MoreHorizontal size={18} />

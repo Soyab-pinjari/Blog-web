@@ -100,7 +100,7 @@ const navigate = useNavigate();
           />
         </div>
 
-        <button type="submit" className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700">
+        <button class={btn} type="submit" className="w-full bg-indigo-600 text-white py-3 rounded-lg font-medium hover:bg-indigo-700">
           Sign Up
         </button>
 

@@ -81,8 +81,9 @@ const handleDelete = async (selectedSlug) => {
         </div>
 
         </Link>
-        <button className="text-gray-500 hover:text-red-500"  onClick={() => {
+        <button class={btn} className="text-gray-500 hover:text-red-500"  onClick={() => {
              console.log(blog.slug);
+            
     setSelectedSlug(blog.slug);
     setShowDeleteModal(true);
   }}>
@@ -108,6 +109,7 @@ const handleDelete = async (selectedSlug) => {
 
         <button
           onClick={() => setShowDeleteModal(false)}
+          class={btn}
           className="px-4 py-2 rounded-lg border"
         >
           Cancel
@@ -115,8 +117,10 @@ const handleDelete = async (selectedSlug) => {
 
 
         <button
-         onClick={(e) =>{ e.preventDefault();     
+         onClick={(e) =>{ e.preventDefault();
+          
     e.stopPropagation(); handleDelete(selectedSlug)}}
+    class={btn}     
           className="px-4 py-2 rounded-lg bg-red-500 text-white hover:bg-red-600"
         >
           Delete
