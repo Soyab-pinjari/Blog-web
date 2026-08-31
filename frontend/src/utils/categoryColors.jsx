@@ -6,5 +6,6 @@ export const categoryColors = {
   Bussiness: "bg-purple-600",
   Programming: "bg-indigo-600",
   Lifestyle: "bg-pink-500",
+  Sports:"bg-green-500",
   Entertainment: "bg-orange-500",
 };
