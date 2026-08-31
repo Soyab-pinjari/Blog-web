@@ -1,5 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import { categoryColors } from "../../utils/categoryColors";
+
 import { useEffect, useState } from "react";
 const BASE_URL = import.meta.env.VITE_API_URL
 function BlogCard({ blog }) {

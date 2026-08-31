@@ -117,7 +117,7 @@ function BlogPage() {
             <img
               src={
                 blog?.author?.profileImage
-                  ? `${BASE_URL}/uploads/${blog.author.profileImage}`
+                  ? blog.author.profileImage
                   : `${BASE_URL}/default-avatar.jpg`
               }
               alt="author"
@@ -169,7 +169,7 @@ function BlogPage() {
           <img
             src={
               blog?.coverImage
-                ? `${BASE_URL}/uploads/blogs/${blog.coverImage}`
+                ? blog.coverImage
                 : "/default-blog.jpg"
             }
             alt={blog?.title || "Blog cover"}

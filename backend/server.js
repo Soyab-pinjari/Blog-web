@@ -33,7 +33,7 @@ app.use(
 );
 
 app.use("/user", userRoutes);
-app.use("/api/category", categoryRoutes);
+app.use("/category", categoryRoutes);
 app.use("/blog", blogRoute);
 
 
