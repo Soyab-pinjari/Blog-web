@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { getblogDetails } from '../services/api';
-import { Link, useNavigate, useParams } from 'react-router';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router';
 import Navbar from '../Component/Navbar';
 import Footer from '../Component/Footer';
 import { categoryColors } from '../utils/categoryColors';
@@ -10,7 +10,7 @@ function BlogPage() {
      const { slug } = useParams();
 const navigate=useNavigate();
     const [blog,setBlog]=useState(null);
-   
+  const [loding,setLoding]=useState(true);
     useEffect(()=>{
         const token = localStorage.getItem("token");
 
@@ -23,15 +23,19 @@ const navigate=useNavigate();
                     const res = await getblogDetails(slug);
                     setBlog(res);
                     console.log(res);
+                     setLoading(false);
                 } catch (error) {
                     console.log(error);
                 }
-
             }
             if(slug) {
                 fetchData();
             }
+
     },[slug])
+      if (loading) {
+    return <h2>Loading...</h2>;
+  }
   return (
     <div>
 <Navbar/>
