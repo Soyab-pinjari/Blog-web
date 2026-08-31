@@ -12,11 +12,7 @@ function ProfileTabs() {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [selectedSlug, setSelectedSlug] = useState(null);
   const [deleting, setDeleting] = useState(false);
-
-  // =========================
-  // FETCH USER BLOGS
-  // =========================
-
+  
   const fetchBlogs = async () => {
     try {
       setLoading(true);

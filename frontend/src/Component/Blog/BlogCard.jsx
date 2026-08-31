@@ -15,7 +15,7 @@ function BlogCard({ blog }) {
       <Link to={`/blog/${blog.slug}`}>
         <div className="relative h-48">
           <img
-            src={`${BASE_URL}/uploads/blogs/${blog.coverImage}`}
+            src={blog.coverImage}
             alt={blog.title}
               loading="lazy"
             className="w-full h-full object-cover"
@@ -42,8 +42,9 @@ function BlogCard({ blog }) {
         to={`/author/${blog.author._id}`}
         className="flex items-center gap-3 px-4 pb-4"
       >
-        <img
-          src={blog.author?.profileImage?`${BASE_URL}/uploads/${blog.author.profileImage}`:`${BASE_URL}/default-avatar.jpg`}
+       <img
+  src={blog.author?.profileImage || `${BASE_URL}/default-avatar.jpg`}
+  alt={blog.author?.username || "Author"}
           className="w-10 h-10 rounded-full object-cover"
             loading="lazy"
         />
