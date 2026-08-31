@@ -10,7 +10,7 @@ function BlogPage() {
      const { slug } = useParams();
 const navigate=useNavigate();
     const [blog,setBlog]=useState(null);
-  const [loding,setLoding]=useState(true);
+    const [loading,setLoading]=useState(true);
     useEffect(()=>{
         const token = localStorage.getItem("token");
 
