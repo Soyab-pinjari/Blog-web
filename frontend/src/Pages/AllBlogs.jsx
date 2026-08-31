@@ -1,59 +1,60 @@
 import React, { useEffect, useState } from "react";
+
 import Navbar from "../Component/Navbar";
 import { GetAllBlogs } from "../services/api";
-import { Link, useNavigate } from "react-router";
-import { categoryColors } from "../utils/categoryColors";
+import { useNavigate } from "react-router";
 import BlogList from "../Component/Blog/BlogList";
+
 function AllBlogs() {
-const [blogs, setBlogs] = useState([]);
-const [category, setCategory] = useState("");
-const [loading, setLoading] = useState(true);
+  const [blogs, setBlogs] = useState([]);
+  const [category, setCategory] = useState("");
+  const [loading, setLoading] = useState(true);
 
-const navigate = useNavigate();
+  const navigate = useNavigate();
 
-useEffect(() => {
-  const token = localStorage.getItem("token");
+  useEffect(() => {
+    const token = localStorage.getItem("token");
 
-  if (!token) {
-    navigate("/login");
-    return;
-  }
-
-  const fetchBlogs = async () => {
-    try {
-      setLoading(true);
-
-      const data = await GetAllBlogs(category);
-      setBlogs(data);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setLoading(false);
+    if (!token) {
+      navigate("/login");
+      return;
     }
-  };
 
-  fetchBlogs();
-}, [category, navigate]);
+    const fetchBlogs = async () => {
+      try {
+        setLoading(true);
+
+        const data = await GetAllBlogs(category);
+
+        setBlogs(data);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, [category, navigate]);
+
   return (
-  <>
-    <Navbar />
+    <>
+      <Navbar />
 
-    {loading ? (
-      <div className="flex justify-center items-center min-h-[60vh]">
-        <div className="w-10 h-10 border-4 border-gray-300 border-t-blue-600 rounded-full animate-spin"></div>
-      </div>
-    ) : (
       <div className="max-w-7xl mx-auto px-4 py-6">
         <div className="pt-24 pb-12">
+
+          {/* Heading */}
           <h2 className="text-3xl font-bold text-gray-900 mb-5">
             Explore Blogs
           </h2>
 
-          <div className="relative w-52 md:w-64">
+          {/* Category */}
+          <div className="relative w-52 md:w-64 mb-8">
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value)}
-              className="appearance-none w-50 bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-700 font-semibold shadow-sm cursor-pointer focus:outline-none"
+              className="appearance-none w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-700 font-semibold shadow-sm cursor-pointer focus:outline-none"
             >
               <option value="">All Categories</option>
               <option value="Technology">Technology</option>
@@ -67,20 +68,61 @@ useEffect(() => {
             </select>
           </div>
 
-          <BlogList
-            blogs={blogs}
-            title="All Blogs"
-          />
+          {/* =========================
+              LOADING SKELETON
+          ========================= */}
 
-          {blogs.length === 0 && (
+          {loading ? (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+              {Array.from({ length: 8 }).map((_, index) => (
+                <div
+                  key={index}
+                  className="animate-pulse"
+                >
+                  {/* Image */}
+                  <div className="w-full h-48 bg-gray-200 rounded-xl mb-4"></div>
+
+                  {/* Category */}
+                  <div className="w-20 h-5 bg-gray-200 rounded-full mb-3"></div>
+
+                  {/* Title */}
+                  <div className="h-5 bg-gray-200 rounded w-full mb-2"></div>
+
+                  <div className="h-5 bg-gray-200 rounded w-4/5 mb-4"></div>
+
+                  {/* Description */}
+                  <div className="h-4 bg-gray-200 rounded w-full mb-2"></div>
+
+                  <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+                </div>
+              ))}
+            </div>
+          ) : blogs.length > 0 ? (
+
+            /* =========================
+               BLOG LIST
+            ========================= */
+
+            <BlogList
+              blogs={blogs}
+              title="All Blogs"
+            />
+
+          ) : (
+
+            /* =========================
+               NO BLOGS
+            ========================= */
+
             <p className="text-center text-gray-500 mt-10">
               No blogs found.
             </p>
           )}
+
         </div>
       </div>
-    )}
-  </>
-);
+    </>
+  );
 }
+
 export default AllBlogs;
