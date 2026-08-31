@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 
 import Navbar from "../Component/Navbar";
@@ -8,6 +9,32 @@ import Footer from "../Component/Footer";
 import About from "../Pages/About";
 
 function MainLayout() {
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setLoading(false);
+    }, 2500); // 2.5 seconds
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  // Loading Screen
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <div className="text-center">
+          {/* Spinner */}
+          <div className="w-12 h-12 border-4 border-gray-300 border-t-black rounded-full animate-spin mx-auto"></div>
+
+          <p className="mt-4 text-gray-600 text-lg font-medium">
+            Loading...
+          </p>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -68,3 +95,4 @@ function MainLayout() {
 }
 
 export default MainLayout;
+
