@@ -22,13 +22,13 @@ function BlogCard({ blog }) {
             className="w-full h-full object-cover"
           />
 
-          <span
-            className={`absolute bottom-3 left-3 text-white text-xs px-3 py-1 rounded-full ${
-              categoryColors[blog.category] || "bg-gray-600"
-            }`}
-          >
-            {blog.category}
-          </span>
+         <span
+  className={`absolute bottom-3 left-3 text-white text-xs px-3 py-1 rounded-full ${
+    categoryColors[blog.category?.toLowerCase()] || "bg-gray-600"
+  }`}
+>
+  {blog.category}
+</span>
         </div>
 
         <div className="p-4">

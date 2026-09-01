@@ -51,21 +51,23 @@ function AllBlogs() {
 
           {/* Category */}
           <div className="relative w-52 md:w-64 mb-8">
-            <select
-              value={category}
-              onChange={(e) => setCategory(e.target.value)}
-              className="appearance-none w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-700 font-semibold shadow-sm cursor-pointer focus:outline-none"
-            >
-              <option value="">All Categories</option>
-              <option value="Technology">Technology</option>
-              <option value="Travel">Travel</option>
-              <option value="Education">Education</option>
-              <option value="Health">Health</option>
-              <option value="Bussiness">Bussiness</option>
-              <option value="Programming">Programming</option>
-              <option value="Lifestyle">Lifestyle</option>
-              <option value="Entertainment">Entertainment</option>
-            </select>
+        <select
+  value={category}
+  onChange={(e) => setCategory(e.target.value)}
+  className="appearance-none w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 text-gray-700 font-semibold shadow-sm cursor-pointer focus:outline-none"
+>
+  <option value="">All Categories</option>
+
+  <option value="technology">Technology</option>
+  <option value="travel">Travel</option>
+  <option value="education">Education</option>
+  <option value="health">Health</option>
+  <option value="business">Business</option>
+  <option value="programming">Programming</option>
+  <option value="lifestyle">Lifestyle</option>
+  <option value="sports">Sports</option>
+  <option value="entertainment">Entertainment</option>
+</select>
           </div>
 
           {/* =========================

@@ -99,10 +99,10 @@ function BlogPage() {
         {/* Category */}
         <span
           className={`inline-block ${
-            categoryColors[blog?.category] || "bg-gray-600"
+            categoryColors[blog.category?.toLowerCase()]  || "bg-gray-600"
           } text-white text-xs font-medium px-4 py-1 rounded-full mb-5`}
         >
-          {blog?.category || "Technology"}
+          {blog?.category.charAt(0).toUpperCase() + blog.category.slice(1) || "Technology"}
         </span>
 
         {/* Title */}
