@@ -13,10 +13,10 @@ function AuthorInfo() {
 
     const BannerImage = author?.banner 
 
-    ?`${BASE_URL}/uploads/${author?.banner}`:`${BASE_URL}/default-banner.jpeg`;
+    ?author?.banner:`${BASE_URL}/default-banner.jpeg`;
 
     const profileImage = author?.profileImage
-    ?`${BASE_URL}/uploads/${author?.profileImage}`:`${BASE_URL}/default-avatar.jpg`;
+    ?author?.profileImage:`${BASE_URL}/default-avatar.jpg`;
  
         const fetchUser = async () => {
         try {
