@@ -27,7 +27,7 @@ function BlogCard({ blog }) {
     categoryColors[blog.category?.toLowerCase()] || "bg-gray-600"
   }`}
 >
-  {blog.category}
+  {blog.category.charAt(0).toUpperCase() + blog.category.slice(1)}
 </span>
         </div>
 
