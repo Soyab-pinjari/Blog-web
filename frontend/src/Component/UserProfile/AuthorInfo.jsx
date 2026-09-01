@@ -21,7 +21,7 @@ function AuthorInfo() {
         const fetchUser = async () => {
         try {
             const res = await authorProfile(id);
-            setAuthor(res);
+            setAuthor(res.user);
           console.log("blog response ",res);
         } catch (error) {
             console.log(error);
