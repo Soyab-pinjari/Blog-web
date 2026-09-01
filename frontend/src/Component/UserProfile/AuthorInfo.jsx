@@ -13,16 +13,16 @@ function AuthorInfo() {
 
     const BannerImage = author?.banner 
 
-    ?author?.banner:`${BASE_URL}/default-banner.jpeg`;
+    ?author.banner:`${BASE_URL}/default-banner.jpeg`;
 
     const profileImage = author?.profileImage
-    ?author?.profileImage:`${BASE_URL}/default-avatar.jpg`;
+    ?author.profileImage:`${BASE_URL}/default-avatar.jpg`;
  
         const fetchUser = async () => {
         try {
             const res = await authorProfile(id);
-            setAuthor(res.user);
-          
+            setAuthor(res);
+          console.log("blog response ",res);
         } catch (error) {
             console.log(error);
         }

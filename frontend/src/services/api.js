@@ -60,7 +60,11 @@ export const getProfile = () => {
 
 export const authorProfile = async(id)=>{
   try {
-    const response = await axios.get(`${BASE_URL}/user/profile/${id}`)
+    const response = await axios.get(`${BASE_URL}/user/profile/${id}`,{
+      headers:{
+        Authorization:`Bearer ${localStorage.getItem("token")}`
+      }
+    })
     return response.data;
   } catch (error) {
     console.error(error);
