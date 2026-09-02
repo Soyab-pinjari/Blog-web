@@ -101,20 +101,12 @@ function AllBlogs() {
             </div>
           ) : blogs.length > 0 ? (
 
-            /* =========================
-               BLOG LIST
-            ========================= */
-
             <BlogList
               blogs={blogs}
               title="All Blogs"
             />
 
           ) : (
-
-            /* =========================
-               NO BLOGS
-            ========================= */
 
             <p className="text-center text-gray-500 mt-10">
               No blogs found.

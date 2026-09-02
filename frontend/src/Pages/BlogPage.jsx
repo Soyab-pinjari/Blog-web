@@ -141,9 +141,9 @@ function BlogPage() {
                 })}
               </span>
             </div>
-          <LikeButton/>
           </div>
         </div>
+          <LikeButton/>
 
         {/* =========================
             COVER IMAGE
