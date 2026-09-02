@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
-import { searchBlogs } from "../services/api";
-import { Link } from "react-router-dom";
-const BASE_URL = import.meta.env.VITE_API_URL
+import { searchBlogs, getBlogDetails } from "../services/api";
+import { useNavigate } from "react-router-dom";
+
 const Search = () => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!search.trim()) {
@@ -18,7 +20,6 @@ const Search = () => {
         setLoading(true);
 
         const data = await searchBlogs(search);
-console.log("SEARCH RESULTS:", data);
 
         setSearchResults(data.blogs);
       } catch (error) {
@@ -32,6 +33,25 @@ console.log("SEARCH RESULTS:", data);
     return () => clearTimeout(timer);
   }, [search]);
 
+  const handleBlogClick = async (slug) => {
+    try {
+      const data = await getBlogDetails(slug);
+
+      console.log("Blog details:", data);
+
+      setSearch("");
+      setSearchResults([]);
+
+      navigate(`/blog/${slug}`, {
+        state: {
+          blog: data.blog,
+        },
+      });
+    } catch (error) {
+      console.log("Get blog details error:", error);
+    }
+  };
+
   const clearSearch = () => {
     setSearch("");
     setSearchResults([]);
@@ -39,8 +59,6 @@ console.log("SEARCH RESULTS:", data);
 
   return (
     <div className="relative w-full max-w-md">
-      
-      {/* Search Input */}
       <div className="relative">
         <input
           type="text"
@@ -50,7 +68,6 @@ console.log("SEARCH RESULTS:", data);
           className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 pr-20 text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
 
-        {/* Clear Button */}
         {search && (
           <button
             onClick={clearSearch}
@@ -61,22 +78,19 @@ console.log("SEARCH RESULTS:", data);
         )}
       </div>
 
-      {/* Loading */}
       {loading && search.trim() && (
         <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg px-4 py-3 text-sm text-gray-500">
           Searching...
         </div>
       )}
 
-      {/* Search Results */}
       {!loading && search.trim() && searchResults.length > 0 && (
         <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
           {searchResults.map((blog) => (
-            <Link
+            <button
               key={blog._id}
-              to={`${BASE_URL}/blog/${blog.slug || blog._id}`}
-              onClick={clearSearch}
-              className="block px-4 py-3 hover:bg-gray-100 border-b last:border-b-0"
+              onClick={() => handleBlogClick(blog.slug)}
+              className="w-full text-left px-4 py-3 hover:bg-gray-100 border-b last:border-b-0"
             >
               <h3 className="font-semibold text-gray-800 truncate">
                 {blog.title}
@@ -87,12 +101,11 @@ console.log("SEARCH RESULTS:", data);
                   {blog.category}
                 </p>
               )}
-            </Link>
+            </button>
           ))}
         </div>
       )}
 
-      {/* No Results */}
       {!loading &&
         search.trim() &&
         searchResults.length === 0 && (
