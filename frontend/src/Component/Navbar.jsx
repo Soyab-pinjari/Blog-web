@@ -78,10 +78,10 @@ const handleLogout = () => {
 
 
   {/* Notification */}
-  <button className="relative p-2 rounded-full hover:bg-gray-100">
+  {/* <button className="relative p-2 rounded-full hover:bg-gray-100">
     <FiBell className="text-xl" />
     <span className="absolute top-1 right-1 w-2 h-2 bg-red-500 rounded-full"></span>
-  </button>
+  </button> */}
 
   {isLoggedIn ? (
     <>
