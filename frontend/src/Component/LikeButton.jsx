@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { Heart } from "lucide-react";
 import axios from "axios";
+import { likeBlog } from "../services/api";
 
 function LikeButton({ blogId, likes = 0, isLiked = false }) {
 const [liked, setLiked] = useState(false);
@@ -15,7 +16,7 @@ const handleLike = async () => {
       navigate("/login");
       return;
     }
-
+      
     setLikeLoading(true);
 
     const data = await likeBlog(blog._id);
