@@ -166,50 +166,42 @@ const deleteBlog = async (req,res)=>{
         return res.status(500).json({success:false,message:error.message});
     }
 }
-
-const searchBlogs = async (req, res) => {
+export const searchBlogs = async (req, res) => {
   try {
     const { q } = req.query;
 
     if (!q || !q.trim()) {
-      return res.status(400).json({
-        message: "Search query is required"
-      });
+      return res.status(200).json([]);
     }
 
-    const searchTerm = q.trim();
-
-    const blogs = await Blog.find({
-      $or: [
-    {
-      title: {
-        $regex: searchTerm,
-        $options: "i",
+    const blogs = await Blog.aggregate([
+      {
+        $search: {
+          index: "default",
+          autocomplete: {
+            query: q,
+            path: "title",
+            fuzzy: {
+              maxEdits: 1
+            }
+          }
+        }
       },
-    },
-    {
-      category: {
-        $regex: searchTerm,
-        $options: "i",
-      },
-    },
-  ],
-    })
-      .sort({ createdAt: -1 })
-      .limit(5);
+      {
+        $limit: 20
+      }
+    ]);
 
-    res.status(200).json({
-      success: true,
-      blogs
-    });
+    res.status(200).json(blogs);
 
   } catch (error) {
-    console.error("Search error:", error);
+    console.log("Search error:", error);
 
     res.status(500).json({
-      success: false,
-      message: "Server error"
+      message: "Search failed",
+      error: error.message
     });
   }
 };
+
 module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog,authorBlogs,searchBlogs};

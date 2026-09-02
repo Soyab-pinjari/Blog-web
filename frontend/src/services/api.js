@@ -120,3 +120,11 @@ export const getCategories=async()=>{
     
   }
 }
+
+export const searchBlogs = async (query) => {
+  const response = await axios.get(
+    `${BASE_URL}/blog/search?q=${encodeURIComponent(query)}`
+  );
+
+  return response.data;
+};
