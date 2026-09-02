@@ -20,7 +20,7 @@ const Search = () => {
         const data = await searchBlogs(search);
 console.log("SEARCH RESULTS:", data);
 
-        setSearchResults(data);
+        setSearchResults(data.blogs);
       } catch (error) {
         console.log("Search error:", error);
         setSearchResults([]);
