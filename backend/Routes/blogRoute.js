@@ -18,7 +18,7 @@ const router = express.Router();
 router.post('/create',auth,blogUpload.single("coverImage"),createBlog);
 router.get('/',getAllBlog);
 router.get('/search',searchBlogs);
-router.post("/:id/like", authMiddleware, likeBlog);
+router.post("/:id/like", auth, likeBlog);
 router.get('/user',auth,getUserBlog);
 router.get('/author/:id',authorBlogs);
 // router.get('/author/:id',authorBlogDetails);
