@@ -147,6 +147,13 @@ const getBlogInfo = async (req,res)=>{
                 return res.status(404).json({
                 message: "Blog not found",
                 })}
+                  let isLiked = false;
+
+    if (req.user) {
+      isLiked = blog.likes.some(
+        (userId) => userId.toString() === req.user.id.toString()
+      );
+    }
                  res.status(200).json(blog);
     } catch (error) {
           return res.status(500).json({success:false,message:error.message});
