@@ -14,7 +14,7 @@ const Search = () => {
       setSearchResults([]);
       return;
     }
-    asdj
+    
 
     const timer = setTimeout(async () => {
       try {
