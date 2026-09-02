@@ -18,6 +18,7 @@ const Search = () => {
         setLoading(true);
 
         const data = await searchBlogs(search);
+console.log("SEARCH RESULTS:", data);
 
         setSearchResults(data);
       } catch (error) {
