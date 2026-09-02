@@ -9,7 +9,7 @@ function Hero() {
         <div>
           <p className="flex items-center gap-2 text-gray-600 font-medium mb-5">
             <span className="text-blue-600 text-xl">✦</span>
-            Welcome to Blogy
+            Welcome to Blogy search your blogs 
           </p>
 
           <h1 className="text-5xl lg:text-6xl font-bold leading-tight">
