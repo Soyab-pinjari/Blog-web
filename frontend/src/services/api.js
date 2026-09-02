@@ -128,3 +128,19 @@ export const searchBlogs = async (query) => {
 
   return response.data;
 };
+
+export const likeBlog = async (blogId) => {
+  const token = localStorage.getItem("token");
+
+  const response = await axios.post(
+    `${BASE_URL}/blog/${blogId}/like`,
+    {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+  return response.data;
+};

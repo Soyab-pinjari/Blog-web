@@ -204,4 +204,58 @@ export const searchBlogs = async (req, res) => {
   }
 };
 
-module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog,authorBlogs,searchBlogs};
+
+const likeBlog = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const userId = req.user.userId;
+
+    const blog = await Blog.findById(id);
+
+    if (!blog) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog not found",
+      });
+    }
+
+    const alreadyLiked = blog.likes.includes(userId);
+
+    if (alreadyLiked) {
+      // Unlike
+      blog.likes = blog.likes.filter(
+        (user) => user.toString() !== userId.toString()
+      );
+
+      await blog.save();
+
+      return res.status(200).json({
+        success: true,
+        liked: false,
+        likesCount: blog.likes.length,
+        message: "Blog unliked",
+      });
+    }
+
+    // Like
+    blog.likes.push(userId);
+
+    await blog.save();
+
+    return res.status(200).json({
+      success: true,
+      liked: true,
+      likesCount: blog.likes.length,
+      message: "Blog liked",
+    });
+  } catch (error) {
+    console.log("Like error:", error);
+
+    return res.status(500).json({
+      success: false,
+      message: "Something went wrong",
+    });
+  }
+};
+
+module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog,authorBlogs,searchBlogs,likeBlog};
