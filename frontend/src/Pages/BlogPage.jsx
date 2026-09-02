@@ -143,7 +143,11 @@ function BlogPage() {
             </div>
           </div>
         </div>
-          <LikeButton/>
+         <LikeButton
+  blogId={blog._id}
+  likes={blog.likes?.length || 0}
+  isLiked={blog.isLiked || false}
+/>
 
         {/* =========================
             COVER IMAGE
