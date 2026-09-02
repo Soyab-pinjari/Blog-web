@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { searchBlogs, getBlogDetails, getblogDetails } from "../services/api";
+import { searchBlogs,getblogDetails } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
@@ -14,6 +14,7 @@ const Search = () => {
       setSearchResults([]);
       return;
     }
+    asdj
 
     const timer = setTimeout(async () => {
       try {
