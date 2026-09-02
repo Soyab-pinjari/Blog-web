@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { searchBlogs, getBlogDetails } from "../services/api";
+import { searchBlogs, getBlogDetails, getblogDetails } from "../services/api";
 import { useNavigate } from "react-router-dom";
 
 const Search = () => {
@@ -35,7 +35,7 @@ const Search = () => {
 
   const handleBlogClick = async (slug) => {
     try {
-      const data = await getBlogDetails(slug);
+      const data = await getblogDetails(slug);
 
       console.log("Blog details:", data);
 
