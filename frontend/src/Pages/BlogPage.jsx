@@ -4,6 +4,7 @@ import { Link, useNavigate, useParams } from "react-router";
 import Navbar from "../Component/Navbar";
 import Footer from "../Component/Footer";
 import { categoryColors } from "../utils/categoryColors";
+import LikeButton from "../Component/LikeButton";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -140,7 +141,7 @@ function BlogPage() {
                 })}
               </span>
             </div>
-          
+          <LikeButton/>
           </div>
         </div>
 
