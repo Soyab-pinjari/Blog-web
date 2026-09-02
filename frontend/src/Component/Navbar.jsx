@@ -34,7 +34,7 @@ const handleLogout = () => {
 
   return (
     <div>
-        <nav className="fixed top-0 z-1 w-full bg-white shadow-sm border-b ">
+       <nav className="fixed top-0 left-0 z-50 w-full bg-white shadow-sm border-b">
       <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
         {/* Logo */}
         <div className="text-3xl font-bold">

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { searchBlogs,getblogDetails } from "../services/api";
+import { searchBlogs, getblogDetails } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { FiSearch, FiX } from "react-icons/fi";
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -12,9 +13,9 @@ const Search = () => {
   useEffect(() => {
     if (!search.trim()) {
       setSearchResults([]);
+      setLoading(false);
       return;
     }
-    
 
     const timer = setTimeout(async () => {
       try {
@@ -22,7 +23,7 @@ const Search = () => {
 
         const data = await searchBlogs(search);
 
-        setSearchResults(data.blogs);
+        setSearchResults(data.blogs || []);
       } catch (error) {
         console.log("Search error:", error);
         setSearchResults([]);
@@ -59,46 +60,112 @@ const Search = () => {
   };
 
   return (
-    <div className="relative w-full max-w-md">
+    <div className="relative w-full sm:w-72 md:w-80 lg:w-96">
+
+      {/* Search Input */}
       <div className="relative">
+        <FiSearch
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg"
+        />
+
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search blogs..."
-          className="w-full bg-gray-50 border border-gray-300 rounded-xl px-4 py-3 pr-20 text-gray-700 outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="
+            w-full
+            bg-gray-50
+            border border-gray-300
+            rounded-xl
+            pl-10 pr-10 py-2.5
+            text-sm sm:text-base
+            text-gray-700
+            outline-none
+            transition
+            focus:ring-2
+            focus:ring-blue-500
+            focus:border-blue-500
+          "
         />
 
         {search && (
           <button
+            type="button"
             onClick={clearSearch}
-            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-800"
+            className="
+              absolute right-3 top-1/2
+              -translate-y-1/2
+              text-gray-400
+              hover:text-gray-700
+              transition
+            "
           >
-            ✕
+            <FiX className="text-lg" />
           </button>
         )}
       </div>
 
+      {/* Loading */}
       {loading && search.trim() && (
-        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg px-4 py-3 text-sm text-gray-500">
+        <div
+          className="
+            absolute
+            top-full left-0
+            mt-2
+            w-full
+            z-[9999]
+            bg-white
+            border border-gray-200
+            rounded-xl
+            shadow-xl
+            px-4 py-3
+            text-sm
+            text-gray-500
+          "
+        >
           Searching...
         </div>
       )}
 
+      {/* Results */}
       {!loading && search.trim() && searchResults.length > 0 && (
-        <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg overflow-hidden">
+        <div
+          className="
+            absolute
+            top-full left-0
+            mt-2
+            w-full
+            max-h-80
+            overflow-y-auto
+            z-[9999]
+            bg-white
+            border border-gray-200
+            rounded-xl
+            shadow-xl
+          "
+        >
           {searchResults.map((blog) => (
             <button
               key={blog._id}
+              type="button"
               onClick={() => handleBlogClick(blog.slug)}
-              className="w-full text-left px-4 py-3 hover:bg-gray-100 border-b last:border-b-0"
+              className="
+                w-full
+                text-left
+                px-4 py-3
+                hover:bg-gray-50
+                transition
+                border-b
+                last:border-b-0
+              "
             >
               <h3 className="font-semibold text-gray-800 truncate">
                 {blog.title}
               </h3>
 
               {blog.category && (
-                <p className="text-sm text-gray-500 mt-1 capitalize">
+                <p className="text-xs sm:text-sm text-gray-500 mt-1 capitalize">
                   {blog.category}
                 </p>
               )}
@@ -107,10 +174,26 @@ const Search = () => {
         </div>
       )}
 
+      {/* No Results */}
       {!loading &&
         search.trim() &&
         searchResults.length === 0 && (
-          <div className="absolute z-50 w-full mt-2 bg-white border border-gray-200 rounded-xl shadow-lg px-4 py-3 text-sm text-gray-500">
+          <div
+            className="
+              absolute
+              top-full left-0
+              mt-2
+              w-full
+              z-[9999]
+              bg-white
+              border border-gray-200
+              rounded-xl
+              shadow-xl
+              px-4 py-3
+              text-sm
+              text-gray-500
+            "
+          >
             No blogs found.
           </div>
         )}
