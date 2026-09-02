@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { searchBlogs } from "../services/api";
 import { Link } from "react-router-dom";
-
+const BASE_URL = import.meta.env.VITE_API_URL
 const Search = () => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -74,7 +74,7 @@ console.log("SEARCH RESULTS:", data);
           {searchResults.map((blog) => (
             <Link
               key={blog._id}
-              to={`/blog/${blog.slug || blog._id}`}
+              to={`${BASE_URL}/blog/${blog.slug || blog._id}`}
               onClick={clearSearch}
               className="block px-4 py-3 hover:bg-gray-100 border-b last:border-b-0"
             >
