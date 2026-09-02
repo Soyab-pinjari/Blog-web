@@ -166,7 +166,7 @@ const deleteBlog = async (req,res)=>{
         return res.status(500).json({success:false,message:error.message});
     }
 }
-export const searchBlogs = async (req, res) => {
+ const searchBlogs = async (req, res) => {
   try {
     const { q } = req.query;
 
@@ -205,7 +205,7 @@ export const searchBlogs = async (req, res) => {
 };
 
 
-const likeBlog = async (req, res) => {
+const likeBlogs = async (req, res) => {
   try {
     const { id } = req.params;
     const userId = req.user.userId;
@@ -258,4 +258,4 @@ const likeBlog = async (req, res) => {
   }
 };
 
-module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog,authorBlogs,searchBlogs,likeBlog};
+module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog,authorBlogs,searchBlogs,likeBlogs};

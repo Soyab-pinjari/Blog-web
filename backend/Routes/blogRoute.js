@@ -9,7 +9,7 @@
 // GET    /blog/category/:slug
 
 const express = require('express');
-const {createBlog, getAllBlog, getUserBlog, getBlogInfo, deleteBlog, authorBlogs, searchBlogs,likeBlog }= require('../Controller/blogController');
+const {createBlog, getAllBlog, getUserBlog, getBlogInfo, deleteBlog, authorBlogs, searchBlogs, likeBlogs, }= require('../Controller/blogController');
 const auth = require('../middleware/auth');
 const { blogUpload } = require('../Config/multer');
 
@@ -18,7 +18,7 @@ const router = express.Router();
 router.post('/create',auth,blogUpload.single("coverImage"),createBlog);
 router.get('/',getAllBlog);
 router.get('/search',searchBlogs);
-router.post("/:id/like", auth, likeBlog);
+router.post("/:id/like", auth,likeBlogs );
 router.get('/user',auth,getUserBlog);
 router.get('/author/:id',authorBlogs);
 // router.get('/author/:id',authorBlogDetails);

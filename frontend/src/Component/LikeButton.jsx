@@ -35,9 +35,11 @@ const handleLike = async () => {
   disabled={likeLoading}
   className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition"
 >
-  <span className={liked ? "text-red-500" : "text-gray-500"}>
-    {liked ? "❤️" : "🤍"}
-  </span>
+ <span
+  className={`text-2xl ${liked ? "text-red-500" : "text-gray-500"}`}
+>
+  {liked ? "❤️" : "🤍"}
+</span>
 
   <span>
     {likesCount}
