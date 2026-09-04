@@ -30,27 +30,28 @@ function EditProfile() {
   const [isEditing, setIsEditing] = useState(false);
 
   // Fetch profile
-  useEffect(() => {
-    const fetchProfile = async () => {
-      try {
-        const res = await getProfile();
-  console.log(res)
-        const updatedUser = res.data.user;
+useEffect(() => {
+  const fetchProfile = async () => {
+    try {
+      const data = await getProfile();
 
-        setUser(updatedUser);
+      console.log("Profile data:", data);
 
-        localStorage.setItem(
-          "user",
-          JSON.stringify(updatedUser)
-        );
-      } catch (err) {
-        console.log("Profile fetch error:", err);
-      }
-    };
+      const updatedUser = data.user;
 
-    fetchProfile();
-  }, [setUser]);
+      setUser(updatedUser);
 
+      localStorage.setItem(
+        "user",
+        JSON.stringify(updatedUser)
+      );
+    } catch (err) {
+      console.log("Profile fetch error:", err);
+    }
+  };
+
+  fetchProfile();
+}, [setUser]);
   // Update form when user changes
   useEffect(() => {
     if (user) {
