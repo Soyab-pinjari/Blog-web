@@ -102,7 +102,7 @@ function BlogPage() {
 
         {/* Category */}
         <span
-          className={`inline-block ${categoryColors[blog.category?.toLowerCase()] || "bg-gray-600"
+          className={`inline-block ${categoryColors[blog.category] || "bg-gray-600"
             } text-white text-xs font-medium px-4 py-1 rounded-full mb-5`}
         >
          {blog?.category
