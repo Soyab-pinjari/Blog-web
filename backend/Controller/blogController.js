@@ -251,10 +251,10 @@ const deleteBlog = async (req,res)=>{
 export { searchBlogs };
 
 const likeBlogs = async (req, res) => {
+  console.logI("likes route")
   try {
     const { id } = req.params;
     const userId = req.user.userId;
-
     const blog = await Blog.findById(id);
 
     if (!blog) {
