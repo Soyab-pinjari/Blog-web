@@ -32,13 +32,13 @@ function BlogPage() {
 
     const data = await getblogDetails(slug);
 
-    console.log("API DATA:", data);
+console.log("API DATA:", data);
 
-    const blogData = data[0];
+setBlog(data.blog);
+setIsLiked(data.isLiked);
+setLikesCount(data.likesCount);
 
-    setBlog(blogData);
-    setIsLiked(false);
-    setLikesCount(blogData?.likes?.length || 0);
+setImageLoading(true);
 
     setImageLoading(true);
   } catch (error) {

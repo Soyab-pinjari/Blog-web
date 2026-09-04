@@ -156,7 +156,7 @@ const getBlogInfo = async (req, res) => {
     if (req.user) {
       isLiked = blog.likes.some(
         (userId) =>
-          userId.toString() === req.user.id.toString()
+          userId.toString() === req.user.userId.toString()
       );
     }
 
