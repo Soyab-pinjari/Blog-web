@@ -17,17 +17,17 @@ app.use(
 );
 
 connection();
-
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(express.static("public"));
-
-app.use(
-    "/uploads",
-    express.static(path.join(process.cwd(), "uploads"))
-);
+// Default images
 app.use(express.static(path.join(__dirname, "Public")));
+
+// Uploaded images
+app.use(
+  "/uploads",
+  express.static(path.join(process.cwd(), "uploads"))
+);
 app.use("/user", userRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/blog", blogRoute);

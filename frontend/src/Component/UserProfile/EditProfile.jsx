@@ -74,15 +74,16 @@ useEffect(() => {
     });
   };
 
-  // Profile image URL
- const profileImage =user?.profileImage
-  ?  user.profileImage
-  : `${BASE_URL}/default-avatar.jpg`;
+// Profile image URL
+const profileImage = user?.profileImage
+  ? user.profileImage
+  : `${BASE_URL}/Default-avatar.jpg`;
 
-  // Banner image URL
-  const bannerImage = user.banner
-    ? user.banner
-    : `${BASE_URL}/default-banner.jpeg`;
+// Banner image URL
+const bannerImage = user?.banner
+  ? user.banner
+  : `${BASE_URL}/Default-banner.jpg`;
+
 
   // Upload profile image
   const handleProfileImage = async (e) => {
