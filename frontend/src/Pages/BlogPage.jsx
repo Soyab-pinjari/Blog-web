@@ -57,7 +57,7 @@ function BlogPage() {
   // PAGE LOADING
   // =========================
 
-  if (loading) {
+  if (loading||!blog) {
     return (
       <div className="min-h-screen flex flex-col">
         <Navbar />
@@ -153,7 +153,7 @@ function BlogPage() {
           </div>
         </div>
         <LikeButton
-          blogId={blog._id}
+          blogId={blog?._id}
           likes={likesCount}
           isLiked={isLiked}
         />
