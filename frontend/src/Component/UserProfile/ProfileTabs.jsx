@@ -133,7 +133,7 @@ function ProfileTabs() {
 
                   {/* Blog Image */}
                   <img
-                    src={`${BASE_URL}/uploads/blogs/${blog.coverImage}`}
+                    src={blog.coverImage}
                     alt={blog.title}
                     className="w-40 h-24 rounded-lg object-cover"
                   />

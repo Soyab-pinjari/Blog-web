@@ -126,7 +126,7 @@ function AuthorInfo() {
           <div className="flex items-center gap-5 border rounded-xl p-4 hover:shadow-md transition cursor-pointer">
             
             <img
-              src={`${BASE_URL}/uploads/blogs/${blog.coverImage}`}
+              src={blog.coverImage}
               alt={blog.title}
               className="w-48 h-28 rounded-lg object-cover"
             />
