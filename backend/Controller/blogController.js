@@ -138,28 +138,42 @@ const authorBlogs=async(req,res)=>{
 //         res.status(500).json({message:"server error"});
 //     }
 // }
+const getBlogInfo = async (req, res) => {
+  try {
+    const blog = await Blog.findOne({
+      slug: req.params.slug,
+    }).populate("author", "username profileImage");
 
-const getBlogInfo = async (req,res)=>{
-    try {
-           
-        const blog = await Blog.findOne ({slug: req.params.slug}).populate("author", "username profileImage ");
-        if(!blog){
-                return res.status(404).json({
-                message: "Blog not found",
-                })}
-                  let isLiked = false;
+    if (!blog) {
+      return res.status(404).json({
+        success: false,
+        message: "Blog not found",
+      });
+    }
+
+    let isLiked = false;
 
     if (req.user) {
       isLiked = blog.likes.some(
-        (userId) => userId.toString() === req.user.id.toString()
+        (userId) =>
+          userId.toString() === req.user.id.toString()
       );
     }
-                 res.status(200).json(blog);
-    } catch (error) {
-          return res.status(500).json({success:false,message:error.message});
-    }
-} 
 
+    return res.status(200).json({
+      success: true,
+      blog,
+      isLiked,
+      likesCount: blog.likes.length,
+    });
+
+  } catch (error) {
+    return res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
 const deleteBlog = async (req,res)=>{
     try {
         console.log(req.params);

@@ -34,6 +34,9 @@ function BlogPage() {
 
         // New blog image ke liye loader dobara show karo
         setImageLoading(true);
+        setBlog(data.blog);
+        setIsLiked(data.isLiked);
+        setLikesCount(data.likesCount);
       } catch (error) {
         console.log(error);
       } finally {
@@ -99,11 +102,12 @@ function BlogPage() {
 
         {/* Category */}
         <span
-          className={`inline-block ${
-            categoryColors[blog.category?.toLowerCase()]  || "bg-gray-600"
-          } text-white text-xs font-medium px-4 py-1 rounded-full mb-5`}
+          className={`inline-block ${categoryColors[blog.category?.toLowerCase()] || "bg-gray-600"
+            } text-white text-xs font-medium px-4 py-1 rounded-full mb-5`}
         >
-          {blog?.category.charAt(0).toUpperCase() + blog.category.slice(1) || "Technology"}
+         {blog?.category
+  ? blog.category.charAt(0).toUpperCase() + blog.category.slice(1)
+  : "Technology"}
         </span>
 
         {/* Title */}
@@ -143,15 +147,11 @@ function BlogPage() {
             </div>
           </div>
         </div>
-         <LikeButton
-  blogId={blog._id}
-  likes={blog.likes?.length || 0}
-  isLiked={blog.isLiked || false}
-/>
-
-        {/* =========================
-            COVER IMAGE
-        ========================= */}
+        <LikeButton
+          blogId={blog._id}
+          likes={likesCount}
+          isLiked={isLiked}
+        />
 
         <div className="relative w-full aspect-video overflow-hidden rounded-xl shadow-md mb-8 bg-gray-200">
 
@@ -181,9 +181,8 @@ function BlogPage() {
             alt={blog?.title || "Blog cover"}
             onLoad={() => setImageLoading(false)}
             onError={() => setImageLoading(false)}
-            className={`w-full h-full object-cover object-center transition-opacity duration-500 ${
-              imageLoading ? "opacity-0" : "opacity-100"
-            }`}
+            className={`w-full h-full object-cover object-center transition-opacity duration-500 ${imageLoading ? "opacity-0" : "opacity-100"
+              }`}
           />
 
         </div>
