@@ -31,7 +31,7 @@ app.use(
     "/uploads",
     express.static(path.join(process.cwd(), "uploads"))
 );
-
+app.use(express.static(path.join(__dirname, "Public")));
 app.use("/user", userRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/blog", blogRoute);
