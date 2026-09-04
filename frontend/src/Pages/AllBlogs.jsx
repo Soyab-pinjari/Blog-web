@@ -61,7 +61,7 @@ function AllBlogs() {
   <option value="technology">Technology</option>
   <option value="travel">Travel</option>
   <option value="education">Education</option>
-  <option value="health">Health</option>
+  <option value="health-fitness">Health-fitness</option>
   <option value="business">Business</option>
   <option value="programming">Programming</option>
   <option value="lifestyle">Lifestyle</option>
