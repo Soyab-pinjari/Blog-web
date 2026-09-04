@@ -7,7 +7,6 @@ import { categoryColors } from "../utils/categoryColors";
 import LikeButton from "../Component/LikeButton";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
-
 function BlogPage() {
   const { slug } = useParams();
   const navigate = useNavigate();
@@ -15,6 +14,9 @@ function BlogPage() {
   const [blog, setBlog] = useState(null);
   const [loading, setLoading] = useState(true);
   const [imageLoading, setImageLoading] = useState(true);
+
+  const [isLiked, setIsLiked] = useState(false);
+  const [likesCount, setLikesCount] = useState(0);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -28,15 +30,13 @@ function BlogPage() {
       try {
         setLoading(true);
 
-        const res = await getblogDetails(slug);
+        const data = await getblogDetails(slug);
 
-        setBlog(res);
-
-        // New blog image ke liye loader dobara show karo
-        setImageLoading(true);
         setBlog(data.blog);
         setIsLiked(data.isLiked);
         setLikesCount(data.likesCount);
+
+        setImageLoading(true);
       } catch (error) {
         console.log(error);
       } finally {
