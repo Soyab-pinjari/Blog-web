@@ -201,6 +201,7 @@ const deleteBlog = async (req,res)=>{
           index: "default",
           compound: {
             should: [
+              // Search in title
               {
                 autocomplete: {
                   query: q,
@@ -210,6 +211,8 @@ const deleteBlog = async (req,res)=>{
                   },
                 },
               },
+
+              // Search in category
               {
                 autocomplete: {
                   query: q,
@@ -219,20 +222,21 @@ const deleteBlog = async (req,res)=>{
                   },
                 },
               },
+
+              // Search in content
               {
-                autocomplete: {
+                text: {
                   query: q,
                   path: "content",
-                  fuzzy: {
-                    maxEdits: 1,
-                  },
                 },
               },
             ],
+
             minimumShouldMatch: 1,
           },
         },
       },
+
       {
         $limit: 20,
       },
@@ -248,6 +252,8 @@ const deleteBlog = async (req,res)=>{
     });
   }
 };
+
+export { searchBlogs };
 
 const likeBlogs = async (req, res) => {
   try {
