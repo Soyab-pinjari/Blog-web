@@ -248,7 +248,6 @@ const deleteBlog = async (req,res)=>{
   }
 };
 
-export { searchBlogs };
 
 const likeBlogs = async (req, res) => {
   console.logI("likes route")
