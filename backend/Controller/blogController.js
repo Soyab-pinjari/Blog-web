@@ -201,7 +201,6 @@ const deleteBlog = async (req,res)=>{
           index: "default",
           compound: {
             should: [
-              // Search in title
               {
                 autocomplete: {
                   query: q,
@@ -211,8 +210,6 @@ const deleteBlog = async (req,res)=>{
                   },
                 },
               },
-
-              // Search in category
               {
                 autocomplete: {
                   query: q,
@@ -222,8 +219,6 @@ const deleteBlog = async (req,res)=>{
                   },
                 },
               },
-
-              // Search in content
               {
                 text: {
                   query: q,
