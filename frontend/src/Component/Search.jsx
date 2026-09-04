@@ -24,7 +24,7 @@ const Search = () => {
    console.log("🔎 Searching for:", search);
         const data = await searchBlogs(search);
 
-        setSearchResults(data.blogs || []);
+        setSearchResults(data || []);
 
         console.log("✅ Search API response:", data);
       } catch (error) {
