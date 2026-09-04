@@ -17,11 +17,7 @@ app.use(
 );
 
 connection();
-app.use((req, res, next) => {
-  console.log("🔥 REQUEST RECEIVED");
-  console.log(req.method, req.originalUrl);
-  next();
-});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

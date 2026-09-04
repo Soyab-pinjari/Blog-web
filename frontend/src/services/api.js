@@ -48,6 +48,7 @@ export const getProfile = () => {
   })
     .then((res) => {
     console.log(res.data);
+     return res.data;
   })
   .catch((err) => {
     if (err.response?.status === 401) {
