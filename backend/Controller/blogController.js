@@ -199,32 +199,55 @@ const deleteBlog = async (req,res)=>{
       {
         $search: {
           index: "default",
-          autocomplete: {
-            query: q,
-            path: "title",
-            fuzzy: {
-              maxEdits: 1
-            }
-          }
-        }
+          compound: {
+            should: [
+              {
+                autocomplete: {
+                  query: q,
+                  path: "title",
+                  fuzzy: {
+                    maxEdits: 1,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query: q,
+                  path: "category",
+                  fuzzy: {
+                    maxEdits: 1,
+                  },
+                },
+              },
+              {
+                autocomplete: {
+                  query: q,
+                  path: "content",
+                  fuzzy: {
+                    maxEdits: 1,
+                  },
+                },
+              },
+            ],
+            minimumShouldMatch: 1,
+          },
+        },
       },
       {
-        $limit: 20
-      }
+        $limit: 20,
+      },
     ]);
 
     res.status(200).json(blogs);
-
   } catch (error) {
     console.log("Search error:", error);
 
     res.status(500).json({
       message: "Search failed",
-      error: error.message
+      error: error.message,
     });
   }
 };
-
 
 const likeBlogs = async (req, res) => {
   try {
