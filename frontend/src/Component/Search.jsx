@@ -42,28 +42,41 @@ const Search = () => {
     return () => clearTimeout(timer);
   }, [search]);
 
-  const handleBlogClick = async (slug) => {
-    try {
-      const token = localStorage.getItem("token");
-      const data = await getblogDetails(slug);
+ const handleBlogClick = async (slug) => {
+  try {
+    const token = localStorage.getItem("token");
 
-      console.log("Blog details:", data);
-
+    // Not logged in → go to login
+    if (!token) {
       setSearch("");
       setSearchResults([]);
-       if(!token){
-        navigate('/login');
-       }else{
-         navigate(`/blog/${slug}`, {
-           state: {
-             blog: data.blog,
-            },
-          });
-        }
-    } catch (error) {
-      console.log("Get blog details error:", error);
+      navigate("/login");
+      return;
     }
-  };
+
+    // Logged in → get blog details
+    const data = await getblogDetails(slug);
+
+    console.log("Blog details:", data);
+
+    setSearch("");
+    setSearchResults([]);
+
+    navigate(`/blog/${slug}`, {
+      state: {
+        blog: data.blog,
+      },
+    });
+  } catch (error) {
+    console.log("Get blog details error:", error);
+
+    // Token exists but is expired/invalid
+    if (error.response?.status === 401) {
+      localStorage.removeItem("token");
+      navigate("/login");
+    }
+  }
+};
 
   const clearSearch = () => {
     setSearch("");
