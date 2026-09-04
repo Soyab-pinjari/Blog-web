@@ -250,10 +250,20 @@ const deleteBlog = async (req,res)=>{
 
 
 const likeBlogs = async (req, res) => {
-  console.logI("likes route")
   try {
     const { id } = req.params;
+
+    // Check authenticated user
+    if (!req.user || !req.user.userId) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized. Please login.",
+      });
+    }
+
     const userId = req.user.userId;
+
+    // Find blog
     const blog = await Blog.findById(id);
 
     if (!blog) {
@@ -263,7 +273,14 @@ const likeBlogs = async (req, res) => {
       });
     }
 
-    const alreadyLiked = blog.likes.includes(userId);
+    // Make sure likes array exists
+    if (!blog.likes) {
+      blog.likes = [];
+    }
+
+    const alreadyLiked = blog.likes.some(
+      (user) => user.toString() === userId.toString()
+    );
 
     if (alreadyLiked) {
       // Unlike
@@ -293,13 +310,17 @@ const likeBlogs = async (req, res) => {
       message: "Blog liked",
     });
   } catch (error) {
-    console.log("Like error:", error);
+    console.log("🔥 LIKE ERROR:", error.message);
+    console.log("🔥 FULL ERROR:", error);
 
     return res.status(500).json({
       success: false,
       message: "Something went wrong",
+      error: error.message, // temporary debugging
     });
   }
 };
+
+
 
 module.exports = {createBlog,getAllBlog,getUserBlog,getBlogInfo,deleteBlog,authorBlogs,searchBlogs,likeBlogs};
