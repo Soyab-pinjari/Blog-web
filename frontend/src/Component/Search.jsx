@@ -21,12 +21,19 @@ const Search = () => {
       try {
         setLoading(true);
 
+   console.log("🔎 Searching for:", search);
         const data = await searchBlogs(search);
 
         setSearchResults(data.blogs || []);
+
+        console.log("✅ Search API response:", data);
       } catch (error) {
         console.log("Search error:", error);
+        console.log("❌ Search error:", error);
+        console.log("❌ Error response:", error.response);
+        console.log("❌ Error message:", error.message);
         setSearchResults([]);
+        
       } finally {
         setLoading(false);
       }
