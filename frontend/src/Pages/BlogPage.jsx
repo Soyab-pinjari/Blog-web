@@ -121,43 +121,50 @@ setImageLoading(true);
         </h1>
 
         {/* Author Info */}
-        <div className="flex items-center gap-3 mb-8">
+       <div className="flex items-center justify-between gap-3 mb-8">
 
-          <Link to={`/author/${blog?.author?._id}`}>
-            <img
-              src={
-                blog?.author?.profileImage
-                  ? blog.author.profileImage
-                  : `${BASE_URL}/default-avatar.jpg`
-              }
-              alt="author"
-              className="w-10 h-10 rounded-full object-cover"
-            />
-          </Link>
+  {/* Author Info */}
+  <div className="flex items-center gap-3">
 
-          <div className="text-sm text-gray-600">
-            <p className="font-medium text-gray-900">
-              {blog?.author?.username || "John Doe"}
-            </p>
+    <Link to={`/author/${blog?.author?._id}`}>
+      <img
+        src={
+          blog?.author?.profileImage
+            ? blog.author.profileImage
+            : `${BASE_URL}/default-avatar.jpg`
+        }
+        alt="author"
+        className="w-10 h-10 rounded-full object-cover"
+      />
+    </Link>
 
-            <div className="flex gap-2 text-gray-500">
-              <span>
-                Published At :{" "}
-                {new Date(blog?.createdAt).toLocaleDateString("en-GB", {
-                  day: "2-digit",
-                  month: "short",
-                  year: "numeric",
-                })}
-              </span>
-            </div>
-          </div>
-        </div>
-        <LikeButton
-          blogId={blog?._id}
-          likes={likesCount}
-          isLiked={isLiked}
-        />
+    <div className="text-sm text-gray-600">
+      <p className="font-medium text-gray-900">
+        {blog?.author?.username || "John Doe"}
+      </p>
 
+      <div className="flex gap-2 text-gray-500">
+        <span>
+          Published At:{" "}
+          {new Date(blog?.createdAt).toLocaleDateString("en-GB", {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+          })}
+        </span>
+      </div>
+    </div>
+
+  </div>
+
+  {/* Like Button - Right Side */}
+  <LikeButton
+    blogId={blog?._id}
+    likes={likesCount}
+    isLiked={isLiked}
+  />
+
+</div>
         <div className="relative w-full aspect-video overflow-hidden rounded-xl shadow-md mb-8 bg-gray-200">
 
           {/* Image Loader */}
