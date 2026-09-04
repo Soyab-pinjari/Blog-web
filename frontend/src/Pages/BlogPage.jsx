@@ -26,23 +26,27 @@ function BlogPage() {
       return;
     }
 
-    const fetchData = async () => {
-      try {
-        setLoading(true);
+   const fetchData = async () => {
+  try {
+    setLoading(true);
 
-        const data = await getblogDetails(slug);
+    const data = await getblogDetails(slug);
 
-        setBlog(data.blog);
-        setIsLiked(data.isLiked);
-        setLikesCount(data.likesCount);
+    console.log("API DATA:", data);
 
-        setImageLoading(true);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    const blogData = data[0];
+
+    setBlog(blogData);
+    setIsLiked(false);
+    setLikesCount(blogData?.likes?.length || 0);
+
+    setImageLoading(true);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    setLoading(false);
+  }
+};
 
     if (slug) {
       fetchData();
@@ -102,13 +106,14 @@ function BlogPage() {
 
         {/* Category */}
         <span
-          className={`inline-block ${categoryColors[blog.category] || "bg-gray-600"
-            } text-white text-xs font-medium px-4 py-1 rounded-full mb-5`}
-        >
-         {blog?.category
-  ? blog.category.charAt(0).toUpperCase() + blog.category.slice(1)
-  : "Technology"}
-        </span>
+  className={`inline-block ${
+    categoryColors[blog?.category] || "bg-gray-600"
+  } text-white text-xs font-medium px-4 py-1 rounded-full mb-5`}
+>
+  {blog?.category
+    ? blog.category.charAt(0).toUpperCase() + blog.category.slice(1)
+    : "Technology"}
+</span>
 
         {/* Title */}
         <h1 className="text-4xl md:text-5xl font-bold text-gray-900 leading-tight mb-5">
