@@ -44,18 +44,22 @@ const Search = () => {
 
   const handleBlogClick = async (slug) => {
     try {
+      const token = localStorage.getItem("token");
       const data = await getblogDetails(slug);
 
       console.log("Blog details:", data);
 
       setSearch("");
       setSearchResults([]);
-
-      navigate(`/blog/${slug}`, {
-        state: {
-          blog: data.blog,
-        },
-      });
+       if(!token){
+        navigate('/login');
+       }else{
+         navigate(`/blog/${slug}`, {
+           state: {
+             blog: data.blog,
+            },
+          });
+        }
     } catch (error) {
       console.log("Get blog details error:", error);
     }
