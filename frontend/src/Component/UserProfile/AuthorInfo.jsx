@@ -133,7 +133,7 @@ function AuthorInfo() {
               pb-2
             "
           >
-            My Blogs
+           Blogs
           </h2>
 
           {/* Blog List */}

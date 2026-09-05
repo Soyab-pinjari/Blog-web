@@ -206,7 +206,8 @@ function ProfileTabs() {
                       rounded-full
                     "
                   >
-                    {blog.category}
+                  {blog.category?.charAt(0).toUpperCase() +
+          blog.category?.slice(1)}
                   </span>
                 )}
 
