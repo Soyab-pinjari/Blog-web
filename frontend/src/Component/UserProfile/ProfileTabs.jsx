@@ -120,7 +120,7 @@ function ProfileTabs() {
 
             <div
               key={blog.slug}
-              className="flex justify-between items-center bg-white rounded-xl p-4 shadow-sm border"
+              className="flex justify-between items-center bg-white rounded-xl p-4 shadow-sm border hover:border-blue-300"
             >
 
               {/* Blog */}
@@ -133,15 +133,28 @@ function ProfileTabs() {
 
                   {/* Blog Image */}
                   <img
-                    src={blog.coverImage}
-                    alt={blog.title}
-                    className="w-40 h-24 rounded-lg object-cover"
+                      src={blog.coverImage}
+                        alt={blog.title}
+                        loading="lazy"
+                        className="
+                          w-full
+                          h-full
+                          object-cover
+                          group-hover:scale-105
+                          transition-transform
+                          duration-300
+                        "
                   />
 
                   {/* Blog Details */}
                   <div>
 
-                    <h2 className="text-xl font-semibold">
+                    <h2 className="  text-xl
+                          font-semibold
+                          text-slate-900
+                          group-hover:text-blue-600
+                          transition
+                          line-clamp-2">
                       {blog.title}
                     </h2>
 
