@@ -29,6 +29,7 @@ import AddCategory from './Pages/admin/AddCategory'
 import EditCategory from './Pages/admin/EditCategory'
 import Signin from './Forms/SignIn'
 import Signup from './Forms/Signup'
+import AboutPage from './Pages/AboutPage'
 
 
 
@@ -55,6 +56,7 @@ function App() {
       <Route path='/author/:id' element={<AuthorInfo/>}></Route>
       <Route path='/contact' element={<Contact/>}></Route>
       <Route path='/about' element={<About/>}></Route>
+      <Route path='/aboutPage' element={<AboutPage/>}></Route>
       <Route path='/navbar' element={<Navbar/>}></Route>
       <Route path='/register' element={<Signup/>}></Route>
       <Route path='/login' element={<Signin/>}></Route>

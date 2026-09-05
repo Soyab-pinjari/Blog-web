@@ -10,7 +10,7 @@ import {
   Send,
   Sparkles,
 } from "lucide-react";
-import Navbar from "../Component/Navbar";
+
 
 const About = () => {
   const features = [
@@ -54,7 +54,7 @@ const About = () => {
   return (
 
     <>
-    <Navbar/>
+  
     <div className="bg-white  pt-20  text-slate-900">
 
       {/* What is Blogy */}
