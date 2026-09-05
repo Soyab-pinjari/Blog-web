@@ -46,245 +46,208 @@ function AuthorInfo() {
     fetchBlogs();
   }, [id]);
 
-  return (
-    <>
-      <Navbar />
+ return (
+  <>
+    <Navbar />
 
-      <main className="min-h-screen bg-gray-50 pt-24 pb-12 px-4 sm:px-6">
-        <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+    <main className="min-h-screen bg-gray-100 pt-28 pb-12 px-4">
+      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm overflow-hidden">
 
-          {/* ================= COVER ================= */}
-          <div className="relative h-48 sm:h-60 md:h-72">
-            <img
-              src={BannerImage}
-              alt="cover"
-              loading="lazy"
-              className="w-full h-full object-cover"
-            />
+        {/* ================= BANNER ================= */}
+        <div className="relative h-56 md:h-64">
+          <img
+            src={BannerImage}
+            alt="cover"
+            loading="lazy"
+            className="w-full h-full object-cover"
+          />
 
-            {/* Dark overlay */}
-            <div className="absolute inset-0 bg-black/10" />
-
-            {/* Profile Image */}
-            <div className="absolute -bottom-14 sm:-bottom-16 left-1/2 sm:left-8 -translate-x-1/2 sm:translate-x-0">
+          {/* Profile */}
+          <div className="absolute -bottom-16 left-8">
+            <div className="relative">
               <img
                 src={profileImage}
                 alt={author?.username || "profile"}
                 loading="lazy"
                 className="
-                  w-28 h-28
-                  sm:w-32 sm:h-32
-                  md:w-36 md:h-36
+                  w-32 h-32
                   rounded-full
-                  border-4 border-white
                   object-cover
+                  border-4
+                  border-white
                   shadow-md
                   bg-white
                 "
               />
             </div>
           </div>
+        </div>
 
-          {/* ================= USER INFO ================= */}
-          <div className="pt-20 sm:pt-20 px-5 sm:px-8 md:px-10 pb-8 text-center sm:text-left">
+        {/* ================= AUTHOR INFO ================= */}
+        <div className="px-8 pt-20 pb-8">
 
-            <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">
-              {author?.username || "Author"}
-            </h1>
+          <h1 className="text-3xl font-bold text-slate-900">
+            {author?.username || "Author"}
+          </h1>
 
-            <p className="text-gray-600 mt-3 text-base sm:text-lg leading-7 max-w-2xl">
-              {author?.bio || "No bio added yet"}
-            </p>
+          <p className="mt-4 text-lg text-slate-600">
+            {author?.bio || "No bio added yet"}
+          </p>
 
-            {/* Meta information */}
-            <div className="
-              flex
-              flex-col sm:flex-row
-              items-center sm:items-start
-              justify-center sm:justify-start
-              gap-3 sm:gap-8
-              mt-5
-              text-sm sm:text-base
-              text-gray-500
-            ">
+          {/* Location + Joined */}
+          <div className="flex flex-wrap items-center gap-8 mt-6 text-slate-500">
 
-              {/* Location */}
-              <div className="flex items-center gap-2">
-                <span>📍</span>
-
-                <span>
-                  {author?.location || "India"}
-                </span>
-              </div>
-
-              {/* Joined */}
-              {author?.createdAt && (
-                <div>
-                  <span className="font-medium text-gray-600">
-                    Joined:
-                  </span>{" "}
-                  {new Date(author.createdAt).toLocaleDateString(
-                    "en-IN",
-                    {
-                      day: "2-digit",
-                      month: "short",
-                      year: "numeric",
-                    }
-                  )}
-                </div>
-              )}
-            </div>
-          </div>
-
-          {/* ================= BLOGS ================= */}
-          <section className="px-5 sm:px-8 md:px-10 pb-10">
-
-            {/* Heading */}
-            <div className="flex items-center justify-between mb-7">
-              <h2 className="
-                text-2xl
-                sm:text-3xl
-                font-bold
-                text-gray-900
-              ">
-                Blogs
-              </h2>
-
-              <span className="
-                text-sm
-                text-gray-500
-                bg-gray-100
-                px-3
-                py-1
-                rounded-full
-              ">
-                {blogs?.length || 0} posts
+            <div className="flex items-center gap-2">
+              <span>📍</span>
+              <span>
+                {author?.location || "India"}
               </span>
             </div>
 
-            {/* Blog List */}
-            <div className="space-y-5">
+            {author?.createdAt && (
+              <div>
+                Joined:{" "}
+                {new Date(author.createdAt).toLocaleDateString(
+                  "en-IN",
+                  {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric",
+                  }
+                )}
+              </div>
+            )}
+          </div>
 
-              {blogs?.length > 0 ? (
-                blogs.map((blog) => (
-                  <Link
-                    key={blog._id}
-                    to={`/blog/${blog.slug}`}
-                    className="block group"
-                  >
-                    <article className="
+          {/* Create Blog */}
+          <Link
+            to="/create-blog"
+            className="
+              inline-block
+              mt-8
+              bg-blue-600
+              hover:bg-blue-700
+              text-white
+              font-semibold
+              px-6
+              py-3
+              rounded-lg
+              transition
+            "
+          >
+            Create Blog
+          </Link>
+        </div>
+
+        {/* ================= MY BLOGS ================= */}
+        <div className="px-8 pb-10">
+
+          <h2
+            className="
+              inline-block
+              text-xl
+              font-bold
+              text-blue-600
+              border-b-4
+              border-blue-600
+              pb-2
+            "
+          >
+            My Blogs
+          </h2>
+
+          {/* Blog List */}
+          <div className="mt-6 space-y-5">
+
+            {blogs?.length > 0 ? (
+              blogs.map((blog) => (
+                <Link
+                  key={blog._id}
+                  to={`/blog/${blog.slug}`}
+                  className="block group"
+                >
+                  <div
+                    className="
                       flex
-                      flex-col sm:flex-row
-                      gap-4 sm:gap-5
+                      items-center
+                      gap-5
                       border
-                      border-gray-200
-                      rounded-2xl
+                      border-gray-300
+                      rounded-xl
                       p-4
-                      hover:border-blue-200
-                      hover:shadow-md
-                      transition-all
-                      duration-300
                       bg-white
-                    ">
+                      hover:shadow-md
+                      hover:border-blue-300
+                      transition
+                    "
+                  >
 
-                      {/* Blog Image */}
-                      <div className="
-                        w-full
-                        sm:w-44
-                        md:w-48
-                        h-48
-                        sm:h-28
-                        flex-shrink-0
-                        overflow-hidden
-                        rounded-xl
-                        bg-gray-100
-                      ">
-                        <img
-                          src={blog.coverImage}
-                          alt={blog.title}
-                          loading="lazy"
-                          className="
-                            w-full
-                            h-full
-                            object-cover
-                            group-hover:scale-105
-                            transition-transform
-                            duration-300
-                          "
-                        />
-                      </div>
+                    {/* Blog Image */}
+                    <div className="w-48 h-28 flex-shrink-0 overflow-hidden rounded-lg">
+                      <img
+                        src={blog.coverImage}
+                        alt={blog.title}
+                        loading="lazy"
+                        className="
+                          w-full
+                          h-full
+                          object-cover
+                          group-hover:scale-105
+                          transition-transform
+                          duration-300
+                        "
+                      />
+                    </div>
 
-                      {/* Blog Details */}
-                      <div className="flex-1 min-w-0">
+                    {/* Blog Content */}
+                    <div className="flex-1 min-w-0">
 
-                        <h3 className="
-                          text-lg
-                          sm:text-xl
+                      <h3
+                        className="
+                          text-xl
                           font-semibold
-                          text-gray-900
-                          line-clamp-2
+                          text-slate-900
                           group-hover:text-blue-600
                           transition
-                        ">
-                          {blog.title}
-                        </h3>
+                          line-clamp-2
+                        "
+                      >
+                        {blog.title}
+                      </h3>
 
-                        {/* Published */}
-                        <p className="text-sm text-gray-500 mt-2">
-                          Published{" "}
-                          {new Date(blog.createdAt).toLocaleDateString(
-                            "en-IN",
-                            {
-                              day: "2-digit",
-                              month: "short",
-                              year: "numeric",
-                            }
-                          )}
-                        </p>
-
-                        {/* Category */}
-                        {blog.category && (
-                          <span className="
-                            inline-block
-                            mt-3
-                            text-xs
-                            font-medium
-                            text-blue-600
-                            bg-blue-50
-                            px-3
-                            py-1
-                            rounded-full
-                          ">
-                            {blog.category}
-                          </span>
+                      <p className="text-slate-500 mt-3">
+                        Published At :{" "}
+                        {new Date(blog.createdAt).toLocaleDateString(
+                          "en-IN",
+                          {
+                            day: "2-digit",
+                            month: "short",
+                            year: "numeric",
+                          }
                         )}
-                      </div>
+                      </p>
 
-                    </article>
-                  </Link>
-                ))
-              ) : (
-                <div className="
-                  text-center
-                  py-12
-                  border
-                  border-dashed
-                  border-gray-300
-                  rounded-2xl
-                ">
-                  <p className="text-gray-500">
-                    No blogs published yet.
-                  </p>
-                </div>
-              )}
+                      <p className="text-sm text-slate-400 mt-2">
+                        {blog.category}
+                      </p>
 
-            </div>
-          </section>
+                    </div>
+                  </div>
+                </Link>
+              ))
+            ) : (
+              <p className="text-gray-500 py-8">
+                No blogs published yet.
+              </p>
+            )}
 
+          </div>
         </div>
-      </main>
-    </>
-  );
+
+      </div>
+    </main>
+  </>
+);
 }
 
 export default AuthorInfo;
