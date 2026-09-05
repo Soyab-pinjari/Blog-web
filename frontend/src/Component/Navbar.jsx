@@ -4,7 +4,8 @@ import { Link, useNavigate } from 'react-router';
 import { getProfile } from "../services/api";
 import userContext from '../Context/userContext';
 import Search from './Search';
-import ConfirmLogout from './confirmlogout';
+import ConfirmPopup from './ConfirmPopup';
+
 const BASE_URL = import.meta.env.VITE_API_URL
 
 function Navbar() {
@@ -102,7 +103,7 @@ const handleLogout = () => {
 >
   Log out
 </button>
-<ConfirmLogout isOpen={showPopup} onClose={() => setShowPopup(false)} onConfirm={handleLogout} />
+<ConfirmPopup isOpen={showPopup} onClose={() => setShowPopup(false)} onConfirm={handleLogout} />
     </>
   ) : (
     <>
