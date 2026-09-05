@@ -82,7 +82,7 @@ const profileImage = user?.profileImage
 // Banner image URL
 const bannerImage = user?.banner
   ? user.banner
-  : `${BASE_URL}/Default-banner.jpg`;
+  : `${BASE_URL}/Default-banner.jpeg`;
 
 
   // Upload profile image
