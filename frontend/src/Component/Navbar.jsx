@@ -4,12 +4,14 @@ import { Link, useNavigate } from 'react-router';
 import { getProfile } from "../services/api";
 import userContext from '../Context/userContext';
 import Search from './Search';
+import ConfirmLogout from './confirmlogout';
 const BASE_URL = import.meta.env.VITE_API_URL
 
 function Navbar() {
 
   const isLoggedIn = localStorage.getItem("token");
   const {user,setUser}=useContext(userContext);
+  const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
    
    const profileImage =user?.profileImage
@@ -18,13 +20,9 @@ function Navbar() {
 
 const handleLogout = () => {
   try {
-    const confirmLogout = window.confirm(
-    "Are you sure you want to log out?"
-  );
-
-  if (!confirmLogout) return;
     localStorage.removeItem("token");
     localStorage.removeItem("user");
+    setShowPopup(false);
     setUser(null); 
     navigate("/", { replace: true });
   } catch (error) {
@@ -98,12 +96,13 @@ const handleLogout = () => {
 </Link>
       
      <button
-  onClick={handleLogout}
+  onClick={() => setShowPopup(true)}
   
   className="px-5 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition"
 >
   Log out
 </button>
+<ConfirmLogout isOpen={showPopup} onClose={() => setShowPopup(false)} onConfirm={handleLogout} />
     </>
   ) : (
     <>
