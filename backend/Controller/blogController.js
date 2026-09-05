@@ -243,18 +243,17 @@ const deleteBlog = async (req,res)=>{
 
     res.status(500).json({
       message: "Search failed",
-      error: error.message,
+      error: error.message, 
     });
   }
 };
-
 
 const likeBlogs = async (req, res) => {
   try {
     const { id } = req.params;
 
     // Check authenticated user
-    if (!req.user || !req.user.userId) {
+    if (!req.user?.userId) {
       return res.status(401).json({
         success: false,
         message: "Unauthorized. Please login.",
@@ -263,32 +262,42 @@ const likeBlogs = async (req, res) => {
 
     const userId = req.user.userId;
 
-    // Find blog
-    const blog = await Blog.findById(id);
+    // Try to LIKE first
+    const likeResult = await Blog.updateOne(
+      {
+        _id: id,
+        likes: { $ne: userId },
+      },
+      {
+        $addToSet: { likes: userId },
+      }
+    );
 
-    if (!blog) {
-      return res.status(404).json({
-        success: false,
-        message: "Blog not found",
+    // Successfully liked
+    if (likeResult.modifiedCount === 1) {
+      const blog = await Blog.findById(id).select("likes");
+
+      return res.status(200).json({
+        success: true,
+        liked: true,
+        likesCount: blog.likes.length,
+        message: "Blog liked",
       });
     }
 
-    // Make sure likes array exists
-    if (!blog.likes) {
-      blog.likes = [];
-    }
-
-    const alreadyLiked = blog.likes.some(
-      (user) => user.toString() === userId.toString()
+    // Already liked → UNLIKE
+    const unlikeResult = await Blog.updateOne(
+      {
+        _id: id,
+        likes: userId,
+      },
+      {
+        $pull: { likes: userId },
+      }
     );
 
-    if (alreadyLiked) {
-      // Unlike
-      blog.likes = blog.likes.filter(
-        (user) => user.toString() !== userId.toString()
-      );
-
-      await blog.save();
+    if (unlikeResult.modifiedCount === 1) {
+      const blog = await Blog.findById(id).select("likes");
 
       return res.status(200).json({
         success: true,
@@ -298,25 +307,17 @@ const likeBlogs = async (req, res) => {
       });
     }
 
-    // Like
-    blog.likes.push(userId);
-
-    await blog.save();
-
-    return res.status(200).json({
-      success: true,
-      liked: true,
-      likesCount: blog.likes.length,
-      message: "Blog liked",
+    return res.status(404).json({
+      success: false,
+      message: "Blog not found",
     });
+
   } catch (error) {
-    console.log("🔥 LIKE ERROR:", error.message);
-    console.log("🔥 FULL ERROR:", error);
+    console.error("LIKE ERROR:", error);
 
     return res.status(500).json({
       success: false,
       message: "Something went wrong",
-      error: error.message, // temporary debugging
     });
   }
 };
