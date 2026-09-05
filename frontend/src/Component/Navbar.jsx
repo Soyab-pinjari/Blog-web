@@ -59,7 +59,7 @@ const handleLogout = () => {
             </a>
           </li>
           <li>
-            <a href='#aboutPage' className="hover:text-blue-600 transition">
+            <a href='/about' className="hover:text-blue-600 transition">
               About
             </a>
           </li>
