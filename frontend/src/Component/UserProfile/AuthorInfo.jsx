@@ -42,6 +42,10 @@ function AuthorInfo() {
   };
 
   useEffect(() => {
+    const token = localStorage.getItem("token");
+    if(!token){
+      navigate("/login");
+    }
     fetchUser();
     fetchBlogs();
   }, [id]);
