@@ -50,8 +50,9 @@ function AuthorInfo() {
   <>
     <Navbar />
 
-    <main className="min-h-screen bg-gray-100 pt-28 pb-12 px-4">
-      <div className="max-w-5xl mx-auto bg-white rounded-2xl shadow-sm overflow-hidden">
+     <div className="min-h-screen bg-gray-100 flex pt-30 justify-center items-center p-5">
+
+      <div className="w-full max-w-3xl bg-white rounded-xl shadow-md overflow-hidden">
 
         {/* ================= BANNER ================= */}
         <div className="relative h-56 md:h-64">
@@ -61,8 +62,6 @@ function AuthorInfo() {
             loading="lazy"
             className="w-full h-full object-cover"
           />
-
-          {/* Profile */}
           <div className="absolute -bottom-16 left-8">
             <div className="relative">
               <img
@@ -83,7 +82,6 @@ function AuthorInfo() {
           </div>
         </div>
 
-        {/* ================= AUTHOR INFO ================= */}
         <div className="px-8 pt-20 pb-8">
 
           <h1 className="text-3xl font-bold text-slate-900">
@@ -94,7 +92,7 @@ function AuthorInfo() {
             {author?.bio || "No bio added yet"}
           </p>
 
-          {/* Location + Joined */}
+    
           <div className="flex flex-wrap items-center gap-8 mt-6 text-slate-500">
 
             <div className="flex items-center gap-2">
@@ -119,24 +117,6 @@ function AuthorInfo() {
             )}
           </div>
 
-          {/* Create Blog */}
-          <Link
-            to="/create-blog"
-            className="
-              inline-block
-              mt-8
-              bg-blue-600
-              hover:bg-blue-700
-              text-white
-              font-semibold
-              px-6
-              py-3
-              rounded-lg
-              transition
-            "
-          >
-            Create Blog
-          </Link>
         </div>
 
         {/* ================= MY BLOGS ================= */}
@@ -245,7 +225,7 @@ function AuthorInfo() {
         </div>
 
       </div>
-    </main>
+    </div>
   </>
 );
 }
