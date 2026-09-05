@@ -14,7 +14,7 @@ function Navbar() {
    
    const profileImage =user?.profileImage
   ?  user.profileImage
-  : `${BASE_URL}/default-avatar.jpg`;
+  : `${BASE_URL}/Default-avatar.jpg`;
 
 const handleLogout = () => {
   try {
@@ -35,7 +35,7 @@ const handleLogout = () => {
   return (
     <div>
        <nav className="fixed top-0 left-0 z-50 w-full bg-white shadow-sm border-b">
-      <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+   <div className="max-w-7xl mx-auto px-4 sm:px-6 py-3 flex items-center justify-between gap-4">
         {/* Logo */}
         <div className="text-3xl font-bold">
           Blogy<span className="text-blue-600">.</span>
@@ -71,9 +71,8 @@ const handleLogout = () => {
         </ul>
 
         {/* Right Side */}
-       <div className="flex items-center gap-4">
-
- <Search/>
+     <div className="flex items-center gap-3 lg:gap-4 min-w-0">
+  <Search />
 
 
 
