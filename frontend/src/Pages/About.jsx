@@ -52,9 +52,11 @@ const About = () => {
   ];
 
   return (
+
+    <>
+    <Navbar/>
     <div className="bg-white  pt-20  text-slate-900">
 
-    <Navbar/>
       {/* What is Blogy */}
       <section className="bg-slate-50 py-20">
         <div className="max-w-5xl mx-auto px-6 text-center">
@@ -123,37 +125,37 @@ const About = () => {
       {/* Categories */}
       {/* <section className="max-w-7xl mx-auto px-6 py-20">
 
-        <div className="text-center mb-10">
+<div className="text-center mb-10">
           <p className="text-blue-600 font-semibold mb-3">
             EXPLORE
           </p>
 
           <h2 className="text-4xl font-bold">
             Explore different topics
-          </h2>
+            </h2>
         </div>
-
+        
         <div className="flex flex-wrap justify-center gap-4">
-          {categories.map((category) => (
+        {categories.map((category) => (
             <Link
               key={category}
               to={`/categories/${category.toLowerCase()}`}
               className="px-6 py-3 rounded-full border border-slate-200 hover:border-blue-600 hover:text-blue-600 transition"
-            >
+              >
               {category}
             </Link>
           ))}
-        </div>
+          </div>
 
       </section> */}
 
       {/* CTA */}
       {/* <section className="max-w-7xl mx-auto px-6 pb-20">
 
-        <div className="bg-blue-600 rounded-3xl px-8 py-14 md:px-16 text-center text-white">
+<div className="bg-blue-600 rounded-3xl px-8 py-14 md:px-16 text-center text-white">
 
-          <h2 className="text-4xl font-bold">
-            Have an idea worth sharing?
+<h2 className="text-4xl font-bold">
+Have an idea worth sharing?
           </h2>
 
           <p className="text-blue-100 text-lg mt-4 max-w-2xl mx-auto">
@@ -173,6 +175,7 @@ const About = () => {
       </section> */}
 
     </div>
+          </>
   );
 };
 
