@@ -11,7 +11,7 @@ function LikeButton({
 
   const [liked, setLiked] = useState(isLiked);
   const [likesCount, setLikesCount] = useState(likes);
-  const [likeLoading, setLikeLoading] = useState(false);
+  // const [likeLoading, setLikeLoading] = useState(false);
 
   useEffect(() => {
     setLiked(isLiked);
@@ -27,7 +27,7 @@ function LikeButton({
         return;
       }
 
-      setLikeLoading(true);
+      // setLikeLoading(true);
 
       const data = await likeBlog(blogId);
 
@@ -37,14 +37,14 @@ function LikeButton({
     } catch (error) {
       console.log("Like error:", error);
     } finally {
-      setLikeLoading(false);
+      // setLikeLoading(false);
     }
   };
 
   return (
     <button
       onClick={handleLike}
-      disabled={likeLoading}
+      // disabled={likeLoading}
       className="flex items-center gap-2 px-4 py-2 rounded-lg hover:bg-gray-100 transition"
     >
       <span
