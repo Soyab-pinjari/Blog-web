@@ -53,6 +53,7 @@ const Contact = () => {
               </label>
               <input
                 type="email"
+                
                 placeholder="Enter your email"
                 className="w-full border rounded-lg px-4 py-3 outline-none focus:ring-2 focus:ring-blue-500"
               />
@@ -116,9 +117,9 @@ const Contact = () => {
                 <FaEnvelope className="text-blue-600 text-2xl" />
                 <div>
                   <h4 className="font-semibold">Email</h4>
-                  <p className="text-gray-600">
-                    contact@example.com
-                  </p>
+                  <a  href="mailto:pinjarisoyab2006@gmail.com" className="text-gray-600">
+                    pinjarisoyab2006@gmail.com
+                  </a>
                 </div>
               </div>
 
