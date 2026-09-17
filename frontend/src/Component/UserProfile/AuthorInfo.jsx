@@ -43,7 +43,7 @@ function AuthorInfo() {
   };
 
   useEffect(() => {
-    const token = useSelector((state)=>state.auth.token)
+    const token =localStorage.getItem("token")
     if(!token){
       navigate("/login");
     }
