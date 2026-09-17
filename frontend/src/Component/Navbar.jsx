@@ -17,9 +17,9 @@ function Navbar() {
   const navigate = useNavigate();
 const dispatch = useDispatch();
   
-console.log(user);
-   
-   const profileImage =user?.profileImage
+console.log("Redux user:", user);
+console.log("Redux profileImage:", user?.profileImage);
+   const profileImage = user?.profileImage
   ?  user.profileImage
   : `${BASE_URL}/Default-avatar.jpg`;
 
