@@ -11,7 +11,7 @@ const BASE_URL = import.meta.env.VITE_API_URL
 
 function Navbar() {
 
-  const isLoggedIn = useSelector((state)=>state.auth.token);
+  const isLoggedIn = localStorage.getItem("token");
   const user = useSelector((state)=>state.auth.user);
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
