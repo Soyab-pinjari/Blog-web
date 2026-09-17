@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react'
 import { loginUser } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 
-import userContext from '../Context/userContext';
+// import userContext from '../Context/userContext';
 import { useDispatch } from 'react-redux';
 import { login } from '../Redux/authSlice';
 
@@ -14,8 +14,6 @@ function Signin() {
   const [password,setPassword]=useState('');
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState(''); 
-  
-  const {setUser} = useContext(userContext);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -29,10 +27,8 @@ function Signin() {
         password
       })
       if(data) {
-      
-
         localStorage.setItem("token",data.token);
-        localStorage.setItem("user",JSON.stringify(data.user));
+        
       
 dispatch(login({
           user:data.user,
@@ -42,7 +38,7 @@ dispatch(login({
         setSuccessMsg(data.message);
         setErrorMsg('');
         navigate('/');
-       setUser(data.user);
+     
       }
     } catch (error) {
       setErrorMsg(

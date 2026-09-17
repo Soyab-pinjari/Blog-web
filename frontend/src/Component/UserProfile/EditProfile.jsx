@@ -8,16 +8,16 @@ import React, {
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-import userContext from "../../Context/userContext";
 import { getProfile } from "../../services/api";
 import ProfileTabs from "./ProfileTabs";
+import { useSelector } from "react-redux";
 const BASE_URL=import.meta.env.VITE_API_URL
 
 function EditProfile() {
   const profileInput = useRef(null);
   const bannerInput = useRef(null);
 
-  const { user, setUser } = useContext(userContext);
+const user = useSelector((state)=>state.auth.user)
 
   const [profilePreview, setProfilePreview] = useState("");
   const [bannerPreview, setBannerPreview] = useState("");

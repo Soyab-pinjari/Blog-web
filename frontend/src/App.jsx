@@ -10,8 +10,6 @@ import FeaturedBlog from './Pages/FeaturedBlog'
 import AllBlogs from './Pages/AllBlogs'
 import EditProfile from './Component/UserProfile/EditProfile'
 // import { GetAllBlogs } from './services/api'
-
-import userContext from './Context/userContext'
 import BlogPage from './Pages/BlogPage'
 import ScrollToTop from './Component/ScrollToTop'
 import ProfilePage from './Pages/ProfilePage'
@@ -34,22 +32,22 @@ import AboutPage from './Pages/AboutPage'
 
 
 function App() {
-  const getUserFromStorage = () => {
-  try {
-    const user = localStorage.getItem("user");
-    return user ? JSON.parse(user) : null;
-  } catch (error) {
-    console.error("Invalid user data in localStorage:", error);
-    localStorage.removeItem("user");
-    return null;
-  }
-};
-    const [user, setUser] = useState(getUserFromStorage());
+//   const getUserFromStorage = () => {
+//   try {
+//     const user = localStorage.getItem("user");
+//     return user ? JSON.parse(user) : null;
+//   } catch (error) {
+//     console.error("Invalid user data in localStorage:", error);
+//     localStorage.removeItem("user");
+//     return null;
+//   }
+// };
+//     const [user, setUser] = useState(getUserFromStorage());
 
   return (
     <>
     <ScrollToTop/>
-    <userContext.Provider value={{ user, setUser }}>
+    {/* <userContext.Provider value={{ user, setUser }}> */}
 
      <Routes>
       <Route path='/' element={<MainLayout/>}></Route>
@@ -85,7 +83,7 @@ function App() {
 </Route>
      
      </Routes>
-    </userContext.Provider>
+    {/* </userContext.Provider> */}
     </>
   )
 }
