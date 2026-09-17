@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { authorProfile, getauthorBlogs } from "../../services/api";
 import { Link, useNavigate, useParams } from "react-router";
 import Navbar from "../Navbar";
+import { useSelector } from "react-redux";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -42,7 +43,7 @@ function AuthorInfo() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
+    const token = useSelector((state)=>state.auth.token)
     if(!token){
       navigate("/login");
     }

@@ -28,8 +28,6 @@ function Signin() {
       })
       if(data) {
         localStorage.setItem("token",data.token);
-        
-      
 dispatch(login({
           user:data.user,
           token:data.token,         ///dispatch store update

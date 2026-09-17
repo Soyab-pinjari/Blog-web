@@ -11,7 +11,7 @@ const BASE_URL = import.meta.env.VITE_API_URL
 
 function Navbar() {
 
-  const isLoggedIn = localStorage.getItem("token");
+  const isLoggedIn = useSelector((state)=>state.auth.token);
   const user = useSelector((state)=>state.auth.user);
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
@@ -25,11 +25,10 @@ console.log(user);
 
 const handleLogout = () => {
   try {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+localStorage.removeItem("token");
     setShowPopup(false);
       dispatch(logout());
-  
+      
     navigate("/", { replace: true });
   } catch (error) {
     console.error("Logout failed:", error);

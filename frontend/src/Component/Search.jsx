@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { searchBlogs, getblogDetails } from "../services/api";
 import { useNavigate } from "react-router-dom";
 import { FiSearch, FiX } from "react-icons/fi";
+import { useSelector } from "react-redux";
 
 const Search = () => {
   const [search, setSearch] = useState("");
@@ -44,7 +45,7 @@ const Search = () => {
 
  const handleBlogClick = async (slug) => {
   try {
-    const token = localStorage.getItem("token");
+    const token = useSelector((state)=>state.auth.token)
 
     // Not logged in → go to login
     if (!token) {

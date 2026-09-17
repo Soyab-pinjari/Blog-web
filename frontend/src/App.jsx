@@ -32,23 +32,11 @@ import AboutPage from './Pages/AboutPage'
 
 
 function App() {
-//   const getUserFromStorage = () => {
-//   try {
-//     const user = localStorage.getItem("user");
-//     return user ? JSON.parse(user) : null;
-//   } catch (error) {
-//     console.error("Invalid user data in localStorage:", error);
-//     localStorage.removeItem("user");
-//     return null;
-//   }
-// };
-//     const [user, setUser] = useState(getUserFromStorage());
 
   return (
     <>
     <ScrollToTop/>
-    {/* <userContext.Provider value={{ user, setUser }}> */}
-
+  
      <Routes>
       <Route path='/' element={<MainLayout/>}></Route>
       <Route path='/author/:id' element={<AuthorInfo/>}></Route>
@@ -83,7 +71,7 @@ function App() {
 </Route>
      
      </Routes>
-    {/* </userContext.Provider> */}
+    
     </>
   )
 }

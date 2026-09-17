@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { likeBlog } from "../services/api";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function LikeButton({
   blogId,
@@ -20,7 +21,7 @@ function LikeButton({
 
   const handleLike = async () => {
     try {
-      const token = localStorage.getItem("token");
+      const token = useSelector((state)=>state.auth.token);
 
       if (!token) {
         navigate("/login");
