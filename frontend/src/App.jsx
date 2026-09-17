@@ -28,11 +28,33 @@ import EditCategory from './Pages/admin/EditCategory'
 import Signin from './Forms/SignIn'
 import Signup from './Forms/Signup'
 import AboutPage from './Pages/AboutPage'
+import { getProfile } from './services/api'
+import { useDispatch } from 'react-redux'
 
 
 
 function App() {
+   const dispatch = useDispatch();
 
+    useEffect(() => {
+        const loadUser = async () => {
+            const token = localStorage.getItem("token");
+
+            if (!token) return;
+
+            try {
+                const data = await getProfile();
+
+                if (data?.user) {
+                    dispatch(updateUser(data.user));
+                }
+            } catch (error) {
+                console.log("User loading error:", error);
+            }
+        };
+
+        loadUser();
+    }, [dispatch]);
   return (
     <>
     <ScrollToTop/>
