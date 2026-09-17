@@ -30,6 +30,7 @@ import Signup from './Forms/Signup'
 import AboutPage from './Pages/AboutPage'
 import { getProfile } from './services/api'
 import { useDispatch } from 'react-redux'
+import { updateUser } from './Redux/authSlice'
 
 
 

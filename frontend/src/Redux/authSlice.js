@@ -21,6 +21,8 @@ reducers:{
   state.isLoggedIn=false
     },
      updateUser: (state, action) => {
+                console.log("REDUCER UPDATE USER:", action.payload);
+
             state.user = action.payload;
         }
 }
