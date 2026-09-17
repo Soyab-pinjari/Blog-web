@@ -42,11 +42,15 @@ function App() {
 
             if (!token) return;
             try {
-                const data = await getProfile();
-                console.log("app user data",data);
-                if (data?.user) {
-                    dispatch(updateUser(data.user));
-                }
+              const data = await getProfile();
+
+console.log("PROFILE DATA:", data);
+
+if (data?.user) {
+    console.log("DISPATCHING USER:", data.user);
+
+    dispatch(updateUser(data.user));
+}
             } catch (error) {
                 console.log("User loading error:", error);
             }
