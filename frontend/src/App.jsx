@@ -41,10 +41,9 @@ function App() {
             const token = localStorage.getItem("token");
 
             if (!token) return;
-
             try {
                 const data = await getProfile();
-
+                console.log("app user data",data);
                 if (data?.user) {
                     dispatch(updateUser(data.user));
                 }
