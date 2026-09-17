@@ -24,7 +24,7 @@ function BlogPage() {
     if (!token) {
       navigate("/login");
       return;
-    }
+    } 
 
    const fetchData = async () => {
   try {

@@ -2,18 +2,21 @@ import React, { useContext, useEffect, useState } from 'react'
 import { FiSearch, FiBell ,FiUser, FiMessageSquare} from "react-icons/fi";
 import { Link, useNavigate } from 'react-router';
 import { getProfile } from "../services/api";
-import userContext from '../Context/userContext';
 import Search from './Search';
 import ConfirmPopup from './ConfirmPopup';
+import { logout } from '../Redux/authSlice';
+import { useSelector } from 'react-redux';
 
 const BASE_URL = import.meta.env.VITE_API_URL
 
 function Navbar() {
 
   const isLoggedIn = localStorage.getItem("token");
-  const {user,setUser}=useContext(userContext);
+  const user = useSelector((state)=>state.auth.user);
   const [showPopup, setShowPopup] = useState(false);
   const navigate = useNavigate();
+const dispatch = useDispatch();
+  
    
    const profileImage =user?.profileImage
   ?  user.profileImage
@@ -24,6 +27,7 @@ const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("user");
     setShowPopup(false);
+      dispatch(logout());
     setUser(null); 
     navigate("/", { replace: true });
   } catch (error) {

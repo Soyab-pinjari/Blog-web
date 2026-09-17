@@ -4,6 +4,8 @@ import { loginUser } from '../services/api';
 import { Link, useNavigate } from 'react-router-dom';
 
 import userContext from '../Context/userContext';
+import { useDispatch } from 'react-redux';
+import { login } from '../Redux/authSlice';
 
 
 
@@ -15,6 +17,8 @@ function Signin() {
   
   const {setUser} = useContext(userContext);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+
 
   const handleSubmit = async(e)=>{
     
@@ -24,18 +28,20 @@ function Signin() {
         email,
         password
       })
-  
-       console.log("Full response:", data);
-  console.log("User object:", data.user);
       if(data) {
-        
+      
+
         localStorage.setItem("token",data.token);
         localStorage.setItem("user",JSON.stringify(data.user));
       
+dispatch(login({
+          user:data.user,
+          token:data.token,         ///dispatch store update
+        }))
+
         setSuccessMsg(data.message);
         setErrorMsg('');
         navigate('/');
-
        setUser(data.user);
       }
     } catch (error) {
