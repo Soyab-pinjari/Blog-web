@@ -5,7 +5,7 @@ import { getProfile } from "../services/api";
 import Search from './Search';
 import ConfirmPopup from './ConfirmPopup';
 import { logout } from '../Redux/authSlice';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const BASE_URL = import.meta.env.VITE_API_URL
 
