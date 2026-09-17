@@ -1,5 +1,4 @@
 import React, {
-  useContext,
   useEffect,
   useRef,
   useState,
@@ -10,14 +9,21 @@ import { Link } from "react-router-dom";
 
 import { getProfile } from "../../services/api";
 import ProfileTabs from "./ProfileTabs";
-import { useSelector } from "react-redux";
-const BASE_URL=import.meta.env.VITE_API_URL
+
+import { useDispatch, useSelector } from "react-redux";
+import { updateUser } from "../../Redux/authSlice";
+
+const BASE_URL = import.meta.env.VITE_API_URL;
 
 function EditProfile() {
   const profileInput = useRef(null);
   const bannerInput = useRef(null);
 
-const user = useSelector((state)=>state.auth.user)
+  // Get user from Redux
+  const user = useSelector((state) => state.auth.user);
+
+  // Redux dispatch
+  const dispatch = useDispatch();
 
   const [profilePreview, setProfilePreview] = useState("");
   const [bannerPreview, setBannerPreview] = useState("");
@@ -29,30 +35,28 @@ const user = useSelector((state)=>state.auth.user)
 
   const [isEditing, setIsEditing] = useState(false);
 
-  // Fetch profile
-useEffect(() => {
-  const fetchProfile = async () => {
-    try {
-      const data = await getProfile();
+  // ================= FETCH PROFILE =================
 
-      console.log("Profile data:", data);
+  useEffect(() => {
+    const fetchProfile = async () => {
+      try {
+        const data = await getProfile();
 
-      const updatedUser = data.user;
+        console.log("Profile data:", data);
 
-      setUser(updatedUser);
+        if (data.user) {
+          dispatch(updateUser(data.user));
+        }
+      } catch (err) {
+        console.log("Profile fetch error:", err);
+      }
+    };
 
-      localStorage.setItem(
-        "user",
-        JSON.stringify(updatedUser)
-      );
-    } catch (err) {
-      console.log("Profile fetch error:", err);
-    }
-  };
+    fetchProfile();
+  }, [dispatch]);
 
-  fetchProfile();
-}, [setUser]);
-  // Update form when user changes
+  // ================= UPDATE FORM =================
+
   useEffect(() => {
     if (user) {
       setFormData({
@@ -66,7 +70,8 @@ useEffect(() => {
     return null;
   }
 
-  // Handle text input
+  // ================= HANDLE TEXT INPUT =================
+
   const handleChange = (e) => {
     setFormData({
       ...formData,
@@ -74,24 +79,26 @@ useEffect(() => {
     });
   };
 
-// Profile image URL
-const profileImage = user?.profileImage
-  ? user.profileImage
-  : `${BASE_URL}/Default-avatar.jpg`;
+  // ================= PROFILE IMAGE URL =================
 
-// Banner image URL
-const bannerImage = user?.banner
-  ? user.banner
-  : `${BASE_URL}/Default-banner.jpeg`;
+  const profileImage = user?.profileImage
+    ? user.profileImage
+    : `${BASE_URL}/Default-avatar.jpg`;
 
+  // ================= BANNER IMAGE URL =================
 
-  // Upload profile image
+  const bannerImage = user?.banner
+    ? user.banner
+    : `${BASE_URL}/Default-banner.jpeg`;
+
+  // ================= UPLOAD PROFILE IMAGE =================
+
   const handleProfileImage = async (e) => {
     const file = e.target.files[0];
 
     if (!file) return;
 
-    // Show preview immediatelyd
+    // Preview immediately
     const previewURL = URL.createObjectURL(file);
     setProfilePreview(previewURL);
 
@@ -118,30 +125,28 @@ const bannerImage = user?.banner
       console.log("Profile image response:", data);
 
       if (data.success && data.user) {
-        // Update React user
-        setUser(data.user);
+        // UPDATE REDUX
+        dispatch(updateUser(data.user));
 
-        // Update localStorage
-        localStorage.setItem(
-          "user",
-          JSON.stringify(data.user)
-        );
-
-        // Remove preview
+        // Remove preview after successful upload
         setProfilePreview("");
       }
     } catch (err) {
       console.log("Profile image upload error:", err);
+
+      // Remove preview if upload fails
+      setProfilePreview("");
     }
   };
 
-  // Upload banner image
+  // ================= UPLOAD BANNER IMAGE =================
+
   const handleBannerImage = async (e) => {
     const file = e.target.files[0];
 
     if (!file) return;
 
-    // Show preview immediately
+    // Preview immediately
     const previewURL = URL.createObjectURL(file);
     setBannerPreview(previewURL);
 
@@ -162,29 +167,28 @@ const bannerImage = user?.banner
           body: uploadData,
         }
       );
+
       const data = await res.json();
 
       console.log("Banner response:", data);
 
       if (data.success && data.user) {
-        // Update React user
-        setUser(data.user);
-
-        // Update localStorage
-        localStorage.setItem(
-          "user",
-          JSON.stringify(data.user)
-        );
+        // UPDATE REDUX
+        dispatch(updateUser(data.user));
 
         // Remove preview
         setBannerPreview("");
       }
     } catch (err) {
       console.log("Banner upload error:", err);
+
+      // Remove preview if upload fails
+      setBannerPreview("");
     }
   };
 
-  // Save bio and location
+  // ================= SAVE BIO + LOCATION =================
+
   const saveProfile = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -202,15 +206,9 @@ const bannerImage = user?.banner
 
       console.log("Save profile response:", res.data);
 
-      if (res.data.success) {
-        const updatedUser = res.data.user;
-
-        setUser(updatedUser);
-
-        localStorage.setItem(
-          "user",
-          JSON.stringify(updatedUser)
-        );
+      if (res.data.success && res.data.user) {
+        // UPDATE REDUX
+        dispatch(updateUser(res.data.user));
 
         setIsEditing(false);
       }
@@ -271,7 +269,6 @@ const bannerImage = user?.banner
             />
 
             <button
-         
               type="button"
               onClick={(e) => {
                 e.stopPropagation();
@@ -358,7 +355,6 @@ const bannerImage = user?.banner
             {isEditing && (
               <button
                 onClick={saveProfile}
-               
                 className="mt-4 px-4 py-2 mr-5 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
               >
                 Save

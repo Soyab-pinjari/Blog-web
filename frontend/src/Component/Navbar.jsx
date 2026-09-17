@@ -29,7 +29,7 @@ const handleLogout = () => {
     localStorage.removeItem("user");
     setShowPopup(false);
       dispatch(logout());
-    setUser(null); 
+  
     navigate("/", { replace: true });
   } catch (error) {
     console.error("Logout failed:", error);
