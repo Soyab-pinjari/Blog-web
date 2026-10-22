@@ -23,27 +23,29 @@ function LikeButton({
     setLikesCount(likes);
   }, [isLiked, likes]);
 
-  const handleLike = async () => {
-    try {
-      if (!token) {
-        navigate("/login");
-        return;
-      }
+const handleLike = async () => {
+  try {
+    const token = localStorage.getItem("token");
 
-      if (!blogId) return;
-
-      setLikeLoading(true);
-
-      const data = await likeBlog(blogId);
-
-      setLiked(data.liked);
-      setLikesCount(data.likesCount);
-    } catch (error) {
-      console.log("Like error:", error);
-    } finally {
-      setLikeLoading(false);
+    if (!token) {
+      navigate("/login");
+      return;
     }
-  };
+
+    if (!blogId) return;
+
+    setLikeLoading(true);
+
+    const data = await likeBlog(blogId);
+
+    setLiked(data.liked);
+    setLikesCount(data.likesCount);
+  } catch (error) {
+    console.log("Like error:", error);
+  } finally {
+    setLikeLoading(false);
+  }
+};
 
   return (
     <button
