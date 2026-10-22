@@ -56,7 +56,7 @@ const login = async(req,res)=>{
    const userData = user.toObject();
     delete userData.password;
 
-    res.status(200).json({ message: "Login successful",token,user: userData});
+    res.status(200).json({ message: "Login successful",token,user:userData});
 
     } catch (error) {
         res.status(500).json({message:error.message});

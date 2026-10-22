@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, {useEffect, useState } from 'react'
 import { FiSearch, FiBell ,FiUser, FiMessageSquare} from "react-icons/fi";
 import { Link, useNavigate } from 'react-router';
 import { getProfile } from "../services/api";

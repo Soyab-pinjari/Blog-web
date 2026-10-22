@@ -15,14 +15,14 @@ reducers:{
         state.token = action.payload.token;
         state.isLoggedIn=true;
     },
-    logout:(state )=>{
-  state.user=null,
-  state.token=null,
-  state.isLoggedIn=false
+
+     logout:(state )=>{
+        state.user=null,
+        state.token=null,
+        state.isLoggedIn=false
     },
      updateUser: (state, action) => {
                 console.log("REDUCER UPDATE USER:", action.payload);
-
             state.user = action.payload;
         }
 }
