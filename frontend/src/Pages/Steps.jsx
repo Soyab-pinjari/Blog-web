@@ -1,95 +1,144 @@
-import React from 'react'
-// import { Link } from "react-router-dom";
-import {
-  PenLine,
-  BookOpen,
-  Users,
-  Search,
-  UserPlus,
-  FileText,
-  Send,
-  Sparkles,
-} from "lucide-react";
 
-function Steps() {
-    const steps = [
-    {
-      number: "01",
-      icon: UserPlus,
-      title: "Create an Account",
-      description: "Join Blogy and become part of our growing community.",
-    },
-    {
-      number: "02",
-      icon: FileText,
-      title: "Write Your Blog",
-      description: "Share your thoughts, knowledge and experiences with others.",
-    },
-    {
-      number: "03",
-      icon: Send,
-      title: "Publish",
-      description: "Publish your article and make your ideas available to readers.",
-    },
-    {
-      number: "04",
-      icon: Sparkles,
-      title: "Get Discovered",
-      description: "Let readers discover your content and learn from your ideas.",
-    },
-  ];
+import React, { useEffect, useState } from "react";
+import { searchBlogs, getblogDetails } from "../services/api";
+import { useNavigate } from "react-router-dom";
+import { FiSearch, FiX } from "react-icons/fi";
+import { useSelector } from "react-redux";
+
+const Search = () => {
+  const [search, setSearch] = useState("");
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  const navigate = useNavigate();
+
+  // Call hooks only at the component's top level
+  const token = useSelector((state) => state.auth.token);
+
+  useEffect(() => {
+    if (!search.trim()) {
+      setSearchResults([]);
+      setLoading(false);
+      return;
+    }
+
+    const timer = setTimeout(async () => {
+      try {
+        console.log("Searching for:", search);
+
+        const data = await searchBlogs(search);
+
+        setSearchResults(data || []);
+        console.log("Search API response:", data);
+      } catch (error) {
+        console.log("Search error:", error);
+        console.log("Error response:", error.response);
+        setSearchResults([]);
+      } finally {
+        setLoading(false);
+      }
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, [search]);
+
+  const handleBlogClick = async (slug) => {
+    try {
+      // Token comes from Redux, not from a hook inside this handler
+      if (!token) {
+        setSearch("");
+        setSearchResults([]);
+        navigate("/login");
+        return;
+      }
+
+      const data = await getblogDetails(slug);
+
+      console.log("Blog details:", data);
+
+      setSearch("");
+      setSearchResults([]);
+
+      navigate(`/blog/${slug}`, {
+        state: {
+          blog: data.blog,
+        },
+      });
+    } catch (error) {
+      console.log("Get blog details error:", error);
+
+      if (error.response?.status === 401) {
+        localStorage.removeItem("token");
+        navigate("/login");
+      }
+    }
+  };
+
+  const clearSearch = () => {
+    setSearch("");
+    setSearchResults([]);
+  };
+
   return (
-    <div>
-       {/* How it works */}
-      <section className="bg-slate-50 py-20">
-        <div className="max-w-7xl mx-auto px-6">
+    <div className="relative w-full sm:w-72 md:w-80 lg:w-96">
+      <div className="relative">
+        <FiSearch className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg" />
 
-          <div className="text-center mb-12">
-            <p className="text-blue-600 font-semibold mb-3">
-              HOW IT WORKS
-            </p>
+        <input
+          type="text"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search blogs..."
+          className="w-full bg-gray-50 border border-gray-300 rounded-xl pl-10 pr-10 py-2.5 text-sm sm:text-base text-gray-700 outline-none transition focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+        />
 
-            <h2 className="text-4xl font-bold">
-              From idea to published story
-            </h2>
-          </div>
+        {search && (
+          <button
+            type="button"
+            onClick={clearSearch}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-700 transition"
+          >
+            <FiX className="text-lg" />
+          </button>
+        )}
+      </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-
-            {steps.map((step) => {
-              const Icon = step.icon;
-
-              return (
-                <div
-                  key={step.number}
-                  className="bg-white rounded-2xl p-7 border border-slate-200"
-                >
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="w-11 h-11 bg-blue-600 text-white rounded-xl flex items-center justify-center">
-                      <Icon size={20} />
-                    </div>
-
-                    <span className="text-3xl font-bold text-slate-200">
-                      {step.number}
-                    </span>
-                  </div>
-
-                  <h3 className="text-xl font-semibold mb-3">
-                    {step.title}
-                  </h3>
-
-                  <p className="text-slate-500 leading-7">
-                    {step.description}
-                  </p>
-                </div>
-              );
-            })}
-
-          </div>
+      {loading && search.trim() && (
+        <div className="absolute top-full left-0 mt-2 w-full z-[9999] bg-white border border-gray-200 rounded-xl shadow-xl px-4 py-3 text-sm text-gray-500">
+          Searching...
         </div>
-      </section>
-    </div>
-  )
-}
+      )}
 
-export default Steps
+      {!loading && search.trim() && searchResults.length > 0 && (
+        <div className="absolute top-full left-0 mt-2 w-full max-h-80 overflow-y-auto z-[9999] bg-white border border-gray-200 rounded-xl shadow-xl">
+          {searchResults.map((blog) => (
+            <button
+              key={blog._id}
+              type="button"
+              onClick={() => handleBlogClick(blog.slug)}
+              className="w-full text-left px-4 py-3 hover:bg-gray-50 transition border-b last:border-b-0"
+            >
+              <h3 className="font-semibold text-gray-800 truncate">
+                {blog.title}
+              </h3>
+
+              {blog.category && (
+                <p className="text-xs sm:text-sm text-gray-500 mt-1 capitalize">
+                  {blog.category}
+                </p>
+              )}
+            </button>
+          ))}
+        </div>
+      )}
+
+      {!loading && search.trim() && searchResults.length === 0 && (
+        <div className="absolute top-full left-0 mt-2 w-full z-[9999] bg-white border border-gray-200 rounded-xl shadow-xl px-4 py-3 text-sm text-gray-500">
+          No blogs found.
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Search;

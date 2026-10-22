@@ -56,11 +56,11 @@ localStorage.removeItem("token");
               Blogs
             </Link>
           </li>
-          <li>
+          {/* <li>
             <a href="#" className="hover:text-blue-600 transition">
               Categories
             </a>
-          </li>
+          </li> */}
           <li>
             <a href='/aboutPage' className="hover:text-blue-600 transition">
               About
