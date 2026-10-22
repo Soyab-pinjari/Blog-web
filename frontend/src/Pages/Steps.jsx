@@ -44,7 +44,7 @@ const Search = () => {
 
   const handleBlogClick = async (slug) => {
     try {
-      // Token comes from Redux, not from a hook inside this handler
+console.log("hadle blog called")
       if (!token) {
         setSearch("");
         setSearchResults([]);
@@ -53,8 +53,8 @@ const Search = () => {
       }
 
       const data = await getblogDetails(slug);
-
       console.log("Blog details:", data);
+
 
       setSearch("");
       setSearchResults([]);

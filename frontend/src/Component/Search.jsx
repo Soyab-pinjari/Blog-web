@@ -8,7 +8,8 @@ const Search = () => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
-
+  const token = useSelector((state) => state.auth.token);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -22,7 +23,6 @@ const Search = () => {
       try {
         setLoading(true);
 
-   console.log("🔎 Searching for:", search);
         const data = await searchBlogs(search);
 
         setSearchResults(data || []);
@@ -45,7 +45,6 @@ const Search = () => {
 
  const handleBlogClick = async (slug) => {
   try {
-    const token = useSelector((state)=>state.auth.token)
 
     // Not logged in → go to login
     if (!token) {
