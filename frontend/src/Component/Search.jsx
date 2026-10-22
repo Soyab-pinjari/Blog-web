@@ -8,7 +8,7 @@ const Search = () => {
   const [search, setSearch] = useState("");
   const [searchResults, setSearchResults] = useState([]);
   const [loading, setLoading] = useState(false);
-  const token = useSelector((state) => state.auth.token);
+  const token = localStorage.getItem("token")
   
   const navigate = useNavigate();
 
